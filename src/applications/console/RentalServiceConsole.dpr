@@ -9,7 +9,8 @@ uses
   MainMenuUnit in 'MainMenuUnit.pas',
   ClientMenuUnit in 'ClientMenuUnit.pas',
   VehiclesMenuUnit in 'VehiclesMenuUnit.pas',
-  RentalMenuUnit in 'RentalMenuUnit.pas';
+  RentalMenuUnit in 'RentalMenuUnit.pas',
+  ConsoleUtilsUnit in 'ConsoleUtilsUnit.pas';
 
 begin
   try

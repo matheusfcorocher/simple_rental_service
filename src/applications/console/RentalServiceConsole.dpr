@@ -7,7 +7,8 @@ program RentalServiceConsole;
 uses
   System.SysUtils,
   MainMenuUnit in 'MainMenuUnit.pas',
-  ClientMenuUnit in 'ClientMenuUnit.pas';
+  ClientMenuUnit in 'ClientMenuUnit.pas',
+  VehiclesMenuUnit in 'VehiclesMenuUnit.pas';
 
 begin
   try

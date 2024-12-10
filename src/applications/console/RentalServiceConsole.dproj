@@ -161,6 +161,7 @@
         <DCCReference Include="MainMenuUnit.pas"/>
         <DCCReference Include="ClientMenuUnit.pas"/>
         <DCCReference Include="VehiclesMenuUnit.pas"/>
+        <DCCReference Include="RentalMenuUnit.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

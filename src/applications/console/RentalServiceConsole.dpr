@@ -8,7 +8,8 @@ uses
   System.SysUtils,
   MainMenuUnit in 'MainMenuUnit.pas',
   ClientMenuUnit in 'ClientMenuUnit.pas',
-  VehiclesMenuUnit in 'VehiclesMenuUnit.pas';
+  VehiclesMenuUnit in 'VehiclesMenuUnit.pas',
+  RentalMenuUnit in 'RentalMenuUnit.pas';
 
 begin
   try

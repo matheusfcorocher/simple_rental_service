@@ -1,16 +1,21 @@
-unit MainMenuUnit;
+unit RentalMenuUnit;
 
 interface
 
 uses Winapi.Windows, System.SysUtils;
 
-procedure Menu;
-
 procedure CleanConsole;
+
+// procedures related to Rental
+procedure RentalMenu;
+procedure RegisterRental;
+procedure EditRental;
+procedure CheckRental;
+procedure DeleteRental;
 
 implementation
 
-uses ClientMenuUnit, VehiclesMenuUnit, RentalMenuUnit;
+uses MainMenuUnit;
 
 procedure CleanConsole;
 var
@@ -36,20 +41,22 @@ begin
   Win32Check(SetConsoleCursorPosition(stdout, Origin));
 end;
 
-procedure Menu;
+procedure RentalMenu;
 var
   Code: integer;
   Options: string;
 begin
   CleanConsole;
-  Writeln('Main Menu');
+  Writeln('Rentals Menu');
   Writeln;
   Writeln('Options');
   Writeln;
 
-  Options := '1 - Clients Menu' + #13#10 +
-            '2 - Vehicles Menu' + #13#10 +
-            '3 - Rental Menu' + #13#10;
+  Options := '1 - Register Rental' + #13#10 +
+            '2 - Edit Rental' + #13#10 +
+            '3 - Check Rental' + #13#10 +
+            '4 - Delete Rental' + #13#10 +
+            '5 - Back' + #13#10;
 
   Writeln(Options);
 
@@ -58,19 +65,50 @@ begin
     Readln(Input, Code);
 
     case Code of
-      1 : ClientsMenu;
-      2 : VehiclesMenu;
-      3 : RentalMenu;
+      1 : RegisterRental;
+      2 : EditRental;
+      3 : CheckRental;
+      4 : DeleteRental;
+      5 : Menu;
     else
       begin
         Writeln;
-        Writeln('Unknowm option. Chooses between 1 and 3.');
+        Writeln('Unknowm option. Chooses between 1 and 5.');
         Writeln;
       end;
     end;
-  until Code in [1..3];
+  until Code in [1..5];
+end;
 
+procedure RegisterRental;
+begin
+  CleanConsole;
+  Writeln('Clean Rental');
+  Readln;
+  Menu;
+end;
+
+procedure EditRental;
+begin
+  CleanConsole;
+  Writeln('Edit Rental');
+  Readln;
+  Menu;
+end;
+procedure CheckRental;
+begin
+  CleanConsole;
+  Writeln('Check Rental');
+  Readln;
+  Menu;
+end;
+
+procedure DeleteRental;
+begin
+  CleanConsole;
+  Writeln('Delete Rental');
+  Readln;
+  Menu;
 end;
 
 end.
-

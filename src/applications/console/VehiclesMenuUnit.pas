@@ -1,5 +1,9 @@
 unit VehiclesMenuUnit;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses ConsoleUtilsUnit;

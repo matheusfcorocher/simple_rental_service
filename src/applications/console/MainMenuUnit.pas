@@ -1,5 +1,9 @@
 unit MainMenuUnit;
 
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
+
 interface
 
 uses ConsoleUtilsUnit;

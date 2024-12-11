@@ -1,11 +1,14 @@
 program RentalServiceConsole;
 
-{$APPTYPE CONSOLE}
-
-{$R *.res}
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
 
 uses
+{$IFnDEF FPC}
   System.SysUtils,
+{$ELSE}
+{$ENDIF}
   MainMenuUnit in 'MainMenuUnit.pas',
   ClientMenuUnit in 'ClientMenuUnit.pas',
   VehiclesMenuUnit in 'VehiclesMenuUnit.pas',
@@ -13,10 +16,5 @@ uses
   ConsoleUtilsUnit in 'ConsoleUtilsUnit.pas';
 
 begin
-  try
     MainMenuUnit.Menu;
-  except
-    on E: Exception do
-      Writeln(E.ClassName, ': ', E.Message);
-  end;
 end.

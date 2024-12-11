@@ -1,4 +1,8 @@
-unit MainMenuUnit;
+unit MainMenu;
+
+{$IFDEF FPC}
+  {$MODE Delphi}
+{$ENDIF}
 
 interface
 

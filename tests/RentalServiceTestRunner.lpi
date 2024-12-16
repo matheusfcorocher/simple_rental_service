@@ -56,17 +56,16 @@
         <UnitName Value="TestSystemResponseUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\renter\TestRenterStorageUnit.pas"/>
+        <Filename Value="rental_ecosystem\entity\renter\TestRenterDTOUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\renter\TestRenterUnit.pas"/>
+        <Filename Value="rental_ecosystem\entity\renter\TestRenterStorageUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\renter\testrenterdtounit.pas"/>
+        <Filename Value="rental_ecosystem\entity\renter\TestRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestRenterDTOUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -78,7 +77,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="rental_ecosystem\renter;utils"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

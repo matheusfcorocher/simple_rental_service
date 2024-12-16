@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectGroup FileVersion="2">
+    <Targets>
+      <Target FileName="src\applications\console\RentalServiceConsole.lpi">
+        <BuildModes>
+          <Mode Name="Default"/>
+        </BuildModes>
+      </Target>
+      <Target FileName="tests\RentalServiceTestRunner.lpi">
+        <BuildModes>
+          <Mode Name="Default"/>
+        </BuildModes>
+      </Target>
+      <Target FileName="src\infrastructure\rentalserviceinfrastructurepackage.lpk"/>
+      <Target FileName="src\utils\rentalserviceutilitiespackage.lpk"/>
+      <Target FileName="src\rental_ecosystem\rentalecosystempackage.lpk"/>
+    </Targets>
+  </ProjectGroup>
+</CONFIG>

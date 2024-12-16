@@ -9,11 +9,11 @@ uses
   System.SysUtils,
 {$ELSE}
 {$ENDIF}
-  MainMenuUnit in 'MainMenuUnit.pas',
-  ClientMenuUnit in 'ClientMenuUnit.pas',
-  VehiclesMenuUnit in 'VehiclesMenuUnit.pas',
-  RentalMenuUnit in 'RentalMenuUnit.pas',
-  ConsoleUtilsUnit in 'ConsoleUtilsUnit.pas';
+  MainMenuUnit,
+  ClientMenuUnit,
+  VehiclesMenuUnit,
+  RentalMenuUnit,
+  ConsoleUtilsUnit;
 
 begin
     MainMenuUnit.Menu;

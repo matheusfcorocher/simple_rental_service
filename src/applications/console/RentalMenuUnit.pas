@@ -8,7 +8,6 @@ interface
 
 uses ConsoleUtilsUnit;
 
-// procedures related to Rental
 procedure RentalMenu;
 procedure RegisterRental;
 procedure EditRental;

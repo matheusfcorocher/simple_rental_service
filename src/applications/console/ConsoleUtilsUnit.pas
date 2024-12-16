@@ -9,7 +9,7 @@ uses
   crt, 
   {$ENDIF} 
   {$IFDEF MSWINDOWS} 
-  System.SysUtils, 
+  SysUtils,
   {$ENDIF} 
   Classes;
 

@@ -81,6 +81,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UpdateRenterUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\testgetrenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestGetRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\getrenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GetRenterUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

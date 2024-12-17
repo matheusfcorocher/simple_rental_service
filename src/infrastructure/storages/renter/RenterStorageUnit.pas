@@ -18,7 +18,7 @@ type
   public
     function Register(renter: TRenter): TRenter;
     function Update(renter: TRenter): TRenter;
-    function Get(renter_id: String): TRenterDTO;
+    function Get(id: String): TRenter;
     function Delete(id: string): String;
   end;
 
@@ -34,9 +34,9 @@ begin
   result := renter;
 end;
 
-function TRenterStorage.Get(renter_id: String): TRenterDTO;
+function TRenterStorage.Get(id: String): TRenter;
 begin
-  result := CreateRenterDTO(renter_id, 'Ash', 'address','email','1212312432');
+  result := TRenter.Create(id, 'test', 'test', '12345678', '123456789');
 end;
 
 function TRenterStorage.Delete(id: string) : String;

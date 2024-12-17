@@ -46,6 +46,7 @@ begin
 end;
 
 procedure TRenterStorageTest.TestRegister;
+begin
   Fail('Implement the test');
 end;
 

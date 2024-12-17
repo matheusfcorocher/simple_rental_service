@@ -6,7 +6,7 @@ uses
   Interfaces, Forms, TestRenterDTOUnit, TestRenterStorageUnit, TestRenterUnit,
   GuiTestRunner, TestStandardResponseUnit, TestSystemResponseUnit,
 TestRegisterRenterUnit, TestUpdateRenterUnit, UpdateRenterUnit,
-TestGetRenterUnit, GetRenterUnit;
+TestGetRenterUnit, GetRenterUnit, TestDeleteRenterUnit, DeleteRenterUnit;
 
   {$R *.res}
 

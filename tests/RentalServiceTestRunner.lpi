@@ -91,6 +91,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="GetRenterUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\testdeleterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestDeleteRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\deleterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DeleteRenterUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

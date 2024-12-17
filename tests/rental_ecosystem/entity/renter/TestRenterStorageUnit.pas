@@ -46,34 +46,22 @@ begin
 end;
 
 procedure TRenterStorageTest.TestRegister;
-var
-  Response: TSystemResponse;
-begin
   Fail('Implement the test');
 end;
 
 procedure TRenterStorageTest.TestEdit;
-var
-  Response: TSystemResponse;
 begin
-  Response := FRenterStorage.edit(FRenter);
-  AssertEquals('Editing should succeed', True, Response.success);
+  Fail('Implement the test');
 end;
 
 procedure TRenterStorageTest.TestCheck;
-var
-  Response: TSystemResponse;
 begin
-  Response := FRenterStorage.check(FRenterDTO);
-  AssertEquals('Check should succeed', True, Response.success);
+  Fail('Implement the test');
 end;
 
 procedure TRenterStorageTest.TestDelete;
-var
-  Response: TSystemResponse;
 begin
-  Response := FRenterStorage.Delete('some-id');
-  AssertEquals('Deletion should succeed', True, Response.success);
+  Fail('Implement the test');
 end;
 
 initialization

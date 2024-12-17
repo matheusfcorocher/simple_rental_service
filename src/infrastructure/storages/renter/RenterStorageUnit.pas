@@ -17,9 +17,9 @@ type
   TRenterStorage = class(TInterfacedObject, ITRenterStorage)
   public
     function Register(renter: TRenter): TRenter;
-    function Edit(renter: TRenter): TSystemResponse;
-    function Check(renterDTO: TRenterDTO): TSystemResponse;
-    function Delete(id: string): TSystemResponse;
+    function Update(renter: TRenter): TRenter;
+    function Get(renter_id: String): TRenterDTO;
+    function Delete(id: string): String;
   end;
 
 implementation
@@ -29,19 +29,19 @@ begin
   result := renter;
 end;
 
-function TRenterStorage.Edit(renter: TRenter): TSystemResponse;
+function TRenterStorage.Update(renter: TRenter): TRenter;
 begin
-
+  result := renter;
 end;
 
-function TRenterStorage.Check(renterDTO: TRenterDTO): TSystemResponse;
+function TRenterStorage.Get(renter_id: String): TRenterDTO;
 begin
-
+  result := CreateRenterDTO(renter_id, 'Ash', 'address','email','1212312432');
 end;
 
-function TRenterStorage.Delete(id: string): TSystemResponse;
+function TRenterStorage.Delete(id: string) : String;
 begin
-
+  result := 'The renter has been successfully deleted from the system.';
 end;
 
 end.

@@ -12,9 +12,9 @@ uses
 
 type
   ITRenterStorage = interface
-    function Register(renter: TRenter): TSystemResponse;
-    function edit(renter: TRenter): TSystemResponse;
-    function check(renterDTO: TRenterDTO): TSystemResponse;
+    function Register(renter: TRenter): TRenter;
+    function Edit(renter: TRenter): TSystemResponse;
+    function Check(renterDTO: TRenterDTO): TSystemResponse;
     function Delete(id: string): TSystemResponse;
   end;
 

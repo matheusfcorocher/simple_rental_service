@@ -49,8 +49,7 @@ procedure TRenterStorageTest.TestRegister;
 var
   Response: TSystemResponse;
 begin
-  Response := FRenterStorage.Register(FRenter);
-  AssertEquals('Registration should succeed', True, Response.success);
+  Fail('Implement the test');
 end;
 
 procedure TRenterStorageTest.TestEdit;

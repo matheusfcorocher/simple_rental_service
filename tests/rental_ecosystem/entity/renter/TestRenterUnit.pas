@@ -34,23 +34,11 @@ type
     procedure UpdatingRenterTelephoneWithValidData;
 
     procedure TransformingRentersToObjectList;
-  public
-    function RenterEquals(Renter1: TRenter; Renter2: TRenter): boolean;
+    procedure TestRenterEquals;
   end;
 
 
 implementation
-
-//auxiliary test methods
-function TTestCaseRenter.RenterEquals(Renter1: TRenter; Renter2: TRenter): boolean;
-begin
-  Result := (Renter1.getName = Renter2.getName) and
-    (Renter1.getAddress = Renter2.getAddress) and
-    (Renter1.getEmail = Renter2.getEmail) and (Renter1.getTelephone =
-    Renter2.getTelephone);
-end;
-
-// tests
 
 procedure TTestCaseRenter.CreatingRenterWithValidData;
 var
@@ -329,6 +317,25 @@ begin
   AssertEquals(
     'When is transform renters to object, it retuns right object',
     ObjectList.Count, Renters.Count);
+end;
+
+procedure TTestCaseRenter.TestRenterEquals;
+var
+  Renter_A: TRenter;
+  Renter_B: TRenter;
+begin
+  try
+    Renter_A := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
+    Renter_B := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
+
+    AssertTrue(
+      'When is given two renters with same data, it retuns true',
+      RenterEquals(Renter_A, Renter_B)
+    );
+  finally
+    Renter_A.Free;
+    Renter_B.Free;
+  end;
 end;
 
 procedure TTestCaseRenter.SetUp;

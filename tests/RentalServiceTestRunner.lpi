@@ -71,6 +71,16 @@
         <Filename Value="rental_ecosystem\use_cases\renter\TestRegisterRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\testupdaterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestUpdateRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UpdateRenterUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -81,7 +91,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

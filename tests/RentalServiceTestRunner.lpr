@@ -5,7 +5,7 @@ program RentalServiceTestRunner;
 uses
   Interfaces, Forms, TestRenterDTOUnit, TestRenterStorageUnit, TestRenterUnit,
   GuiTestRunner, TestStandardResponseUnit, TestSystemResponseUnit,
-TestRegisterRenterUnit;
+TestRegisterRenterUnit, TestUpdateRenterUnit, UpdateRenterUnit;
 
   {$R *.res}
 

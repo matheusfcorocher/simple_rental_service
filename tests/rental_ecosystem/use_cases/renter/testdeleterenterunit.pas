@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, IRenterStorageUnit,
-  DeleteRenterUnit, RenterUnit, RenterStorageUnit;
+  DeleteRenterUnit, RenterUnit, FakeRenterStorageUnit;
 
 type
 
@@ -29,7 +29,7 @@ var
 begin
   Renter := TRenter.Create('uid', 'test', 'test', '12345678', '123456789');
 
-  RenterStorage := TRenterStorage.Create;
+  RenterStorage := TFakeRenterStorage.Create;
   DeleteRenter := TDeleteRenter.Create(RenterStorage);
 
   Expected := DeleteRenter.Execute(Renter.getId);

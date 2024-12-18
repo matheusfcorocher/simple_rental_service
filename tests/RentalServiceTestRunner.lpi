@@ -72,9 +72,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\use_cases\renter\testupdaterenterunit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestUpdateRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestUpdateRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
@@ -82,9 +81,8 @@
         <UnitName Value="UpdateRenterUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\use_cases\renter\testgetrenterunit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestGetRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="..\src\rental_ecosystem\use_cases\renter\getrenterunit.pas"/>
@@ -92,14 +90,18 @@
         <UnitName Value="GetRenterUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\use_cases\renter\testdeleterenterunit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestDeleteRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestDeleteRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="..\src\rental_ecosystem\use_cases\renter\deleterenterunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="DeleteRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="support\factories\fakerenterstorageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FakeRenterStorageUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -111,7 +113,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

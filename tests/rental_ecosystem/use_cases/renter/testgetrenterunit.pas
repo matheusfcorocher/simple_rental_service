@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, IRenterStorageUnit,
-  RenterUnit, GetRenterUnit, RenterStorageUnit;
+  RenterUnit, GetRenterUnit, FakeRenterStorageUnit;
 
 type
 
@@ -30,7 +30,7 @@ begin
   Renter := TRenter.Create('uid', 'test', 'test', '12345678', '123456789');
   Expected := Renter;
 
-  RenterStorage := TRenterStorage.Create;
+  RenterStorage := TFakeRenterStorage.Create;
   GetRenter := TGetRenter.Create(RenterStorage);
 
   Renter := GetRenter.Execute(Renter.getId);

@@ -56,6 +56,8 @@ type
     function ToObjectList(): specialize TObjectList<TObject>;
   end;
 
+  function RenterEquals(a, b : TRenter): boolean;
+
 implementation
 
 constructor TRenter.Create(id: string; name: string; address: string;
@@ -277,6 +279,14 @@ begin
     ObjectList.Add(Renter);
 
   Result := ObjectList;
+end;
+
+function RenterEquals(a, b : TRenter): boolean;
+  begin
+       Result := (a.getName = b.getName) and
+       (a.getAddress = b.getAddress) and
+       (a.getEmail = b.getEmail) and (a.getTelephone =
+       b.getTelephone);
 end;
 
 end.

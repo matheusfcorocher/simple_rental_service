@@ -4,7 +4,7 @@ unit SystemResponseUnit;
 
 interface
 
-uses Generics.Collections, SysUtils; 
+uses Generics.Collections, SysUtils;
 
 type
   TErrorDomain = (RentalEcosystem, Application, Infrastructure);
@@ -20,16 +20,16 @@ type
     code: integer;
     title: string;
     message: string;
-    data: specialize TObjectList<TObject>;
+    data: Pointer;
     error: TErrorDetail;  
   end;
-
+//specialize TObjectList<TObject>
 function CreateSystemResponse(
          success: boolean;
          code: integer;
          title: string;
          message: string;
-         data: specialize TObjectList<TObject>;
+         data: Pointer;
          error: TErrorDetail
 ): TSystemResponse;
 function CreateErrorDetail(
@@ -47,7 +47,7 @@ function CreateSystemResponse(
          code: integer;
          title: string;
          message: string;
-         data: specialize TObjectList<TObject>;
+         data: Pointer;
          error: TErrorDetail
 ): TSystemResponse;
 var

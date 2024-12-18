@@ -8,7 +8,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="entities\renter;storages"/>
+        <OtherUnitFiles Value="entities\renter;storages;use_cases\renter"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
       </SearchPaths>
     </CompilerOptions>
@@ -24,6 +24,10 @@
       <Item>
         <Filename Value="storages\irenterstorageunit.pas"/>
         <UnitName Value="IRenterStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\renter\RegisterRenterUnit.pas"/>
+        <UnitName Value="RegisterRenterUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

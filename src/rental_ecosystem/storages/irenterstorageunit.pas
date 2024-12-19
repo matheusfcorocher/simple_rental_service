@@ -6,9 +6,7 @@ interface
 
 uses
   SysUtils,
-  RenterUnit,
-  SystemResponseUnit,
-  RenterDTOUnit;
+  RenterUnit;
 
 type
   ITRenterStorage = interface

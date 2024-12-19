@@ -5,7 +5,7 @@ unit TestGetRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, IRenterStorageUnit,
+  Classes, SysUtils, fpcunit, testregistry, IRenterStorageUnit,
   RenterUnit, GetRenterUnit, FakeRenterStorageUnit;
 
 type

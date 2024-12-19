@@ -22,8 +22,6 @@ implementation
 
 function CreateSuccessfulResponse(title: string; message: string;
   data: Pointer): TSystemResponse;
-var
-  Response: TSystemResponse;
 begin
   Result := CreateSystemResponse(True, 200, title, message, data,
     default(TErrorDetail));

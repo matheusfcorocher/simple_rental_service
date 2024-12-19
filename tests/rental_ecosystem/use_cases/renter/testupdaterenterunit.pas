@@ -5,7 +5,7 @@ unit TestUpdateRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, UpdateRenterUnit,
+  Classes, SysUtils, fpcunit, testregistry, UpdateRenterUnit,
   FakeRenterStorageUnit, RenterUnit, IRenterStorageUnit;
 
 type

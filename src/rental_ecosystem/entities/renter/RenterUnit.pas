@@ -5,7 +5,7 @@ unit RenterUnit;
 interface
 
 uses
-    SysUtils, Generics.Collections, SystemResponseUnit, RenterDTOUnit;
+    SysUtils, Generics.Collections, RenterDTOUnit;
 
 type
   TRenter = class

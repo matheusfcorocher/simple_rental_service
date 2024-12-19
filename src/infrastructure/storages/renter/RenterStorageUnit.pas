@@ -9,9 +9,7 @@ uses
   Classes,
   IRenterStorageUnit,
   RenterUnit,
-  RenterDTOUnit,
-  SystemResponseUnit,
-  StandardResponsesUnit;
+  RenterDTOUnit;
 
 type
   TRenterStorage = class(TInterfacedObject, ITRenterStorage)

@@ -5,7 +5,7 @@ unit GetRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, RenterUnit, IRenterStorageUnit, RenterDTOUnit;
+  Classes, SysUtils, RenterUnit, IRenterStorageUnit;
 
 type
   TGetRenter = class

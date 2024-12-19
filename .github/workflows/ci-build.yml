@@ -12,32 +12,23 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.operating-system }}
-    strategy:
-      matrix:
-        operating-system: [windows-latest, ubuntu-latest, macos-latest]
-        lazarus-versions: [dist, stable]
+    runs-on: ubuntu-latest
+    env:
+      LAZARUS_DIR: /usr/bin 
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
       
-      - name: Install Lazarus
-        uses: gcarreno/setup-lazarus@v3
-        with:
-          lazarus-version: ${{ matrix.lazarus-versions }}
-          include-packages: "Synapse 40.1"
-          with-cache: true
+      - name: Install Free Pascal and Lazarus
+        run: |
+            sudo apt update
+            sudo apt install -y fpc fpc-source lazarus
 
-      - name: Build Console Application in Windows and Linux
-        if: ${{ matrix.operating-system != 'macos-latest' }}
-        run: lazbuild -B -q "src/applications/console/RentalServiceConsole.lpi"
-
-      - name: Build Console Application in MacOS
-        if: ${{ matrix.operating-system == 'macos-latest' }}
-        run: lazbuild -B -q --ws=cocoa "src/applications/console/RentalServiceConsole.lpi"
-
+      - name: Build Console Application
+        run: lazbuild -Bq src/applications/console/RentalServiceConsole.lpi
+        
       - name: Build Unit TestRunner Application
-        run: lazbuild -B -q "tests/RentalServiceTestRunner.lpi"
+        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi
 
-      - name: Run the Unit Tests Application
-        run: bin/RentalServiceTestRunner "--all" "--format=plain"
+      - name: Run Unit Tests
+        run: ./tests/RentalServiceTestRunner "--all" "--format=plain"

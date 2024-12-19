@@ -8,7 +8,8 @@ unit RentalEcosystemPackage;
 interface
 
 uses
-  RenterDTOUnit, RenterUnit, IRenterStorageUnit, LazarusPackageIntf;
+  RenterDTOUnit, RenterUnit, IRenterStorageUnit, RegisterRenterUnit, 
+  LazarusPackageIntf;
 
 implementation
 

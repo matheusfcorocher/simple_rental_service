@@ -10,7 +10,7 @@ uses
   SystemResponseUnit;
 
 function CreateSuccessfulResponse(title: string; message: string;
-  Data: specialize TObjectList<TObject>): TSystemResponse;
+  Data: Pointer): TSystemResponse;
 function CreateInternalErrorResponse(errorMessage: string;
   domain: TErrorDomain): TSystemResponse;
 function CreateNotFoundResponse(errorMessage: string;
@@ -21,11 +21,11 @@ function CreateBadRequestResponse(errorMessage: string;
 implementation
 
 function CreateSuccessfulResponse(title: string; message: string;
-  Data: specialize TObjectList<TObject>): TSystemResponse;
+  data: Pointer): TSystemResponse;
 var
   Response: TSystemResponse;
 begin
-  Result := CreateSystemResponse(True, 200, title, message, Data,
+  Result := CreateSystemResponse(True, 200, title, message, data,
     default(TErrorDetail));
 end;
 

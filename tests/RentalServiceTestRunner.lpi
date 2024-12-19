@@ -60,11 +60,47 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\entity\renter\TestRenterStorageUnit.pas"/>
+        <Filename Value="rental_ecosystem\entity\renter\TestRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\entity\renter\TestRenterUnit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestRegisterRenterUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestUpdateRenterUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UpdateRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\getrenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GetRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\renter\TestDeleteRenterUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\deleterenterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DeleteRenterUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="support\factories\fakerenterstorageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FakeRenterStorageUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\infrastructure\renter\TestRenterStorageUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -77,7 +113,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

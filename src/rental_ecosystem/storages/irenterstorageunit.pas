@@ -12,10 +12,10 @@ uses
 
 type
   ITRenterStorage = interface
-    function Register(renter: TRenter): TSystemResponse;
-    function edit(renter: TRenter): TSystemResponse;
-    function check(renterDTO: TRenterDTO): TSystemResponse;
-    function Delete(id: string): TSystemResponse;
+    function Register(renter: TRenter): TRenter;
+    function Update(renter: TRenter): TRenter;
+    function Get(id: String): TRenter;
+    function Delete(id: string): String;
   end;
 
 implementation

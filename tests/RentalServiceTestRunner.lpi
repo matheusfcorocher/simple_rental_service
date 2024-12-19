@@ -60,10 +60,6 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\entity\renter\TestRenterStorageUnit.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\entity\renter\TestRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
@@ -103,6 +99,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="FakeRenterStorageUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\infrastructure\renter\TestRenterStorageUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -113,7 +113,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

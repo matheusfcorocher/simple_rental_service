@@ -5,7 +5,7 @@ unit TestDeleteRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, testutils, testregistry, IRenterStorageUnit,
+  Classes, SysUtils, fpcunit, testregistry, IRenterStorageUnit,
   DeleteRenterUnit, RenterUnit, FakeRenterStorageUnit;
 
 type

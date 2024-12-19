@@ -25,10 +25,10 @@ jobs:
             sudo apt install -y fpc fpc-source lazarus
 
       - name: Build Console Application
-        run: lazbuild -Bq --lazarusdir=${{env.LAZARUS_DIR}} src/applications/console/RentalServiceConsole.lpi
+        run: lazbuild -Bq src/applications/console/RentalServiceConsole.lpi
         
       - name: Build Unit TestRunner Application
-        run: lazbuild -Bq --lazarusdir=${{env.LAZARUS_DIR}} tests/RentalServiceTestRunner.lpi
+        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi
 
       - name: Run Unit Tests
         run: ./tests/RentalServiceTestRunner "--all" "--format=plain"

@@ -12,9 +12,9 @@
           <Mode Name="Default"/>
         </BuildModes>
       </Target>
-      <Target FileName="src\infrastructure\rentalserviceinfrastructurepackage.lpk"/>
-      <Target FileName="src\utils\rentalserviceutilitiespackage.lpk"/>
-      <Target FileName="src\rental_ecosystem\rentalecosystempackage.lpk"/>
+      <Target FileName="src\infrastructure\RentalServiceInfrastructurePackage.lpk"/>
+      <Target FileName="src\rental_ecosystem\RentalEcosystemPackage.lpk"/>
+      <Target FileName="src\utils\RentalServiceUtilitiesPackage.lpk"/>
     </Targets>
   </ProjectGroup>
 </CONFIG>

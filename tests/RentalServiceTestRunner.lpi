@@ -103,6 +103,10 @@
         <Filename Value="rental_ecosystem\infrastructure\renter\TestRenterStorageUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\rentalecosystempackage.lpk"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

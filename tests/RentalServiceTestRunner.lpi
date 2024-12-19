@@ -22,13 +22,13 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="RentalEcosystemPackage"/>
+        <PackageName Value="RentalServiceUtilitiesPackage"/>
       </Item>
       <Item>
         <PackageName Value="RentalServiceInfrastructurePackage"/>
       </Item>
       <Item>
-        <PackageName Value="RentalServiceUtilitiesPackage"/>
+        <PackageName Value="RentalEcosystemPackage"/>
       </Item>
       <Item>
         <PackageName Value="fpcunittestrunner"/>
@@ -68,8 +68,9 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\use_cases\renter\TestUpdateRenterUnit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\testupdaterenterunit.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="TestUpdateRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
@@ -77,8 +78,9 @@
         <UnitName Value="UpdateRenterUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
+        <Filename Value="rental_ecosystem\use_cases\renter\testgetrenterunit.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="TestGetRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="..\src\rental_ecosystem\use_cases\renter\getrenterunit.pas"/>
@@ -101,10 +103,6 @@
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\infrastructure\renter\TestRenterStorageUnit.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\rentalecosystempackage.lpk"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>

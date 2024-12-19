@@ -9,7 +9,7 @@
       <PathDelim Value="\"/>
       <SearchPaths>
         <OtherUnitFiles Value="entities\renter;storages;use_cases\renter"/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
@@ -31,9 +31,6 @@
       </Item>
     </Files>
     <RequiredPkgs>
-      <Item>
-        <PackageName Value="RentalServiceUtilitiesPackage"/>
-      </Item>
       <Item>
         <PackageName Value="FCL"/>
       </Item>

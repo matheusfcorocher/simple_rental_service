@@ -19,11 +19,6 @@
         <UnitName Value="RenterStorageUnit"/>
       </Item>
     </Files>
-    <RequiredPkgs>
-      <Item>
-        <PackageName Value="RentalEcosystemPackage"/>
-      </Item>
-    </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>

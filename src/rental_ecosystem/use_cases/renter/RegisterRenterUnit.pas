@@ -5,7 +5,7 @@ unit RegisterRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, RenterUnit, IRenterStorageUnit, SystemResponseUnit;
+  Classes, SysUtils, RenterUnit, IRenterStorageUnit;
 
 type
   TRegisterRenter = class

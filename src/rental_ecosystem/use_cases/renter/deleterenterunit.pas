@@ -5,7 +5,7 @@ unit DeleteRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, RenterUnit, IRenterStorageUnit;
+  Classes, SysUtils, IRenterStorageUnit;
 
 type
   TDeleteRenter = class

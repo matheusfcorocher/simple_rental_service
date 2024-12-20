@@ -54,11 +54,6 @@
         <UnitName Value="UpdateRenterUnit"/>
       </Item>
     </Files>
-    <RequiredPkgs>
-      <Item>
-        <PackageName Value="FCL"/>
-      </Item>
-    </RequiredPkgs>
     <UsageOptions>
       <UnitPath Value="$(PkgOutDir)"/>
     </UsageOptions>

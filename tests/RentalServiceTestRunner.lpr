@@ -8,7 +8,7 @@ uses
 TestRegisterRenterUnit, TestUpdateRenterUnit, UpdateRenterUnit,
 TestGetRenterUnit, GetRenterUnit, TestDeleteRenterUnit, DeleteRenterUnit,
 FakeRenterStorageUnit, TestVehicleUnit, VehicleUnit, VehicleDTOUnit,
-VehicleStatusUnit, TestVehicleDTOUnit;
+VehicleStatusUnit, TestVehicleDTOUnit, VehicleExceptionsUnit;
 
   {$R *.res}
 

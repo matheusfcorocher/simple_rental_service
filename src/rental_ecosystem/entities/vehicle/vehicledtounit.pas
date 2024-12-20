@@ -22,8 +22,6 @@ function AreVehicleDTOsEquals(a, b : TVehicleDTO): Boolean;
 
 implementation
 
-uses VehicleUnit;
-
 function CreateVehicleDTO(Aid: string; Aname: string; AlicensePlate: string;
     Avalue: Currency; Astatus: TVehicleStatus): TVehicleDTO;
 var

@@ -126,6 +126,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestVehicleDTOUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\entities\vehicle\vehicleexceptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="VehicleExceptionsUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -172,6 +177,15 @@
       </Item>
       <Item>
         <Name Value="EAssertionFailedError"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleNameException"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleValueException"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleLicensePlateException"/>
       </Item>
     </Exceptions>
   </Debugging>

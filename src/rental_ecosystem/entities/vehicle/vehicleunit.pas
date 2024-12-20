@@ -5,37 +5,45 @@ unit VehicleUnit;
 interface
 
 uses
-    SysUtils, Generics.Collections, SystemResponseUnit, VehicleDTOUnit, VehicleStatusUnit;
+  SysUtils, Generics.Collections, VehicleDTOUnit, VehicleStatusUnit,
+  VehicleExceptionsUnit;
 
 type
   TVehicle = class
-    private
-      Fid: string;
-      Fname: string;
-      FlicensePlate: string;
-      Fvalue: Currency;
-      Fstatus: TVehicleStatus;
+  private
+    Fid: string;
+    Fname: string;
+    FlicensePlate: string;
+    Fvalue: currency;
+    Fstatus: TVehicleStatus;
 
-    public
-     constructor Create(id: string; name: string; licensePlate: string;
-      value: Currency; status: TVehicleStatus);
+    function IsNameValid(Name: string): boolean;
+    function IsLicensePlateValid(licensePlate: string): boolean;
+    function IsValueValid(Value: currency): boolean;
 
-     constructor Create(VehicleDTO: TVehicleDTO); overload;
+    function HasNameValidDigits(Name: string): boolean;
+    function HasLicensePlateValidDigits(licensePlate: string): boolean;
+    function IsValueNotNegative(Value: currency): boolean;
+  public
+    constructor Create(id: string; Name: string; licensePlate: string;
+      Value: currency; status: TVehicleStatus);
 
-     //getter and setter methods
-     function getId: string;
+    constructor Create(VehicleDTO: TVehicleDTO); overload;
 
-     function getName: string;
-     procedure setName(name: string);
+    //getter and setter methods
+    function getId: string;
 
-     function getLicensePlate: string;
-     procedure setLicensePlate(licensePlate: string);
+    function getName: string;
+    procedure setName(Name: string);
 
-     function getValue: Currency;
-     procedure setValue(value: Currency);
+    function getLicensePlate: string;
+    procedure setLicensePlate(licensePlate: string);
 
-     function getStatus: TVehicleStatus;
-     procedure setStatus(status: TVehicleStatus);
+    function getValue: currency;
+    procedure setValue(Value: currency);
+
+    function getStatus: TVehicleStatus;
+    procedure setStatus(status: TVehicleStatus);
   end;
 
   TVehicles = specialize TObjectList<TVehicle>;
@@ -44,27 +52,37 @@ type
     function ToObjectList(): specialize TObjectList<TObject>;
   end;
 
-  function VehicleEquals(a, b : TVehicle): boolean;
+function VehicleEquals(a, b: TVehicle): boolean;
 
 implementation
 
-constructor TVehicle.Create(id: string; name: string; licensePlate: string;
-      value: Currency; status: TVehicleStatus);
+constructor TVehicle.Create(id: string; Name: string; licensePlate: string;
+  Value: currency; status: TVehicleStatus);
 begin
-    Fid := id;
-    Fname := name;
-    FlicensePlate := licensePlate;
-    Fvalue := value;
-    Fstatus := status;
+
+  IsNameValid(Name);
+  IsLicensePlateValid(licensePlate);
+  IsValueValid(Value);
+
+  Fid := id;
+  Fname := Name;
+  FlicensePlate := licensePlate;
+  Fvalue := Value;
+  Fstatus := status;
 end;
 
 constructor TVehicle.Create(VehicleDTO: TVehicleDTO);
 begin
-    Fid := VehicleDTO.id;
-    Fname := VehicleDTO.name;
-    FlicensePlate := VehicleDTO.licensePlate;
-    Fvalue := VehicleDTO.value;
-    Fstatus := VehicleDTO.status;
+
+  IsNameValid(VehicleDTO.Name);
+  IsLicensePlateValid(VehicleDTO.licensePlate);
+  IsValueValid(VehicleDTO.Value);
+
+  Fid := VehicleDTO.id;
+  Fname := VehicleDTO.Name;
+  FlicensePlate := VehicleDTO.licensePlate;
+  Fvalue := VehicleDTO.Value;
+  Fstatus := VehicleDTO.status;
 end;
 
 
@@ -79,9 +97,11 @@ begin
   Result := Fname;
 end;
 
-procedure TVehicle.setName(name: string);
+procedure TVehicle.setName(Name: string);
 begin
-    Fname := Name;
+  IsNameValid(Name);
+
+  Fname := Name;
 end;
 
 function TVehicle.getLicensePlate(): string;
@@ -91,20 +111,24 @@ end;
 
 procedure TVehicle.setLicensePlate(licensePlate: string);
 begin
-    FlicensePlate := licensePlate;
+  IsLicensePlateValid(licensePlate);
+
+  FlicensePlate := licensePlate;
 end;
 
-function TVehicle.getValue(): Currency;
+function TVehicle.getValue(): currency;
 begin
   Result := Fvalue;
 end;
 
-procedure TVehicle.setValue(value: Currency);
+procedure TVehicle.setValue(Value: currency);
 begin
-  Fvalue := value;
+  IsValueValid(Value);
+
+  Fvalue := Value;
 end;
 
-function TVehicle.getStatus() : TVehicleStatus;
+function TVehicle.getStatus(): TVehicleStatus;
 begin
   Result := Fstatus;
 end;
@@ -112,6 +136,67 @@ end;
 procedure TVehicle.setStatus(status: TVehicleStatus);
 begin
   Fstatus := status;
+end;
+
+function TVehicle.IsNameValid(Name: string): boolean;
+var
+  IsValid: boolean;
+begin
+  IsValid := HasNameValidDigits(Name);
+
+  if not IsValid then
+  begin
+    CreateVehicleNameError;
+  end;
+
+  Result := IsValid;
+end;
+
+function TVehicle.IsLicensePlateValid(licensePlate: string): boolean;
+var
+  IsValid: boolean;
+begin
+  IsValid := HasLicensePlateValidDigits(licensePlate);
+
+  if not IsValid then
+  begin
+    CreateVehicleLicensePlateError;
+  end;
+
+  Result := IsValid;
+end;
+
+function TVehicle.IsValueValid(Value: currency): boolean;
+var
+  IsValid: boolean;
+begin
+  IsValid := IsValueNotNegative(Value);
+
+  if not IsValid then
+  begin
+    CreateVehicleValueError;
+  end;
+
+  Result := IsValid;
+end;
+
+function TVehicle.HasNameValidDigits(Name: string): boolean;
+const
+  minimumDigits = 3;
+begin
+  Result := (Length(Name) >= minimumDigits);
+end;
+
+function TVehicle.HasLicensePlateValidDigits(licensePlate: string): boolean;
+const
+  minimumDigits = 6;
+begin
+  Result := (Length(licensePlate) >= minimumDigits);
+end;
+
+function TVehicle.IsValueNotNegative(Value: currency): boolean;
+begin
+  Result := Value >= 0;
 end;
 
 function TVehiclesHelper.ToObjectList(): specialize TObjectList<TObject>;
@@ -126,12 +211,11 @@ begin
   Result := ObjectList;
 end;
 
-function VehicleEquals(a, b : TVehicle): boolean;
-  begin
-       Result := (a.getName = b.getName) and
-       (a.getLicensePlate = b.getLicensePlate) and
-       (a.getValue = b.getValue) and (a.getStatus =
-       b.getStatus);
+function VehicleEquals(a, b: TVehicle): boolean;
+begin
+  Result := (a.getName = b.getName) and (a.getLicensePlate =
+    b.getLicensePlate) and (a.getValue = b.getValue) and
+    (a.getStatus = b.getStatus);
 end;
 
 end.

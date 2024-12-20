@@ -18,16 +18,14 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
       
-      - name: Install Free Pascal and Lazarus
-        run: |
-            sudo apt update
-            sudo apt install -y fpc fpc-source lazarus
+      - name: Install Lazarus
+        uses: gcarreno/setup-lazarus@v3
 
       - name: Build Console Application
-        run: lazbuild -B src/applications/console/RentalServiceConsole.lpi
+        run: lazbuild src/applications/console/RentalServiceConsole.lpi
         
       - name: Build Unit TestRunner Application
-        run: lazbuild -B -r tests/RentalServiceTestRunner.lpi
+        run: lazbuild tests/RentalServiceTestRunner.lpi
 
       - name: Run Unit Tests
-        run: ./tests/RentalServiceTestRunner "--all" "--format=plain"
+        run: bin/RentalServiceTestRunner "--all" "--format=plain"

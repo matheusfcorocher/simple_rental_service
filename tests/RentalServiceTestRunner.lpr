@@ -7,7 +7,8 @@ uses
   GuiTestRunner, TestStandardResponseUnit, TestSystemResponseUnit,
 TestRegisterRenterUnit, TestUpdateRenterUnit, UpdateRenterUnit,
 TestGetRenterUnit, GetRenterUnit, TestDeleteRenterUnit, DeleteRenterUnit,
-FakeRenterStorageUnit;
+FakeRenterStorageUnit, TestVehicleUnit, VehicleUnit, VehicleDTOUnit,
+VehicleStatusUnit, TestVehicleDTOUnit;
 
   {$R *.res}
 

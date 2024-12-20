@@ -27,7 +27,7 @@ jobs:
         run: lazbuild -B src/applications/console/RentalServiceConsole.lpi
         
       - name: Build Unit TestRunner Application
-        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi
+        run: lazbuild -B tests/RentalServiceTestRunner.lpi
 
       - name: Run Unit Tests
         run: ./tests/RentalServiceTestRunner "--all" "--format=plain"

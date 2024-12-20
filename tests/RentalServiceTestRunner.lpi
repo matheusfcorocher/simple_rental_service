@@ -22,9 +22,6 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="RentalService"/>
-      </Item>
-      <Item>
         <PackageName Value="fpcunittestrunner"/>
       </Item>
       <Item>

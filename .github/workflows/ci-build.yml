@@ -13,8 +13,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      LAZARUS_DIR: /usr/bin 
+    
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -25,10 +24,10 @@ jobs:
             sudo apt install -y fpc fpc-source lazarus
 
       - name: Build Console Application
-        run: lazbuild -Bq src/applications/console/RentalServiceConsole.lpi
+        run: lazbuild -B src/applications/console/RentalServiceConsole.lpi
         
       - name: Build Unit TestRunner Application
-        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi --add-package src/rentalservice.lpk
+        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi
 
       - name: Run Unit Tests
         run: ./tests/RentalServiceTestRunner "--all" "--format=plain"

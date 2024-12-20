@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="RentalService"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <OtherUnitFiles Value="infrastructure\storages\renter;rental_ecosystem\entities\renter;rental_ecosystem\use_cases\renter;rental_ecosystem\storages;utils\system_responses"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files>
+      <Item>
+        <Filename Value="infrastructure\storages\renter\RenterStorageUnit.pas"/>
+        <UnitName Value="RenterStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\entities\renter\RenterDTOUnit.pas"/>
+        <UnitName Value="RenterDTOUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\entities\renter\RenterUnit.pas"/>
+        <UnitName Value="RenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\storages\IRenterStorageUnit.pas"/>
+        <UnitName Value="IRenterStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="utils\system_responses\StandardResponsesUnit.pas"/>
+        <UnitName Value="StandardResponsesUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="utils\system_responses\SystemResponseUnit.pas"/>
+        <UnitName Value="SystemResponseUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\use_cases\renter\DeleteRenterUnit.pas"/>
+        <UnitName Value="DeleteRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\use_cases\renter\GetRenterUnit.pas"/>
+        <UnitName Value="GetRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\use_cases\renter\RegisterRenterUnit.pas"/>
+        <UnitName Value="RegisterRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rental_ecosystem\use_cases\renter\UpdateRenterUnit.pas"/>
+        <UnitName Value="UpdateRenterUnit"/>
+      </Item>
+    </Files>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

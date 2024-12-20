@@ -3,11 +3,10 @@ program RentalServiceTestRunner;
 {$mode objfpc}{$H+}
 
 uses
-  Interfaces, Forms, TestRenterStorageUnit, TestRenterDTOUnit, TestRenterUnit,
-  GuiTestRunner, TestStandardResponseUnit, TestSystemResponseUnit,
-TestRegisterRenterUnit, TestUpdateRenterUnit, UpdateRenterUnit,
-TestGetRenterUnit, GetRenterUnit, TestDeleteRenterUnit, DeleteRenterUnit,
-FakeRenterStorageUnit;
+  Interfaces, Forms, FakeRenterStorageUnit, TestStandardResponseUnit,
+  TestSystemResponseUnit, TestDeleteRenterUnit, TestGetRenterUnit,
+  TestRegisterRenterUnit, TestUpdateRenterUnit, TestRenterStorageUnit,
+  TestRenterDTOUnit, TestRenterUnit, GuiTestRunner;
 
   {$R *.res}
 

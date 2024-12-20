@@ -1,35 +1,35 @@
 on:
-    pull_request:
-      branches:
-        - main
-    push:
-      paths-ignore:
-        - "README.md"
-      branches:
-        - main
-  jobs:
-    build:
-      runs-on: ${{ matrix.operating-system }}
-      strategy:
-        matrix:
-          operating-system: [windows-latest]
-          lazarus-versions: [dist, stable]
-      steps:
-        - name: Checkout source code
-          uses: actions/checkout@v4
-        
-        - name: Install Lazarus
-          uses: gcarreno/setup-lazarus@v3
-          with:
-            lazarus-version: ${{ matrix.lazarus-versions }}
-            include-packages: "Synapse 40.1"
-            with-cache: true
+  pull_request:
+    branches:
+      - main
+  push:
+    paths-ignore:
+      - "README.md"
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      matrix:
+        operating-system: [windows-latest]
+        lazarus-versions: [dist, stable]
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
 
-        - name: Build Console Application in Windows
-          run: lazbuild -B -q "src/applications/console/RentalServiceConsole.lpi"
-        
-        - name: Build Unit TestRunner Application
-          run: lazbuild -B -q "tests/RentalServiceTestRunner.lpi"
-        
-        - name: Run the Unit Tests Application
-          run: bin/RentalServiceTestRunner "--all" "--format=plain"
+      - name: Install Lazarus
+        uses: gcarreno/setup-lazarus@v3
+        with:
+          lazarus-version: ${{ matrix.lazarus-versions }}
+          include-packages: "Synapse 40.1"
+          with-cache: true
+
+      - name: Build Console Application in Windows
+        run: lazbuild -B -q "src/applications/console/RentalServiceConsole.lpi"
+
+      - name: Build Unit TestRunner Application
+        run: lazbuild -B -q "tests/RentalServiceTestRunner.lpi"
+
+      - name: Run the Unit Tests Application
+        run: bin/RentalServiceTestRunner "--all" "--format=plain"

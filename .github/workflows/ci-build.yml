@@ -22,10 +22,10 @@ jobs:
         uses: gcarreno/setup-lazarus@v3
 
       - name: Build Console Application
-        run: lazbuild src/applications/console/RentalServiceConsole.lpi
+        run: lazbuild -Bq src/applications/console/RentalServiceConsole.lpi
         
       - name: Build Unit TestRunner Application
-        run: lazbuild tests/RentalServiceTestRunner.lpi
+        run: lazbuild -Bq tests/RentalServiceTestRunner.lpi
 
       - name: Run Unit Tests
         run: bin/RentalServiceTestRunner "--all" "--format=plain"

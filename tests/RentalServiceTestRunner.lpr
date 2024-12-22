@@ -11,7 +11,7 @@ FakeRenterStorageUnit, TestVehicleUnit, VehicleUnit, VehicleDTOUnit,
 VehicleStatusUnit, TestVehicleDTOUnit, VehicleExceptionsUnit,
 TestRegisterVehicleUnit, RegisterVehicleUnit, IVehicleStorageUnit,
 FakeVehicleStorageUnit, TestUpdateVehicleUnit, UpdateVehicleUnit,
-TestGetVehicleUnit, GetVehicleUnit;
+TestGetVehicleUnit, GetVehicleUnit, TestDeleteVehicleUnit, DeleteVehicleUnit;
 
   {$R *.res}
 

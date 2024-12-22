@@ -72,9 +72,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\UpdateRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UpdateRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
@@ -93,9 +92,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="support\factories\fakerenterstorageunit.pas"/>
+        <Filename Value="support\factories\FakeRenterStorageUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="FakeRenterStorageUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\infrastructure\renter\TestRenterStorageUnit.pas"/>
@@ -131,6 +129,56 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="VehicleExceptionsUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testregistervehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestRegisterVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\registervehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RegisterVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\storages\ivehiclestorageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="IVehicleStorageUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="support\factories\fakevehiclestorageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="FakeVehicleStorageUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testupdatevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestUpdateVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\updatevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UpdateVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testgetvehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestGetVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\getvehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GetVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testdeletevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestDeleteVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\deletevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="DeleteVehicleUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -141,7 +189,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;..\src\rental_ecosystem\entities\vehicle"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;..\src\rental_ecosystem\entities\vehicle;rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\storages"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

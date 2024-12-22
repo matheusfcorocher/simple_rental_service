@@ -12,7 +12,7 @@ uses
   TestRegisterVehicleUnit, RegisterVehicleUnit, IVehicleStorageUnit,
   FakeVehicleStorageUnit, TestUpdateVehicleUnit, UpdateVehicleUnit,
   TestGetVehicleUnit, GetVehicleUnit, TestDeleteVehicleUnit, DeleteVehicleUnit,
-  TestVehicleStorageUnit, VehicleStorageUnit;
+  TestVehicleStorageUnit, VehicleStorageUnit, TestRentalUnit, RentalUnit;
 
   {$R *.res}
 

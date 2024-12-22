@@ -159,6 +159,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="UpdateVehicleUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testgetvehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestGetVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\getvehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GetVehicleUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

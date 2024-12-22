@@ -72,9 +72,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\renter\updaterenterunit.pas"/>
+        <Filename Value="..\src\rental_ecosystem\use_cases\renter\UpdateRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="UpdateRenterUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
@@ -149,6 +148,16 @@
         <Filename Value="support\factories\fakevehiclestorageunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FakeVehicleStorageUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\use_cases\vehicle\testupdatevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestUpdateVehicleUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\updatevehicleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UpdateVehicleUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>

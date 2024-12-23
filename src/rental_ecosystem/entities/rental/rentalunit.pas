@@ -5,7 +5,7 @@ unit RentalUnit;
 interface
 
 uses
-  Classes, SysUtils, DateUtils, VehicleUnit, RentalExceptionsUnit;
+  Classes, SysUtils, Generics.Collections, DateUtils, VehicleUnit, RentalExceptionsUnit;
 
 type
 
@@ -13,30 +13,37 @@ type
 
   TRental = class
   private
-    FId: String;
-    FRenterId: String;
+    FId: string;
+    FRenterId: string;
     FVehicle: TVehicle;
     FStartDate: TDateTime;
     FEndDate: TDateTime;
 
-    function IsRentalDateValid(startDate : TDateTime; endDate : TDateTime): Boolean;
+    function IsRentalDateValid(startDate: TDateTime; endDate: TDateTime): boolean;
   public
-    function getId: String;
-    function getRenterId: String;
+    function getId: string;
+    function getRenterId: string;
     function getVehicle: TVehicle;
     function getStartDate: TDateTime;
     function getEndDate: TDateTime;
 
 
-    constructor Create(id: String; renter_id: string; vehicle: TVehicle; startDate : TDateTime; endDate: TDateTime);
-    function Total() : Currency;
+    constructor Create(id: string; renter_id: string; vehicle: TVehicle;
+      startDate: TDateTime; endDate: TDateTime);
+    function Total(): currency;
   end;
 
-  function RentalEquals(a,b : TRental) : Boolean;
+  TRentals = specialize TObjectList<TRental>;
+
+  TRentalsHelper = class helper for TRentals
+    function ToObjectList(): specialize TObjectList<TObject>;
+  end;
+
+function RentalEquals(a, b: TRental): boolean;
 
 implementation
 
-constructor TRental.Create(id: String; renter_id: string; vehicle: TVehicle;
+constructor TRental.Create(id: string; renter_id: string; vehicle: TVehicle;
   startDate: TDateTime; endDate: TDateTime);
 begin
 
@@ -50,9 +57,9 @@ begin
   FEndDate := endDate;
 end;
 
-function TRental.IsRentalDateValid(startDate : TDateTime; endDate : TDateTime): Boolean;
+function TRental.IsRentalDateValid(startDate: TDateTime; endDate: TDateTime): boolean;
 var
-  ComparisonResult : Integer;
+  ComparisonResult: integer;
 begin
   ComparisonResult := CompareDateTime(startDate, endDate);
 
@@ -65,12 +72,12 @@ begin
   Result := True;
 end;
 
-function TRental.getId: String;
+function TRental.getId: string;
 begin
   Result := FRenterId;
 end;
 
-function TRental.getRenterId: String;
+function TRental.getRenterId: string;
 begin
   Result := FRenterId;
 end;
@@ -90,10 +97,10 @@ begin
   Result := FEndDate;
 end;
 
-function TRental.Total(): Currency;
+function TRental.Total(): currency;
 var
-  RentedDays : Integer;
-  RentalTax : Currency;
+  RentedDays: integer;
+  RentalTax: currency;
 begin
   // Calculate the difference in hours
   RentedDays := DaysBetween(FStartDate, FEndDate);
@@ -104,12 +111,22 @@ begin
   Result := RentalTax * RentedDays;
 end;
 
-function RentalEquals(a,b : TRental) : Boolean;
+function RentalEquals(a, b: TRental): boolean;
 begin
-  Result := (a.getId = b.getId) and (a.getVehicle =
-    b.getVehicle) and (a.getStartDate = b.getStartDate) and
-    (a.getEndDate = b.getEndDate);
+  Result := (a.getId = b.getId) and (a.getVehicle = b.getVehicle) and
+    (a.getStartDate = b.getStartDate) and (a.getEndDate = b.getEndDate);
+end;
+
+function TRentalsHelper.ToObjectList(): specialize TObjectList<TObject>;
+var
+  Rental: TRental;
+  ObjectList: specialize TObjectList<TObject>;
+begin
+  ObjectList := specialize TObjectList<TObject>.Create();
+  for Rental in Self do
+    ObjectList.Add(Rental);
+
+  Result := ObjectList;
 end;
 
 end.
-

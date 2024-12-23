@@ -13,7 +13,10 @@ uses
   FakeVehicleStorageUnit, TestUpdateVehicleUnit, UpdateVehicleUnit,
   TestGetVehicleUnit, GetVehicleUnit, TestDeleteVehicleUnit, DeleteVehicleUnit,
   TestVehicleStorageUnit, VehicleStorageUnit, TestRentalUnit, RentalUnit, 
-RentalExceptionsUnit, TestVehicleStatusUnit;
+RentalExceptionsUnit, TestVehicleStatusUnit, IRentalStorageUnit, 
+TestRegisterRentalUnit, TestUpdateRentalUnit, TestGetRentalUnit, 
+TestDeleteRentalUnit, FakeRentalStorageUnit, RegisterRentalUnit, 
+UpdateRentalUnit, GetRentalUnit, DeleteRentalUnit;
 
   {$R *.res}
 

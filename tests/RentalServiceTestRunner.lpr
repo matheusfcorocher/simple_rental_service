@@ -12,7 +12,8 @@ uses
   TestRegisterVehicleUnit, RegisterVehicleUnit, IVehicleStorageUnit,
   FakeVehicleStorageUnit, TestUpdateVehicleUnit, UpdateVehicleUnit,
   TestGetVehicleUnit, GetVehicleUnit, TestDeleteVehicleUnit, DeleteVehicleUnit,
-  TestVehicleStorageUnit, VehicleStorageUnit, TestRentalUnit, RentalUnit;
+  TestVehicleStorageUnit, VehicleStorageUnit, TestRentalUnit, RentalUnit, 
+RentalExceptionsUnit, TestVehicleStatusUnit;
 
   {$R *.res}
 

@@ -199,6 +199,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RentalUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\entities\rental\rentalexceptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RentalExceptionsUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\entity\vehicle\testvehiclestatusunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestVehicleStatusUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -254,6 +264,12 @@
       </Item>
       <Item>
         <Name Value="VehicleLicensePlateException"/>
+      </Item>
+      <Item>
+        <Name Value="RangeRentalDateException"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleNotAvailableException"/>
       </Item>
     </Exceptions>
   </Debugging>

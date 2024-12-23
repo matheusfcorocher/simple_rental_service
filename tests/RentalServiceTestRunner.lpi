@@ -189,6 +189,26 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="VehicleStorageUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\entity\rental\testrentalunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestRentalUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\entities\rental\rentalunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RentalUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\src\rental_ecosystem\entities\rental\rentalexceptionsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="RentalExceptionsUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="rental_ecosystem\entity\vehicle\testvehiclestatusunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestVehicleStatusUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -199,7 +219,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;..\src\rental_ecosystem\entities\vehicle;rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\storages;rental_ecosystem\infrastructure\vehicle;..\src\infrastructure\storages\vehicle"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;..\src\rental_ecosystem\entities\vehicle;rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\storages;rental_ecosystem\infrastructure\vehicle;..\src\infrastructure\storages\vehicle;rental_ecosystem\entity\rental;..\src\rental_ecosystem\entities\rental"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -244,6 +264,12 @@
       </Item>
       <Item>
         <Name Value="VehicleLicensePlateException"/>
+      </Item>
+      <Item>
+        <Name Value="RangeRentalDateException"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleNotAvailableException"/>
       </Item>
     </Exceptions>
   </Debugging>

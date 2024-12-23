@@ -11,10 +11,12 @@ type
   VehicleNameException = class(Exception);
   VehicleLicensePlateException = class(Exception);
   VehicleValueException = class(Exception);
+  VehicleNotAvailableException = class(Exception);
 
 procedure CreateVehicleNameError;
 procedure CreateVehicleLicensePlateError;
 procedure CreateVehicleValueError;
+procedure CreateVehicleNotAvailableError;
 
 implementation
 
@@ -31,6 +33,11 @@ end;
 procedure CreateVehicleValueError;
 begin
   Raise VehicleValueException.Create('Value of vehicle isnt valid. Checks if value is positive.');
+end;
+
+procedure CreateVehicleNotAvailableError;
+begin
+  Raise VehicleNotAvailableException.Create('Vehicle isnt available. Checks others vehicles to rent.');
 end;
 
 end.

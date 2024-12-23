@@ -9,6 +9,9 @@ uses
   VehicleExceptionsUnit;
 
 type
+
+  { TVehicle }
+
   TVehicle = class
   private
     Fid: string;
@@ -44,6 +47,8 @@ type
 
     function getStatus: TVehicleStatus;
     procedure setStatus(status: TVehicleStatus);
+
+    function IsVehicleAvailable() : Boolean;
   end;
 
   TVehicles = specialize TObjectList<TVehicle>;
@@ -136,6 +141,16 @@ end;
 procedure TVehicle.setStatus(status: TVehicleStatus);
 begin
   Fstatus := status;
+end;
+
+function TVehicle.IsVehicleAvailable(): Boolean;
+begin
+  if not IsVehicleStatusEqual(Fstatus, TVehicleStatus.AVAILABLE) then
+  begin
+    CreateVehicleNotAvailableError;
+  end;
+
+  Result := True;
 end;
 
 function TVehicle.IsNameValid(Name: string): boolean;

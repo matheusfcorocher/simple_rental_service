@@ -51,8 +51,6 @@ end;
 
 function TFakeRentalStorage.Get(id: String): TRental;
 var
-  //StartDate, EndDate : TDateTime;
-  //Vehicle : TVehicle;
   Rental : TRental;
 begin
   for Rental in FRentals do
@@ -63,11 +61,6 @@ begin
       break;
     end;
   end;
-  //StartDate := EncodeDate(2024, 12, 1);
-  //EndDate := EncodeDate(2024, 12, 31);
-  //Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
-  //
-  //result := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
 end;
 
 function TFakeRentalStorage.Delete(id: string) : String;

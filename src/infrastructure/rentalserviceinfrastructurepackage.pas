@@ -8,7 +8,7 @@ unit RentalServiceInfrastructurePackage;
 interface
 
 uses
-  RenterStorageUnit, LazarusPackageIntf;
+  RenterStorageUnit, RentalStorageUnit, VehicleStorageUnit, LazarusPackageIntf;
 
 implementation
 

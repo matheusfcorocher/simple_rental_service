@@ -8,8 +8,8 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="entities\renter;storages;use_cases\renter"/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <OtherUnitFiles Value="entities\renter;storages;use_cases\renter;entities\rental;entities\vehicle;use_cases\rental;use_cases\vehicle"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
@@ -28,6 +28,86 @@
       <Item>
         <Filename Value="use_cases\renter\RegisterRenterUnit.pas"/>
         <UnitName Value="RegisterRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\rental\rentalexceptionsunit.pas"/>
+        <UnitName Value="RentalExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\rental\rentalunit.pas"/>
+        <UnitName Value="RentalUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\renter\renterexceptionsunit.pas"/>
+        <UnitName Value="RenterExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehicledtounit.pas"/>
+        <UnitName Value="VehicleDTOUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehicleexceptionsunit.pas"/>
+        <UnitName Value="VehicleExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehiclestatusunit.pas"/>
+        <UnitName Value="VehicleStatusUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehicleunit.pas"/>
+        <UnitName Value="VehicleUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\rental\deleterentalunit.pas"/>
+        <UnitName Value="DeleteRentalUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\rental\getrentalunit.pas"/>
+        <UnitName Value="GetRentalUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\rental\registerrentalunit.pas"/>
+        <UnitName Value="RegisterRentalUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\rental\updaterentalunit.pas"/>
+        <UnitName Value="UpdateRentalUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\renter\DeleteRenterUnit.pas"/>
+        <UnitName Value="DeleteRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\renter\GetRenterUnit.pas"/>
+        <UnitName Value="GetRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\renter\UpdateRenterUnit.pas"/>
+        <UnitName Value="UpdateRenterUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\vehicle\deletevehicleunit.pas"/>
+        <UnitName Value="DeleteVehicleUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\vehicle\getvehicleunit.pas"/>
+        <UnitName Value="GetVehicleUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\vehicle\registervehicleunit.pas"/>
+        <UnitName Value="RegisterVehicleUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="use_cases\vehicle\updatevehicleunit.pas"/>
+        <UnitName Value="UpdateVehicleUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="storages\irentalstorageunit.pas"/>
+        <UnitName Value="IRentalStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="storages\ivehiclestorageunit.pas"/>
+        <UnitName Value="IVehicleStorageUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

@@ -5,7 +5,7 @@ unit RenterUnit;
 interface
 
 uses
-    SysUtils, Generics.Collections, SystemResponseUnit, RenterDTOUnit;
+    SysUtils, Generics.Collections, SystemResponseUnit, RenterDTOUnit, RenterExceptionsUnit;
 
 type
   TRenter = class
@@ -63,44 +63,30 @@ implementation
 constructor TRenter.Create(id: string; name: string; address: string;
   email: string; telephone: string);
 begin
-  try
-    IsNameValid(name);
-    IsAddressValid(address);
-    IsEmailValid(email);
-    IsTelephoneValid(telephone);
+  IsNameValid(name);
+  IsAddressValid(address);
+  IsEmailValid(email);
+  IsTelephoneValid(telephone);
 
-    Fid := id;
-    Fname := name;
-    Faddress := address;
-    Femail := email;
-    Ftelephone := telephone;
-  except
-   on E : Exception do
-   begin
-     //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  Fid := id;
+  Fname := name;
+  Faddress := address;
+  Femail := email;
+  Ftelephone := telephone;
 end;
 
 constructor TRenter.Create(RenterDTO: TRenterDTO);
 begin
-  try
-    IsNameValid(RenterDTO.name);
-    IsAddressValid(RenterDTO.address);
-    IsEmailValid(RenterDTO.email);
-    IsTelephoneValid(RenterDTO.telephone);
+  IsNameValid(RenterDTO.name);
+  IsAddressValid(RenterDTO.address);
+  IsEmailValid(RenterDTO.email);
+  IsTelephoneValid(RenterDTO.telephone);
 
-    Fid := RenterDTO.id;
-    Fname := RenterDTO.name;
-    Faddress := RenterDTO.address;
-    Femail := RenterDTO.email;
-    Ftelephone := RenterDTO.telephone;
-  except
-   on E : Exception do
-   begin
-        //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  Fid := RenterDTO.id;
+  Fname := RenterDTO.name;
+  Faddress := RenterDTO.address;
+  Femail := RenterDTO.email;
+  Ftelephone := RenterDTO.telephone;
 end;
 
 
@@ -117,15 +103,8 @@ end;
 
 procedure TRenter.setName(name: string);
 begin
-  try
-    IsNameValid(name);
-    Fname := Name;
-  except
-   on E: Exception do
-   begin
-      //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  IsNameValid(name);
+  Fname := Name;
 end;
 
 function TRenter.getAddress(): string;
@@ -135,15 +114,8 @@ end;
 
 procedure TRenter.setAddress(address: string);
 begin
-  try
-    IsAddressValid(address);
-    Faddress := address;
-  except
-   on E: Exception do
-   begin
-      //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  IsAddressValid(address);
+  Faddress := address;
 end;
 
 function TRenter.getEmail(): string;
@@ -153,15 +125,8 @@ end;
 
 procedure TRenter.setEmail(email: string);
 begin
-  try
-    IsAddressValid(email);
-    Femail := email;
-  except
-   on E: Exception do
-   begin
-      //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  IsEmailValid(email);
+  Femail := email;
 end;
 
 function TRenter.getTelephone() : string;
@@ -171,15 +136,8 @@ end;
 
 procedure TRenter.setTelephone(telephone: string);
 begin
-  try
-    IsTelephoneValid(telephone);
-    Ftelephone := telephone;
-  except
-   on E: Exception do
-   begin
-      //WriteLn('Exception caught: ', E.Message);
-   end;
-  end;
+  IsTelephoneValid(telephone);
+  Ftelephone := telephone;
 end;
 
 // main methods for validating Renter fields
@@ -192,10 +150,7 @@ begin
 
   if not isValid then
   begin
-    Raise Exception
-          .Create(
-            'Name isnt valid. Checks if name isnt empty and have digits between 2 and 50.'
-    );
+    CreateRenterNameError;
   end;
 
   result := isValid;
@@ -209,7 +164,7 @@ begin
 
   if not IsValid then
   begin
-    Raise Exception.Create('Address isnt valid. Checks if address isnt empty.');
+    CreateRenterAddressError;
   end;
 
   result := IsValid;
@@ -223,7 +178,7 @@ begin
 
   if not IsValid then
   begin
-    Raise Exception.Create('Email isnt valid. Checks if email isnt empty.');
+    CreateRenterEmailError;
   end;
 
   result := IsValid;
@@ -237,10 +192,7 @@ begin
 
   if not IsValid then
   begin
-    Raise Exception
-            .Create(
-              'Telephone isnt valid. Checks if telephone isnt empty and have digits between 2 and 50.'
-            );
+    CreateRenterTelephoneError;
   end;
 
   result := IsValid;

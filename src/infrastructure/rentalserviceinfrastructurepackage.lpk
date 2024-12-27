@@ -9,7 +9,7 @@
       <PathDelim Value="\"/>
       <SearchPaths>
         <IncludeFiles Value="..\rental_ecosystem"/>
-        <OtherUnitFiles Value="storages\renter"/>
+        <OtherUnitFiles Value="storages\renter;storages\rental;storages\vehicle"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -17,6 +17,14 @@
       <Item>
         <Filename Value="storages\renter\RenterStorageUnit.pas"/>
         <UnitName Value="RenterStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="storages\rental\rentalstorageunit.pas"/>
+        <UnitName Value="RentalStorageUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="storages\vehicle\vehiclestorageunit.pas"/>
+        <UnitName Value="VehicleStorageUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

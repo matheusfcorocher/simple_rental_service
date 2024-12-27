@@ -72,23 +72,11 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\renter\UpdateRenterUnit.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\use_cases\renter\TestGetRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\renter\GetRenterUnit.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\use_cases\renter\TestDeleteRenterUnit.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\renter\DeleteRenterUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
@@ -105,44 +93,14 @@
         <UnitName Value="TestVehicleUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\vehicle\vehicleunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VehicleUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\vehicle\vehicledtounit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VehicleDTOUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\vehicle\vehiclestatusunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VehicleStatusUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\entity\vehicle\testvehicledtounit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestVehicleDTOUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\vehicle\vehicleexceptionsunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VehicleExceptionsUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\use_cases\vehicle\testregistervehicleunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestRegisterVehicleUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\registervehicleunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RegisterVehicleUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\storages\ivehiclestorageunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="IVehicleStorageUnit"/>
       </Unit>
       <Unit>
         <Filename Value="support\factories\fakevehiclestorageunit.pas"/>
@@ -155,19 +113,9 @@
         <UnitName Value="TestUpdateVehicleUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\updatevehicleunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UpdateVehicleUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\use_cases\vehicle\testgetvehicleunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestGetVehicleUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\getvehicleunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="GetVehicleUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\use_cases\vehicle\testdeletevehicleunit.pas"/>
@@ -175,19 +123,9 @@
         <UnitName Value="TestDeleteVehicleUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\vehicle\deletevehicleunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="DeleteVehicleUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\infrastructure\vehicle\testvehiclestorageunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestVehicleStorageUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\infrastructure\storages\vehicle\vehiclestorageunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="VehicleStorageUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\entity\rental\testrentalunit.pas"/>
@@ -195,24 +133,9 @@
         <UnitName Value="TestRentalUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\rental\rentalunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RentalUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\entities\rental\rentalexceptionsunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RentalExceptionsUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\entity\vehicle\testvehiclestatusunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestVehicleStatusUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\storages\irentalstorageunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="IRentalStorageUnit"/>
       </Unit>
       <Unit>
         <Filename Value="rental_ecosystem\use_cases\rental\testregisterrentalunit.pas"/>
@@ -240,34 +163,9 @@
         <UnitName Value="FakeRentalStorageUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\rental\registerrentalunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RegisterRentalUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\rental\updaterentalunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="UpdateRentalUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\rental\getrentalunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="GetRentalUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\rental_ecosystem\use_cases\rental\deleterentalunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="DeleteRentalUnit"/>
-      </Unit>
-      <Unit>
         <Filename Value="rental_ecosystem\infrastructure\rental\testrentalstorageunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestRentalStorageUnit"/>
-      </Unit>
-      <Unit>
-        <Filename Value="..\src\infrastructure\storages\rental\rentalstorageunit.pas"/>
-        <IsPartOfProject Value="True"/>
-        <UnitName Value="RentalStorageUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -279,7 +177,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;..\src\rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;..\src\rental_ecosystem\entities\vehicle;rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\use_cases\vehicle;..\src\rental_ecosystem\storages;rental_ecosystem\infrastructure\vehicle;..\src\infrastructure\storages\vehicle;rental_ecosystem\entity\rental;..\src\rental_ecosystem\entities\rental;rental_ecosystem\use_cases\rental;..\src\rental_ecosystem\use_cases\rental;rental_ecosystem\infrastructure\rental;..\src\infrastructure\storages\rental"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;rental_ecosystem\use_cases\vehicle;rental_ecosystem\infrastructure\vehicle;rental_ecosystem\entity\rental;rental_ecosystem\use_cases\rental;rental_ecosystem\infrastructure\rental"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -330,6 +228,18 @@
       </Item>
       <Item>
         <Name Value="VehicleNotAvailableException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterNameException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterAddressException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterTelephoneException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterEmailException"/>
       </Item>
     </Exceptions>
   </Debugging>

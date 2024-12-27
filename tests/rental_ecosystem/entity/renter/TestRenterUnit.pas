@@ -6,14 +6,31 @@ interface
 
 uses
   Classes, SysUtils, Generics.Collections, fpcunit, testutils,
-  testregistry, RenterUnit, RenterDTOUnit;
+  testregistry, RenterUnit, RenterDTOUnit, RenterExceptionsUnit;
 
 type
+
+  { TTestCaseRenter }
 
   TTestCaseRenter = class(TTestCase)
   protected
     procedure SetUp; override;
     procedure TearDown; override;
+  private
+    procedure _CreatingInvalidName;
+    procedure _CreatingInvalidAddress;
+    procedure _CreatingInvalidEmail;
+    procedure _CreatingInvalidTelephone;
+
+    procedure _CreatingInvalidNameDTO;
+    procedure _CreatingInvalidAddressDTO;
+    procedure _CreatingInvalidEmailDTO;
+    procedure _CreatingInvalidTelephoneDTO;
+
+    procedure _UpdatingWithInvalidName;
+    procedure _UpdatingWithInvalidAddress;
+    procedure _UpdatingWithInvalidEmail;
+    procedure _UpdatingWithInvalidTelephone;
   published
     procedure CreatingRenterWithValidData;
     procedure CreatingRenterWithInvalidData;
@@ -80,72 +97,66 @@ begin
 end;
 
 procedure TTestCaseRenter.CreatingRenterWithInvalidData;
-const
-  Expected = 'Name isnt valid. Checks if name isnt empty and have digits between 2 and 50.';
-var
-  Renter: TRenter;
 begin
-  try
-    Renter := TRenter.Create('a', 'a', 'a', 'a', 'a');
-  except
-    on E: Exception do
-      AssertEquals(
-        'When is given a renter with invalid data, it retuns renter instance',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When is given a renter with invalid name, it retuns exception',
+   RenterNameException,
+   @_CreatingInvalidName
+  );
+
+  AssertException(
+   'When is given a renter with invalid address, it retuns exception',
+   RenterAddressException,
+   @_CreatingInvalidAddress
+  );
+
+  AssertException(
+   'When is given a renter with invalid email, it retuns exception',
+   RenterEmailException,
+   @_CreatingInvalidEmail
+  );
+
+  AssertException(
+   'When is given a renter with invalid telephone, it retuns exception',
+   RenterTelephoneException,
+   @_CreatingInvalidTelephone
+  );
 end;
 
 procedure TTestCaseRenter.CreatingRenterWithDTOAndInvalidData;
-const
-  Expected = 'Name isnt valid. Checks if name isnt empty and have digits between 2 and 50.';
-var
-  RenterDTO: TRenterDTO;
-  Renter: TRenter;
 begin
-  try
-    RenterDTO := CreateRenterDTO('a', 'a', 'a', 'a', 'a');
-    Renter := TRenter.Create(RenterDTO);
-  except
-    on E: Exception do
-      AssertEquals(
-        'When is given a renter with invalid data, it retuns renter instance',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When is given a RenterDTO with invalid name, it retuns exception',
+   RenterNameException,
+   @_CreatingInvalidNameDTO
+  );
+
+  AssertException(
+   'When is given a RenterDTO with invalid address, it retuns exception',
+   RenterAddressException,
+   @_CreatingInvalidAddressDTO
+  );
+
+  AssertException(
+   'When is given a RenterDTO with invalid email, it retuns exception',
+   RenterEmailException,
+   @_CreatingInvalidEmailDTO
+  );
+
+  AssertException(
+   'When is given a RenterDTO with invalid telephone, it retuns exception',
+   RenterTelephoneException,
+   @_CreatingInvalidTelephoneDTO
+  );
 end;
 
 procedure TTestCaseRenter.UpdatingRenterNameWithInvalidData;
-const
-  Expected = 'Name isnt valid. Checks if name isnt empty and have digits between 2 and 50.';
-var
-  Renter: TRenter;
 begin
-  try
-    Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-    Renter.setName('a');
-  except
-    on E: Exception do
-      AssertEquals(
-        'When updating name of renter with invalid data, it throws Exception',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When updating name of renter with invalid data, it throws Exception',
+   RenterNameException,
+   @_UpdatingWithInvalidName
+  );
 end;
 
 procedure TTestCaseRenter.UpdatingRenterNameWithValidData;
@@ -170,26 +181,12 @@ end;
 
 
 procedure TTestCaseRenter.UpdatingRenterAddressWithInvalidData;
-const
-  Expected = 'Address isnt valid. Checks if address isnt empty.';
-var
-  Renter: TRenter;
 begin
-  try
-    Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-    Renter.setAddress('');
-  except
-    on E: Exception do
-      AssertEquals(
-        'When updating address of renter with invalid data, it throws Exception',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When updating address of renter with invalid data, it throws Exception',
+   RenterAddressException,
+   @_UpdatingWithInvalidAddress
+  );
 end;
 
 procedure TTestCaseRenter.UpdatingRenterAddressWithValidData;
@@ -213,26 +210,12 @@ begin
 end;
 
 procedure TTestCaseRenter.UpdatingRenterEmailWithInvalidData;
-const
-  Expected = 'Email isnt valid. Checks if email isnt empty.';
-var
-  Renter: TRenter;
 begin
-  try
-    Renter := TRenter.Create('uid', 'Los', 'email', '12345678', '123456789');
-    Renter.setEmail('');
-  except
-    on E: Exception do
-      AssertEquals(
-        'When updating email of renter with invalid data, it throws Exception',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When updating email of renter with invalid data, it throws Exception',
+   RenterEmailException,
+   @_UpdatingWithInvalidEmail
+  );
 end;
 
 procedure TTestCaseRenter.UpdatingRenterEmailWithValidData;
@@ -256,27 +239,12 @@ begin
 end;
 
 procedure TTestCaseRenter.UpdatingRenterTelephoneWithInvalidData;
-const
-  Expected =
-    'Telephone isnt valid.Checks if telephone isnt empty and have digits between 2 and 50.';
-var
-  Renter: TRenter;
 begin
-  try
-    Renter := TRenter.Create('uid', 'Los', 'email', '12345678', '123456789');
-    Renter.setTelephone('');
-  except
-    on E: Exception do
-      AssertEquals(
-        'When updating telephone of renter with invalid data, it throws Exception',
-        Expected,
-        E.Message
-        );
-  end;
-  try
-  finally
-    Renter.Free;
-  end;
+  AssertException(
+   'When updating telephone of renter with invalid data, it throws Exception',
+   RenterTelephoneException,
+   @_UpdatingWithInvalidTelephone
+  );
 end;
 
 procedure TTestCaseRenter.UpdatingRenterTelephoneWithValidData;
@@ -346,6 +314,90 @@ end;
 procedure TTestCaseRenter.TearDown;
 begin
 
+end;
+
+procedure TTestCaseRenter._CreatingInvalidName;
+begin
+  TRenter.Create('id', '', 'address', 'email', '123456789');
+end;
+
+procedure TTestCaseRenter._CreatingInvalidAddress;
+begin
+  TRenter.Create('id', 'asda', '', 'email', '123456789');
+end;
+
+procedure TTestCaseRenter._CreatingInvalidEmail;
+begin
+  TRenter.Create('id', 'asda', 'address', '', '123456789');
+end;
+
+procedure TTestCaseRenter._CreatingInvalidTelephone;
+begin
+  TRenter.Create('id', 'asda', 'address', 'email', '123');
+end;
+
+procedure TTestCaseRenter._CreatingInvalidNameDTO;
+var
+  RenterDTO: TRenterDTO;
+begin
+  RenterDTO := CreateRenterDTO('id', 'a', 'address', 'email', '123456789');
+  TRenter.Create(RenterDTO);
+end;
+
+procedure TTestCaseRenter._CreatingInvalidAddressDTO;
+var
+  RenterDTO: TRenterDTO;
+begin
+  RenterDTO := CreateRenterDTO('id', 'asda', '', 'email', '123456789');
+  TRenter.Create(RenterDTO);
+end;
+
+procedure TTestCaseRenter._CreatingInvalidEmailDTO;
+var
+  RenterDTO: TRenterDTO;
+begin
+  RenterDTO := CreateRenterDTO('id', 'asda', 'address', '', '123456789');
+  TRenter.Create(RenterDTO);
+end;
+
+procedure TTestCaseRenter._CreatingInvalidTelephoneDTO;
+var
+  RenterDTO: TRenterDTO;
+begin
+  RenterDTO := CreateRenterDTO('id', 'asda', 'address', 'email', '123');
+  TRenter.Create(RenterDTO);
+end;
+
+procedure TTestCaseRenter._UpdatingWithInvalidName;
+var
+  Renter : TRenter;
+begin
+  Renter := TRenter.Create('uid', 'Los', 'a', 'email', '123456789');
+  Renter.setName('a');
+end;
+
+procedure TTestCaseRenter._UpdatingWithInvalidAddress;
+var
+  Renter : TRenter;
+begin
+  Renter := TRenter.Create('uid', 'Los', 'a', 'email', '123456789');
+  Renter.setAddress('');
+end;
+
+procedure TTestCaseRenter._UpdatingWithInvalidEmail;
+var
+  Renter : TRenter;
+begin
+  Renter := TRenter.Create('uid', 'Los', 'address', 'email', '123456789');
+  Renter.setEmail('');
+end;
+
+procedure TTestCaseRenter._UpdatingWithInvalidTelephone;
+var
+  Renter : TRenter;
+begin
+  Renter := TRenter.Create('uid', 'Los', 'a', 'email', '123456789');
+  Renter.setTelephone('');
 end;
 
 initialization

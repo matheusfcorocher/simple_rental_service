@@ -16,7 +16,8 @@ uses
 RentalExceptionsUnit, TestVehicleStatusUnit, IRentalStorageUnit, 
 TestRegisterRentalUnit, TestUpdateRentalUnit, TestGetRentalUnit, 
 TestDeleteRentalUnit, FakeRentalStorageUnit, RegisterRentalUnit, 
-UpdateRentalUnit, GetRentalUnit, DeleteRentalUnit;
+UpdateRentalUnit, GetRentalUnit, DeleteRentalUnit, TestRentalStorageUnit, 
+RentalStorageUnit;
 
   {$R *.res}
 

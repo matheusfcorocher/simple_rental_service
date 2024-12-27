@@ -10,6 +10,7 @@ uses
 
 type
   ITRentalStorage = interface
+    function GetNextId() : String;
     function Register(Rental: TRental): TRental;
     function Update(Rental: TRental): TRental;
     function Get(id: String): TRental;

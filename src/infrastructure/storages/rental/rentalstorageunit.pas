@@ -8,9 +8,8 @@ uses
   SysUtils,
   Classes,
   DateUtils,
+  uuid,
   IRentalStorageUnit,
-  VehicleUnit,
-  VehicleStatusUnit,
   RentalUnit;
 
 type
@@ -23,6 +22,7 @@ type
   public
     constructor Create();
     constructor Create(rentals : TRentals); overload;
+    function GetNextId() : String;
     function Register(rental: TRental): TRental;
     function Update(rental: TRental): TRental;
     function Get(id: String): TRental;
@@ -39,6 +39,14 @@ end;
 constructor TRentalStorage.Create(rentals: TRentals);
 begin
   FRentals := rentals;
+end;
+
+function TRentalStorage.GetNextId() : String;
+var
+  GUID: TGUID;
+begin
+  CreateGuid(GUID);
+  Result := GUIDToString(GUID);
 end;
 
 function TRentalStorage.Register(rental: TRental): TRental;

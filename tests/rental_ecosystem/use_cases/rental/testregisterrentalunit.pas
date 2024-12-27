@@ -5,8 +5,11 @@ unit TestRegisterRentalUnit;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, DateUtils, testregistry, RentalUnit, VehicleUnit, VehicleStatusUnit,
-  IRentalStorageUnit, FakeRentalStorageUnit, RegisterRentalUnit;
+  Classes, SysUtils, fpcunit, DateUtils, testregistry, RentalUnit,
+  VehicleUnit, VehicleStatusUnit,
+  IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit,
+  FakeRentalStorageUnit, FakeVehicleStorageUnit, FakeRenterStorageUnit,
+  RegisterRentalUnit;
 
 type
 
@@ -19,29 +22,40 @@ implementation
 
 procedure TTestRegisterRental.TestExecute;
 var
+  RenterStorage: ITRenterStorage;
+  VehicleStorage: ITVehicleStorage;
   RentalStorage: ITRentalStorage;
   RegisterRental: TRegisterRental;
-  StartDate, EndDate: TDateTime;
   Vehicle: TVehicle;
-  Rental: TRental;
-  Expected: TRental;
+  Data: TRegisterRentalData;
+  Message: String;
+const
+  Expected = 'Rental created successfully!';
 begin
-  StartDate := EncodeDate(2024, 12, 1);
-  EndDate := EncodeDate(2024, 12, 31);
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
-
-  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle, StartDate, EndDate);
-  Expected := Rental;
-
   RentalStorage := TFakeRentalStorage.Create;
-  RegisterRental := TRegisterRental.Create(RentalStorage);
+  VehicleStorage := TFakeVehicleStorage.Create;
+  RenterStorage := TFakeRenterStorage.Create;
 
-  Rental := RegisterRental.Execute(Rental);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  VehicleStorage.Register(Vehicle);
 
-  AssertTrue(
-    'When registering rental, it retuns correct rental',
-    RentalEquals(Rental, Expected)
-    );
+  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage);
+
+  with Data do
+  begin
+    RenterId := 'renter_uuid';
+    VehicleId := 'vehicle_uuid';
+    StartDate := EncodeDate(2024, 12, 1);
+    EndDate := EncodeDate(2024, 12, 31);
+  end;
+
+  Message := RegisterRental.Execute(Data);
+
+  AssertEquals(
+    'When registering rental, it retuns correct message',
+    Message,
+    Expected
+  );
 end;
 
 

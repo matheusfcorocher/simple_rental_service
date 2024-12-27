@@ -8,18 +8,23 @@ uses
   SysUtils,
   Classes,
   DateUtils,
+  uuid,
   IRentalStorageUnit,
   RentalUnit,
   VehicleUnit,
   VehicleStatusUnit;
 
 type
+
+  { TFakeRentalStorage }
+
   TFakeRentalStorage = class(TInterfacedObject, ITRentalStorage)
   private
     FRentals: TRentals;
   public
     constructor Create();
     constructor Create(rentals : TRentals); overload;
+    function GetNextId() : String;
     function Register(Rental: TRental): TRental;
     function Update(Rental: TRental): TRental;
     function Get(id: String): TRental;
@@ -36,6 +41,14 @@ end;
 constructor TFakeRentalStorage.Create(rentals : TRentals);
 begin
   FRentals := rentals;
+end;
+
+function TFakeRentalStorage.GetNextId(): String;
+var
+  GUID: TGUID;
+begin
+  CreateGuid(GUID);
+  Result := GUIDToString(GUID);
 end;
 
 function TFakeRentalStorage.Register(Rental: TRental): TRental;

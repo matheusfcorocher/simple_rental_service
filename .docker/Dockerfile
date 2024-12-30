@@ -11,8 +11,11 @@ WORKDIR /database
 COPY ../database/migrations /database/migrations
 COPY ../database/scripts /database/scripts
 
-# Create sqlite database and run migrations
-RUN chmod +x ./scripts/run-migrations.sh
+# Creating sqlite database
+RUN mkdir data && cd data && touch rental_service.db
+
+# Run migrations on sqlite database
+RUN ./scripts/run-migrations.sh
 
 # Command to keep the container running in the background
 CMD ["sh", "-c", "while :; do sleep 1; done"]

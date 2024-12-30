@@ -1,0 +1,18 @@
+services:
+  sqlite:
+    build:
+      context: ..
+      dockerfile: .docker/Dockerfile
+    volumes:
+      - ../database/data/:/database/data # Mount data directory for persistence
+    ports:
+      - "8080:8080" # Map port 8080 (or any other port) if needed
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "sqlite3 database/data/rental_service.db 'SELECT 1' || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3

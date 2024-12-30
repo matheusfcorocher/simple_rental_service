@@ -1,0 +1,9 @@
+CREATE TABLE renters (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    uuid TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    email TEXT UNIQUE NOT NULL,
+    telephone TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);

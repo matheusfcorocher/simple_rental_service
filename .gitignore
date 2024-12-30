@@ -116,3 +116,6 @@ lib/
 ## Distribution
 
 *dist/
+
+## Data of database
+/database/data/

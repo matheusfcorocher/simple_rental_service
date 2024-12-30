@@ -1,9 +1,10 @@
 CREATE TABLE rentals (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uuid TEXT UNIQUE NOT NULL,
-    renter_uuid TEXT NOT NULL,
-    vehicle_uuid TEXT NOT NULL,
+    id TEXT PRIMARY KEY,
+    renter_id TEXT NOT NULL UNIQUE,
+    vehicle_id TEXT NOT NULL UNIQUE,
     start_date DATETIME NOT NULL,
     end_date DATETIME NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(renter_id) REFERENCES renters(id)
+    FOREIGN KEY(vehicle_id) REFERENCES vehicles(id)
 );

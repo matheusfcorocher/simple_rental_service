@@ -1,6 +1,5 @@
 CREATE TABLE vehicles (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    uuid TEXT UNIQUE NOT NULL,
+    id TEXT PRIMARY KEY,
     name TEXT NOT NULL,
     licensePlate TEXT NOT NULL,
     value INTEGER NOT NULL,

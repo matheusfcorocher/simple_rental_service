@@ -8,8 +8,8 @@ RUN apk add --no-cache sqlite
 WORKDIR /database
 
 # Copy migrations and scripts files  into the container (if you have one)
-COPY ../database/migrations /database/migrations
-COPY ../database/scripts /database/scripts
+COPY ../src/infrastructure/databases/sqlite/migrations /database/migrations
+COPY ../src/infrastructure/databases/sqlite/scripts /database/scripts
 
 # Creating sqlite database
 RUN mkdir data && cd data && touch rental_service.db

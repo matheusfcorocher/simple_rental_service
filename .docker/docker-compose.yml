@@ -4,7 +4,7 @@ services:
       context: ..
       dockerfile: .docker/Dockerfile
     volumes:
-      - ../database/data/:/database/data # Mount data directory for persistence
+      - ../src/infrastructure/databases/sqlite/data:/database/data # Mount data directory for persistence
     ports:
       - "8080:8080" # Map port 8080 (or any other port) if needed
     healthcheck:

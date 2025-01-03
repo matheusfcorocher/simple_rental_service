@@ -10,7 +10,8 @@ uses
   DateUtils,
   uuid,
   IRentalStorageUnit,
-  RentalUnit;
+  RentalUnit,
+  RentalExceptionsUnit;
 
 type
 
@@ -56,26 +57,40 @@ begin
 end;
 
 function TRentalStorage.Update(rental: TRental): TRental;
+var
+  AuxRental: TRental;
+  RentalIdx : Integer;
 begin
+  AuxRental := Get(rental.getId());
+  RentalIdx := FRentals.IndexOf(AuxRental);
+  FRentals[RentalIdx] := rental;
+
   result := rental;
 end;
 
 function TRentalStorage.Get(id: String): TRental;
 var
   Rental : TRental;
+  CompareResult: Integer;
 begin
   for Rental in FRentals do
   begin
-    if Rental.getId = id then
+    if Rental.getId() = id then
     begin
       result := Rental;
-      break;
+      Exit;
     end;
   end;
+
+  CreateNotFoundRentalException(id);
 end;
 
 function TRentalStorage.Delete(id: string) : String;
+var
+  Rental : TRental;
 begin
+  Rental := Get(id);
+  FRentals.Remove(Rental);
   result := 'The rental has been successfully deleted from the system.';
 end;
 

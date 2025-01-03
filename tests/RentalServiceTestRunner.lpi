@@ -241,6 +241,9 @@
       <Item>
         <Name Value="RenterEmailException"/>
       </Item>
+      <Item>
+        <Name Value="NotFoundRentalException"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

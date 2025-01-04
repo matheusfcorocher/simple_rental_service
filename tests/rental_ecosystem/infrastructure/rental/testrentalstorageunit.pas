@@ -15,19 +15,62 @@ type
   TTestRentalStorage = class(TTestCase)
   private
     FRentalStorage: TRentalStorage;
-    procedure _CreatingNotFoundRental;
+
+    procedure _CreatingInvalidUpdateRental;
+    procedure _CreatingInvalidGetRental;
+    procedure _CreatingInvalidDeleteRental;
   protected
     procedure Setup; override;
     procedure TearDown; override;
   published
     procedure TestRegister;
+
     procedure TestUpdate;
     procedure TestInvalidUpdate;
+
     procedure TestGet;
+    procedure TestInvalidGet;
+
     procedure TestDelete;
+    procedure TestInvalidDelete;
   end;
 
 implementation
+
+procedure TTestRentalStorage._CreatingInvalidUpdateRental;
+var
+  StartDate : TDateTime;
+  EndDate : TDateTime;
+  Vehicle : TVehicle;
+  Rental : TRental;
+begin
+  StartDate := EncodeDate(2024, 12, 1);
+  EndDate := EncodeDate(2024, 12, 31);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle, StartDate, EndDate);
+
+  FRentalStorage.Update(Rental);
+end;
+
+procedure TTestRentalStorage._CreatingInvalidGetRental;
+begin
+  FRentalStorage.Get('rental_uuid');
+end;
+
+procedure TTestRentalStorage._CreatingInvalidDeleteRental;
+var
+  StartDate : TDateTime;
+  EndDate : TDateTime;
+  Vehicle : TVehicle;
+  Rental : TRental;
+begin
+  StartDate := EncodeDate(2024, 12, 1);
+  EndDate := EncodeDate(2024, 12, 31);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle, StartDate, EndDate);
+
+  FRentalStorage.Delete(Rental.getId);
+end;
 
 procedure TTestRentalStorage.Setup;
 begin
@@ -37,11 +80,6 @@ end;
 procedure TTestRentalStorage.TearDown;
 begin
   FRentalStorage.Free;
-end;
-
-procedure TTestRentalStorage._CreatingNotFoundRental;
-begin
-  FRentalStorage.Get('rental_uuid');
 end;
 
 procedure TTestRentalStorage.TestRegister;
@@ -93,9 +131,9 @@ end;
 procedure TTestRentalStorage.TestInvalidUpdate;
 begin
   AssertException(
-   'When trying to get the id of rental that doesnt exist, return exception',
+   'When trying to update rental that doesnt exist, return exception',
    NotFoundRentalException,
-   @_CreatingNotFoundRental
+   @_CreatingInvalidUpdateRental
   );
 end;
 
@@ -122,6 +160,15 @@ begin
     );
 end;
 
+procedure TTestRentalStorage.TestInvalidGet;
+begin
+  AssertException(
+   'When trying to get rental that doesnt exist, return exception',
+   NotFoundRentalException,
+   @_CreatingInvalidGetRental
+  );
+end;
+
 procedure TTestRentalStorage.TestDelete;
 var
   StartDate, EndDate: TDateTime;
@@ -143,11 +190,14 @@ begin
     FRentalStorage.Delete(Rental.getId),
     Expected
   );
+end;
 
+procedure TTestRentalStorage.TestInvalidDelete;
+begin
   AssertException(
-   'When trying to get the id of deleted rental, return exception',
+   'When trying to delete rental that doesnt exist, return exception',
    NotFoundRentalException,
-   @_CreatingNotFoundRental
+   @_CreatingInvalidDeleteRental
   );
 end;
 

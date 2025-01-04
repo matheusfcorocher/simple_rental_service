@@ -71,7 +71,6 @@ end;
 function TRentalStorage.Get(id: String): TRental;
 var
   Rental : TRental;
-  CompareResult: Integer;
 begin
   for Rental in FRentals do
   begin

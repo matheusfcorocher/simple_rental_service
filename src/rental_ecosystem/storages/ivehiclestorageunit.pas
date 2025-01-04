@@ -10,6 +10,7 @@ uses
 
 type
   ITVehicleStorage = interface
+    function GetNextId() : string;
     function Register(Vehicle: TVehicle): TVehicle;
     function Update(Vehicle: TVehicle): TVehicle;
     function Get(id: String): TVehicle;

@@ -12,11 +12,15 @@ uses
   VehicleStatusUnit;
 
 type
+
+  { TFakeVehicleStorage }
+
   TFakeVehicleStorage = class(TInterfacedObject, ITVehicleStorage)
   private
     Vehicles: TVehicles;
   public
     constructor Create();
+    function GetNextId() : String;
     function Register(Vehicle: TVehicle): TVehicle;
     function Update(Vehicle: TVehicle): TVehicle;
     function Get(id: String): TVehicle;
@@ -28,6 +32,14 @@ implementation
 constructor TFakeVehicleStorage.Create();
 begin
   Vehicles := TVehicles.Create
+end;
+
+function TFakeVehicleStorage.GetNextId(): String;
+var
+  GUID: TGUID;
+begin
+  CreateGuid(GUID);
+  Result := GUIDToString(GUID);
 end;
 
 function TFakeVehicleStorage.Register(Vehicle: TVehicle): TVehicle;

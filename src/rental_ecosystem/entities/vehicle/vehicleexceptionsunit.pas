@@ -12,11 +12,13 @@ type
   VehicleLicensePlateException = class(Exception);
   VehicleValueException = class(Exception);
   VehicleNotAvailableException = class(Exception);
+  NotFoundVehicleException = class(Exception);
 
 procedure CreateVehicleNameError;
 procedure CreateVehicleLicensePlateError;
 procedure CreateVehicleValueError;
 procedure CreateVehicleNotAvailableError;
+procedure CreateNotFoundVehicleError(id: string);
 
 implementation
 
@@ -38,6 +40,11 @@ end;
 procedure CreateVehicleNotAvailableError;
 begin
   Raise VehicleNotAvailableException.Create('Vehicle isnt available. Checks others vehicles to rent.');
+end;
+
+procedure CreateNotFoundVehicleError(id : string);
+begin
+  Raise NotFoundVehicleException.Create('Vehicle with id ' + id + ' was not found');
 end;
 
 end.

@@ -44,24 +44,22 @@ procedure TTestRental._CreatingInvalidDateForRental;
 var
   StartDate, EndDate : TDateTime;
   Vehicle : TVehicle;
-  Rental : TRental;
 begin
  StartDate := EncodeDate(2024, 12, 31);
  EndDate := EncodeDate(2024, 12, 1);
  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
- Rental := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+ TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
 end;
 
 procedure TTestRental._CreatingInvalidVehicleForRental;
 var
   StartDate, EndDate : TDateTime;
   Vehicle : TVehicle;
-  Rental : TRental;
 begin
  StartDate := EncodeDate(2024, 12, 1);
  EndDate := EncodeDate(2024, 12, 31);
  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, RENTED);
- Rental := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+ TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
 end;
 
 procedure TTestRental.TestCreateWithValidData;

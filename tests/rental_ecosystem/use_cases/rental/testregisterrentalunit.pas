@@ -5,7 +5,7 @@ unit TestRegisterRentalUnit;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, DateUtils, testregistry, RentalUnit,
+  Classes, SysUtils, fpcunit, DateUtils, testregistry,
   VehicleUnit, VehicleStatusUnit,
   IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit,
   FakeRentalStorageUnit, FakeVehicleStorageUnit, FakeRenterStorageUnit,

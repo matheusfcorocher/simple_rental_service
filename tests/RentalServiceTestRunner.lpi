@@ -244,6 +244,9 @@
       <Item>
         <Name Value="NotFoundRentalException"/>
       </Item>
+      <Item>
+        <Name Value="NotFoundRenterException"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

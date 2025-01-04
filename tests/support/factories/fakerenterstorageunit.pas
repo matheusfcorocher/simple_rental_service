@@ -11,11 +11,15 @@ uses
   RenterUnit;
 
 type
+
+  { TFakeRenterStorage }
+
   TFakeRenterStorage = class(TInterfacedObject, ITRenterStorage)
   private
     Renters: TRenters;
   public
     constructor Create();
+    function GetNextId() : String;
     function Register(renter: TRenter): TRenter;
     function Update(renter: TRenter): TRenter;
     function Get(id: String): TRenter;
@@ -27,6 +31,14 @@ implementation
 constructor TFakeRenterStorage.Create();
 begin
   Renters := TRenters.Create
+end;
+
+function TFakeRenterStorage.GetNextId(): String;
+var
+  GUID: TGUID;
+begin
+  CreateGuid(GUID);
+  Result := GUIDToString(GUID);
 end;
 
 function TFakeRenterStorage.Register(renter: TRenter): TRenter;

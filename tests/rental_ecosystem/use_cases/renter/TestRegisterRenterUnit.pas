@@ -24,16 +24,25 @@ procedure TTestRegisterRenter.TestExecute;
 var
   RenterStorage: ITRenterStorage;
   RegisterRenter: TRegisterRenter;
-  Renter: TRenter;
+  Renter : TRenter;
+  RenterData: TRenterData;
   Expected: TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  Expected := Renter;
+  //Preparing test
+  with RenterData do
+  begin
+    name := 'Los';
+    address := 'address';
+    email :=  '12345678';
+    telephone :=  '123456789';
+  end;
 
   RenterStorage := TFakeRenterStorage.Create;
   RegisterRenter := TRegisterRenter.Create(RenterStorage);
 
-  Renter := RegisterRenter.Execute(Renter);
+  //Execute Test
+  Renter := RegisterRenter.Execute(RenterData);
+  Expected := TRenter.Create(Renter.getId, 'Los', 'address', '12345678', '123456789');
 
   AssertTrue(
     'When executing RegisterRenter, it retuns correct renters',

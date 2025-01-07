@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <Package Version="5">
+    <PathDelim Value="\"/>
+    <Name Value="RentalServicePackage"/>
+    <Type Value="RunAndDesignTime"/>
+    <CompilerOptions>
+      <Version Value="11"/>
+      <PathDelim Value="\"/>
+      <SearchPaths>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+      </SearchPaths>
+    </CompilerOptions>
+    <Files>
+      <Item>
+        <Filename Value="AssembleRentalServiceUnit.pas"/>
+        <UnitName Value="AssembleRentalServiceUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="RentalServiceContainerUnit.pas"/>
+        <UnitName Value="RentalServiceContainerUnit"/>
+      </Item>
+    </Files>
+    <RequiredPkgs>
+      <Item>
+        <PackageName Value="ServiceRentalControllersPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalServiceUtilitiesPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalServicePresentersPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalServiceInfrastructurePackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalEcosystemPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="FCL"/>
+      </Item>
+    </RequiredPkgs>
+    <UsageOptions>
+      <UnitPath Value="$(PkgOutDir)"/>
+    </UsageOptions>
+    <PublishOptions>
+      <Version Value="2"/>
+      <UseFileFilters Value="True"/>
+    </PublishOptions>
+  </Package>
+</CONFIG>

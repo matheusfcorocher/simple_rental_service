@@ -8,7 +8,7 @@ unit ServiceRentalControllersPackage;
 interface
 
 uses
-  RenterControllerUnit, LazarusPackageIntf;
+  RenterControllerUnit, VehicleControllerUnit, LazarusPackageIntf;
 
 implementation
 

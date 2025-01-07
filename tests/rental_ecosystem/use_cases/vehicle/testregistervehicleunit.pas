@@ -25,19 +25,27 @@ var
   VehicleStorage: ITVehicleStorage;
   RegisterVehicle: TRegisterVehicle;
   Vehicle: TVehicle;
+  VehicleData : TVehicleData;
   Expected: TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  Expected := Vehicle;
-
+  // preparing test
   VehicleStorage := TFakeVehicleStorage.Create;
   RegisterVehicle := TRegisterVehicle.Create(VehicleStorage);
+  Expected := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
 
-  Vehicle := RegisterVehicle.Execute(Vehicle);
+  with VehicleData do
+  begin
+    name := Expected.getName;
+    licensePlate := Expected.getLicensePlate;
+    value := Expected.getValue;
+    status := Expected.getStatus;
+  end;
+
+  Vehicle := RegisterVehicle.Execute(VehicleData);
 
   AssertTrue(
     'When executing RegisterVehicle, it retuns correct Vehicles',
-    VehicleEquals(Vehicle,Expected)
+    VehicleEquals(Vehicle, Expected)
   );
 end;
 

@@ -10,6 +10,13 @@ uses
 
 type
 
+  TVehicleData = record
+    name: string;
+    licensePlate: string;
+    value: currency;
+    status: TVehicleStatus;
+  end;
+
   { TVehicle }
 
   TVehicle = class

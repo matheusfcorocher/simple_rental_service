@@ -16,6 +16,10 @@
         <Filename Value="rentercontrollerunit.pas"/>
         <UnitName Value="RenterControllerUnit"/>
       </Item>
+      <Item>
+        <Filename Value="vehiclecontrollerunit.pas"/>
+        <UnitName Value="VehicleControllerUnit"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

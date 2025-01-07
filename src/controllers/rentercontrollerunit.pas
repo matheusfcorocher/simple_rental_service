@@ -82,7 +82,7 @@ var
   Renter: TRenter;
 begin
   try
-    Id := JSONToRenterId(JSON);
+    Id := JSONToId(JSON);
     Renter := FGetRenter.Execute(Id);
     Result := FPresenter.Present(Renter);
   except
@@ -97,7 +97,7 @@ var
   Message: String;
 begin
   try
-    Id := JSONToRenterId(JSON);
+    Id := JSONToId(JSON);
     Message := FDeleteRenter.Execute(Id);
     Result := FPresenter.Present(Message);
   except

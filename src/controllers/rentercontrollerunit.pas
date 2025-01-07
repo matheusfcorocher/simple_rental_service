@@ -5,7 +5,8 @@ unit RenterControllerUnit;
 interface
 
 uses
-  Classes, SysUtils, fpjson, jsonparser, RegisterRenterUnit, IPresenterUnit,
+  Classes, SysUtils, fpjson, jsonparser, RegisterRenterUnit, UpdateRenterUnit,
+  GetRenterUnit, DeleteRenterUnit, IPresenterUnit,
   RenterUnit, JSONConvertersUnit;
 
 type
@@ -15,11 +16,19 @@ type
   generic TRenterController<T> = class
   private
     FRegisterRenter: TRegisterRenter;
+    FUpdateRenter: TUpdateRenter;
+    FGetRenter: TGetRenter;
+    FDeleteRenter: TDeleteRenter;
+
     FPresenter: specialize ITPresenter<T>;
   public
-    constructor Create(RegisterRenter: TRegisterRenter;
+    constructor Create(RegisterRenter: TRegisterRenter; UpdateRenter: TUpdateRenter;
+      GetRenter: TGetRenter; DeleteRenter: TDeleteRenter;
       Presenter: specialize ITPresenter<T>);
-    function RenterRegister(RenterJSON: TJSONObject): string;
+    function Register(JSON: TJSONObject): T;
+    function Update(JSON: TJSONObject): T;
+    function Get(JSON: TJSONObject): T;
+    function Delete(JSON: TJSONObject): T;
   end;
 
 implementation
@@ -27,21 +36,70 @@ implementation
 { TRenterController }
 
 constructor TRenterController.Create(RegisterRenter: TRegisterRenter;
+  UpdateRenter: TUpdateRenter; GetRenter: TGetRenter; DeleteRenter: TDeleteRenter;
   Presenter: specialize ITPresenter<T>);
 begin
   FRegisterRenter := RegisterRenter;
+  FUpdateRenter := UpdateRenter;
+  FGetRenter := GetRenter;
+  FDeleteRenter := DeleteRenter;
+
   FPresenter := Presenter;
 end;
 
-function TRenterController.RenterRegister(RenterJSON: TJSONObject): string;
+function TRenterController.Register(JSON: TJSONObject): T;
 var
   RenterData: TRenterData;
   Renter: TRenter;
 begin
   try
-    RenterData := RenterJSONToData(RenterJSON);
+    RenterData := JSONToRenterData(JSON);
     Renter := FRegisterRenter.Execute(RenterData);
     Result := FPresenter.Present(Renter);
+  except
+    on E: Exception do
+      Result := FPresenter.Present(E);
+  end;
+end;
+
+function TRenterController.Update(JSON: TJSONObject): T;
+var
+  Renter: TRenter;
+begin
+  try
+    Renter := JSONToRenter(JSON);
+    Renter := FUpdateRenter.Execute(Renter);
+    Result := FPresenter.Present(Renter);
+  except
+    on E: Exception do
+      Result := FPresenter.Present(E);
+  end;
+end;
+
+function TRenterController.Get(JSON: TJSONObject): T;
+var
+  Id: String;
+  Renter: TRenter;
+begin
+  try
+    Id := JSONToRenterId(JSON);
+    Renter := FGetRenter.Execute(Id);
+    Result := FPresenter.Present(Renter);
+  except
+    on E: Exception do
+      Result := FPresenter.Present(E);
+  end;
+end;
+
+function TRenterController.Delete(JSON: TJSONObject): T;
+var
+  Id: String;
+  Message: String;
+begin
+  try
+    Id := JSONToRenterId(JSON);
+    Message := FDeleteRenter.Execute(Id);
+    Result := FPresenter.Present(Message);
   except
     on E: Exception do
       Result := FPresenter.Present(E);

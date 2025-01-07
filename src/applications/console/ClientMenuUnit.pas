@@ -92,7 +92,7 @@ begin
   Writeln('------------------------------');
   Writeln;
 
-  Result := RentalService.GetRenterController().RenterRegister(RenterJSON);
+  Result := RentalService.GetRenterController().Register(RenterJSON);
   Writeln(Result);
   Readln;
 

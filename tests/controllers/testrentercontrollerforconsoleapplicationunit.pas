@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, fpjson,
   jsonparser, RenterControllerUnit,
-  RegisterRenterUnit, RenterStorageUnit, ConsolePresenterUnit;
+  RegisterRenterUnit, UpdateRenterUnit, GetRenterUnit, DeleteRenterUnit,
+  RenterStorageUnit, ConsolePresenterUnit;
 
 type
 
@@ -26,7 +27,6 @@ implementation
 procedure TTestRenterControllerOnConsoleApplication.TestRegister;
 var
   RenterJSON: TJSONObject;
-  ExpectedMessageLength: integer;
 begin
   //Preparing test
   RenterJSON := TJSONObject.Create;
@@ -38,23 +38,33 @@ begin
 
   AssertEquals(
     'When calling register use case from controller, it returns right response',
-    Length(FRenterController.RenterRegister(RenterJSON)),
+    Length(FRenterController.Register(RenterJSON)),
     110
-    );
+  );
 end;
 
 procedure TTestRenterControllerOnConsoleApplication.SetUp;
 var
   RenterStorage: TRenterStorage;
+
   RegisterRenter: TRegisterRenter;
+  UpdateRenter: TUpdateRenter;
+  GetRenter: TGetRenter;
+  DeleteRenter: TDeleteRenter;
+
   ConsolePresenter: TConsolePresenter;
 begin
   RenterStorage := TRenterStorage.Create();
+
   RegisterRenter := TRegisterRenter.Create(RenterStorage);
+  UpdateRenter := TUpdateRenter.Create(RenterStorage);
+  GetRenter := TGetRenter.Create(RenterStorage);
+  DeleteRenter := TDeleteRenter.Create(RenterStorage);
+
   ConsolePresenter := TConsolePresenter.Create();
 
   FRenterController := specialize TRenterController<string>.Create(
-    RegisterRenter, ConsolePresenter);
+    RegisterRenter, UpdateRenter, GetRenter, DeleteRenter, ConsolePresenter);
 end;
 
 procedure TTestRenterControllerOnConsoleApplication.TearDown;

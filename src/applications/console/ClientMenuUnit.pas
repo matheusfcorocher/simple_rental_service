@@ -17,7 +17,7 @@ procedure DeleteClient;
 
 implementation
 
-uses MainMenuUnit;
+uses MainMenuUnit, fpjson, jsonparser, GlobalVariablesUnit;
 
 procedure ClientsMenu;
  var
@@ -59,10 +59,43 @@ begin
 end;
 
 procedure RegisterClient;
+var
+ RenterJSON: TJSONObject;
+ UserInput : String;
+ Result : String;
 begin
   CleanConsole;
+  RenterJSON := TJSONObject.Create;
   Writeln('Register Client');
+
+  Writeln;
+  Writeln('Digit Renters name: ');
+  Readln(UserInput);
+  RenterJSON.Add('name', UserInput);
+
+  Writeln;
+  Writeln('Digit Renters address: ');
+  Readln(UserInput);
+  RenterJSON.Add('address', UserInput);
+
+  Writeln;
+  Writeln('Digit Renters email: ');
+  Readln(UserInput);
+  RenterJSON.Add('email', UserInput);
+
+  Writeln;
+  Writeln('Digit Renters telephone: ');
+  Readln(UserInput);
+  RenterJSON.Add('telephone', UserInput);
+
+  Writeln;
+  Writeln('------------------------------');
+  Writeln;
+
+  Result := RentalService.GetRenterController().RenterRegister(RenterJSON);
+  Writeln(Result);
   Readln;
+
   Menu;
 end;
 

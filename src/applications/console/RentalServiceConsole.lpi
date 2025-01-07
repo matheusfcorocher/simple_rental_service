@@ -7,7 +7,6 @@
       <Flags>
         <MainUnitHasCreateFormStatements Value="False"/>
         <MainUnitHasScaledStatement Value="False"/>
-        <UseDefaultCompilerOptions Value="True"/>
       </Flags>
       <SessionStorage Value="InProjectDir"/>
       <Title Value="My Application"/>
@@ -24,10 +23,20 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
+    <RequiredPackages>
+      <Item>
+        <PackageName Value="RentalServicePackage"/>
+      </Item>
+    </RequiredPackages>
     <Units>
       <Unit>
         <Filename Value="RentalServiceConsole.pas"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="globalvariablesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GlobalVariablesUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -56,6 +65,9 @@
       </Item>
       <Item>
         <Name Value="EFOpenError"/>
+      </Item>
+      <Item>
+        <Name Value="RenterNameException"/>
       </Item>
     </Exceptions>
   </Debugging>

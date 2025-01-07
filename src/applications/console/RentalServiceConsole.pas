@@ -1,14 +1,9 @@
 program RentalServiceConsole;
 
-{$IFDEF FPC}
-  {$MODE Delphi}
-{$ENDIF}
+{$mode ObjFPC}{$H+}
 
 uses
-{$IFnDEF FPC}
-  System.SysUtils,
-{$ELSE}
-{$ENDIF}
+  SysUtils,
   MainMenuUnit,
   ClientMenuUnit,
   VehiclesMenuUnit,
@@ -16,5 +11,5 @@ uses
   ConsoleUtilsUnit;
 
 begin
-    MainMenuUnit.Menu;
+    Menu;
 end.

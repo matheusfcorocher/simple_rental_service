@@ -12,7 +12,7 @@ procedure Menu;
 
 implementation
 
-uses ClientMenuUnit, VehiclesMenuUnit, RentalMenuUnit;
+uses RenterMenuUnit, VehiclesMenuUnit, RentalMenuUnit;
 
 procedure Menu;
 var
@@ -25,7 +25,7 @@ begin
   Writeln('Options');
   Writeln;
 
-  Options := '1 - Clients Menu' + #13#10 +
+  Options := '1 - Renters Menu' + #13#10 +
             '2 - Vehicles Menu' + #13#10 +
             '3 - Rental Menu' + #13#10;
 
@@ -36,7 +36,7 @@ begin
     Readln(Input, Code);
 
     case Code of
-      1 : ClientsMenu;
+      1 : RentersMenu;
       2 : VehiclesMenu;
       3 : RentalMenu;
     else

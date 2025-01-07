@@ -5,7 +5,7 @@ program RentalServiceConsole;
 uses
   SysUtils,
   MainMenuUnit,
-  ClientMenuUnit,
+  RenterMenuUnit,
   VehiclesMenuUnit,
   RentalMenuUnit,
   ConsoleUtilsUnit;

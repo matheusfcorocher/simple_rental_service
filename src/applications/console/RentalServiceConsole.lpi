@@ -69,6 +69,12 @@
       <Item>
         <Name Value="RenterNameException"/>
       </Item>
+      <Item>
+        <Name Value="RunError(106)"/>
+      </Item>
+      <Item>
+        <Name Value="EInOutError"/>
+      </Item>
     </Exceptions>
   </Debugging>
 </CONFIG>

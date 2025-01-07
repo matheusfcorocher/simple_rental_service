@@ -11,6 +11,7 @@ type
   TVehicleStatus = (AVAILABLE, RENTED);
 
 function IsVehicleStatusEqual(a, b: TVehicleStatus): boolean;
+function VehicleStatusToStr(Status: TVehicleStatus) : String;
 
 implementation
 
@@ -20,5 +21,11 @@ begin
     GetEnumName(TypeInfo(TVehicleStatus), Ord(b));
 end;
 
+function VehicleStatusToStr(Status: TVehicleStatus) : String;
+const
+  StatusNames : array[TVehicleStatus] of string = ('AVAILABLE', 'RENTED');
+begin
+  result := StatusNames[Status];
+end;
 
 end.

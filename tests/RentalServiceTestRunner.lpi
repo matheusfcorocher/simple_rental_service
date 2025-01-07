@@ -22,6 +22,15 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="ServiceRentalControllersPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalServicePresentersPackage"/>
+      </Item>
+      <Item>
+        <PackageName Value="RentalServiceAssemblersPackage"/>
+      </Item>
+      <Item>
         <PackageName Value="RentalEcosystemPackage"/>
       </Item>
       <Item>
@@ -167,6 +176,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestRentalStorageUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="controllers\testrentercontrollerforconsoleapplicationunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TestRenterControllerForConsoleApplicationUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -177,7 +191,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;rental_ecosystem\use_cases\vehicle;rental_ecosystem\infrastructure\vehicle;rental_ecosystem\entity\rental;rental_ecosystem\use_cases\rental;rental_ecosystem\infrastructure\rental"/>
+      <OtherUnitFiles Value="utils;rental_ecosystem\entity\renter;rental_ecosystem\use_cases\renter;support\factories;rental_ecosystem\infrastructure\renter;rental_ecosystem\entity\vehicle;rental_ecosystem\use_cases\vehicle;rental_ecosystem\infrastructure\vehicle;rental_ecosystem\entity\rental;rental_ecosystem\use_cases\rental;rental_ecosystem\infrastructure\rental;controllers"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -246,6 +260,9 @@
       </Item>
       <Item>
         <Name Value="NotFoundRenterException"/>
+      </Item>
+      <Item>
+        <Name Value="NotFoundVehicleException"/>
       </Item>
     </Exceptions>
   </Debugging>

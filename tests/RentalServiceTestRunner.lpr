@@ -13,10 +13,11 @@ uses
   FakeVehicleStorageUnit, TestUpdateVehicleUnit,
   TestGetVehicleUnit, TestDeleteVehicleUnit,
   TestVehicleStorageUnit, TestRentalUnit, 
-TestVehicleStatusUnit, 
-TestRegisterRentalUnit, TestUpdateRentalUnit, TestGetRentalUnit, 
-TestDeleteRentalUnit, FakeRentalStorageUnit, 
-TestRentalStorageUnit;
+  TestVehicleStatusUnit,
+  TestRegisterRentalUnit, TestUpdateRentalUnit, TestGetRentalUnit,
+  TestDeleteRentalUnit, FakeRentalStorageUnit,
+  TestRentalStorageUnit,
+  TestRenterControllerForConsoleApplicationUnit;
 
   {$R *.res}
 

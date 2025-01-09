@@ -14,7 +14,7 @@ uses
   GetRentalUnit, RegisterRentalUnit, UpdateRentalUnit, DeleteRenterUnit, 
   GetRenterUnit, UpdateRenterUnit, DeleteVehicleUnit, GetVehicleUnit, 
   RegisterVehicleUnit, UpdateVehicleUnit, IRentalStorageUnit, 
-  IVehicleStorageUnit, LazarusPackageIntf;
+  IVehicleStorageUnit, RentalDTOUnit, LazarusPackageIntf;
 
 implementation
 

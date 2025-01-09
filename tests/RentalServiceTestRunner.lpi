@@ -22,10 +22,10 @@
     </RunParams>
     <RequiredPackages>
       <Item>
-        <PackageName Value="RentalServicePackage"/>
+        <PackageName Value="RentalServiceControllersPackage"/>
       </Item>
       <Item>
-        <PackageName Value="ServiceRentalControllersPackage"/>
+        <PackageName Value="RentalServicePackage"/>
       </Item>
       <Item>
         <PackageName Value="RentalServicePresentersPackage"/>

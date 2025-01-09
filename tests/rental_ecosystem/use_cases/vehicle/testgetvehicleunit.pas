@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, GetVehicleUnit,
-  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit;
+  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit, RegisterVehicleUnit;
 
 type
 
@@ -23,15 +23,28 @@ implementation
 procedure TTestGetVehicle.TestExecute;
 var
   VehicleStorage: ITVehicleStorage;
+  RegisterVehicle: TRegisterVehicle;
   GetVehicle: TGetVehicle;
   Vehicle: TVehicle;
+  VehicleData: TVehicleData;
   Expected: TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  Expected := Vehicle;
-
+  // preparing test
   VehicleStorage := TFakeVehicleStorage.Create;
+  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage);
   GetVehicle := TGetVehicle.Create(VehicleStorage);
+
+  with VehicleData do
+  begin
+    name := 'corsa';
+    licensePlate := 'MACLOVIN';
+    value := 1000;
+    status := AVAILABLE;
+  end;
+
+  Vehicle := RegisterVehicle.Execute(VehicleData);
+  Expected := Vehicle;
+  // Executing tests
 
   Vehicle := GetVehicle.Execute(Vehicle.getId);
 

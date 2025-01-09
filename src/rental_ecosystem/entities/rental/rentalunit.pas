@@ -8,7 +8,6 @@ uses
   Classes, SysUtils, Generics.Collections, DateUtils, VehicleUnit, RentalExceptionsUnit;
 
 type
-
   { TRental }
 
   TRental = class
@@ -26,9 +25,11 @@ type
     function getVehicle: TVehicle;
     function getStartDate: TDateTime;
     function getEndDate: TDateTime;
+    procedure setVehicle(vehicle: TVehicle);
 
-
-    constructor Create(id: string; renter_id: string; vehicle: TVehicle;
+    constructor Create(Id: string; RenterId: string; vehicle: TVehicle;
+      startDate: TDateTime; endDate: TDateTime);
+    constructor CreateWithoutBusinessRules(Id: string; RenterId: string; vehicle: TVehicle;
       startDate: TDateTime; endDate: TDateTime);
     function Total(): currency;
   end;
@@ -43,7 +44,7 @@ function RentalEquals(a, b: TRental): boolean;
 
 implementation
 
-constructor TRental.Create(id: string; renter_id: string; vehicle: TVehicle;
+constructor TRental.Create(Id: string; RenterId: string; vehicle: TVehicle;
   startDate: TDateTime; endDate: TDateTime);
 begin
 
@@ -51,7 +52,17 @@ begin
   Vehicle.IsVehicleAvailable();
 
   FId := id;
-  FRenterId := renter_id;
+  FRenterId := RenterId;
+  FVehicle := vehicle;
+  FStartDate := startDate;
+  FEndDate := endDate;
+end;
+
+constructor TRental.CreateWithoutBusinessRules(Id: string; RenterId: string; vehicle: TVehicle;
+  startDate: TDateTime; endDate: TDateTime);
+begin
+  FId := id;
+  FRenterId := RenterId;
   FVehicle := vehicle;
   FStartDate := startDate;
   FEndDate := endDate;
@@ -74,7 +85,7 @@ end;
 
 function TRental.getId: string;
 begin
-  Result := FRenterId;
+  Result := FId;
 end;
 
 function TRental.getRenterId: string;
@@ -97,6 +108,11 @@ begin
   Result := FEndDate;
 end;
 
+procedure TRental.setVehicle(vehicle: TVehicle);
+begin
+  FVehicle := vehicle;
+end;
+
 function TRental.Total(): currency;
 var
   RentedDays: integer;
@@ -113,8 +129,9 @@ end;
 
 function RentalEquals(a, b: TRental): boolean;
 begin
-  Result := (a.getId = b.getId) and (a.getVehicle = b.getVehicle) and
-    (a.getStartDate = b.getStartDate) and (a.getEndDate = b.getEndDate);
+  Result := (a.getId = b.getId) and (a.getRenterId = b.getRenterId) and
+  (a.getVehicle = b.getVehicle) and (a.getStartDate = b.getStartDate)
+  and (a.getEndDate = b.getEndDate);
 end;
 
 function TRentalsHelper.ToObjectList(): specialize TObjectList<TObject>;

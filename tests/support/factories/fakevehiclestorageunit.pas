@@ -9,7 +9,8 @@ uses
   Classes,
   IVehicleStorageUnit,
   VehicleUnit,
-  VehicleStatusUnit;
+  VehicleStatusUnit,
+  VehicleExceptionsUnit;
 
 type
 
@@ -17,7 +18,7 @@ type
 
   TFakeVehicleStorage = class(TInterfacedObject, ITVehicleStorage)
   private
-    Vehicles: TVehicles;
+    FVehicles: TVehicles;
   public
     constructor Create();
     function GetNextId() : String;
@@ -31,7 +32,7 @@ implementation
 
 constructor TFakeVehicleStorage.Create();
 begin
-  Vehicles := TVehicles.Create
+  FVehicles := TVehicles.Create
 end;
 
 function TFakeVehicleStorage.GetNextId(): String;
@@ -44,22 +45,44 @@ end;
 
 function TFakeVehicleStorage.Register(Vehicle: TVehicle): TVehicle;
 begin
-  Vehicles.Add(Vehicle);
+  FVehicles.Add(Vehicle);
   result := Vehicle;
 end;
 
 function TFakeVehicleStorage.Update(Vehicle: TVehicle): TVehicle;
+var
+  AuxVehicle: TVehicle;
+  VehicleIdx : Integer;
 begin
+  AuxVehicle := Get(Vehicle.getId());
+  VehicleIdx := FVehicles.IndexOf(AuxVehicle);
+  FVehicles.Insert(VehicleIdx, Vehicle);;
+
   result := Vehicle;
 end;
 
 function TFakeVehicleStorage.Get(id: String): TVehicle;
+var
+  Vehicle : TVehicle;
 begin
-  result := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
+  for Vehicle in FVehicles do
+  begin
+    if Vehicle.getId() = id then
+    begin
+      result := Vehicle;
+      Exit;
+    end;
+  end;
+
+  CreateNotFoundVehicleError(id);
 end;
 
 function TFakeVehicleStorage.Delete(id: string) : String;
+var
+  Vehicle : TVehicle;
 begin
+  Vehicle := Get(id);
+  FVehicles.Remove(Vehicle);
   result := 'The Vehicle has been successfully deleted from the system.';
 end;
 

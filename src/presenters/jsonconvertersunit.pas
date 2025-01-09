@@ -6,13 +6,17 @@ interface
 
 uses
   Classes, SysUtils, fpjson, jsonparser, RegisterRenterUnit,
-  RegisterVehicleUnit, RenterUnit, VehicleUnit, VehicleStatusUnit;
+  RegisterVehicleUnit, RenterUnit, VehicleUnit, VehicleStatusUnit, RentalUnit,
+  RentalDTOUnit;
 
 function JSONToRenter(JSON: TJSONObject): TRenter;
 function JSONToRenterData(JSON: TJSONObject): TRenterData;
 
 function JSONToVehicle(JSON: TJSONObject): TVehicle;
 function JSONToVehicleData(JSON: TJSONObject): TVehicleData;
+
+function JSONToRentalDTO(JSON: TJSONObject): TRentalDTO;
+function JSONToRentalInfoDTO(JSON: TJSONObject): TRentalInfoDTO;
 
 function JSONToId(JSON: TJSONObject): string;
 
@@ -32,7 +36,7 @@ var
 begin
   with RenterData do
   begin
-    Name := JSON.Strings['name'];
+    name := JSON.Strings['name'];
     address := JSON.Strings['address'];
     email := JSON.Strings['email'];
     telephone := JSON.Strings['telephone'];
@@ -63,6 +67,38 @@ begin
   end;
 
   Result := VehicleData;
+end;
+
+function JSONToRentalDTO(JSON: TJSONObject): TRentalDTO;
+var
+  RentalDTO: TRentalDTO;
+begin
+  with RentalDTO do
+  begin
+   Id := JSON.Strings['id'];
+   RenterId := JSON.Strings['renter_id'];
+   VehicleId := JSON.Strings['vehicle_id'];
+   StartDate := StrToDateTime(Copy(JSON.Strings['start_date'], 1, 10));
+   EndDate := StrToDateTime(Copy(JSON.Strings['end_date'], 1, 10));
+  end;
+
+
+  Result := RentalDTO;
+end;
+
+function JSONToRentalInfoDTO(JSON: TJSONObject): TRentalInfoDTO;
+var
+  RentalInfoDTO: TRentalInfoDTO;
+begin
+  with RentalInfoDTO do
+  begin
+    RenterId := JSON.Strings['renter_id'];
+    VehicleId := JSON.Strings['vehicle_id'];
+    StartDate := StrToDateTime(Copy(JSON.Strings['start_date'], 1, 10));
+    EndDate := StrToDateTime(Copy(JSON.Strings['end_date'], 1, 10));
+  end;
+
+  Result := RentalInfoDTO;
 end;
 
 function JSONToId(JSON: TJSONObject): string;

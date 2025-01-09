@@ -6,16 +6,9 @@ interface
 
 uses
   Classes, SysUtils, DateUtils, RentalUnit, VehicleUnit, RenterUnit,
-  IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit, VehicleStatusUnit;
+  IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit, VehicleStatusUnit, RentalDTOUnit;
 
 type
-  TRegisterRentalData = record
-    RenterId: string;
-    VehicleId: string;
-    StartDate: TDateTime;
-    EndDate: TDateTime;
-  end;
-
   TRegisterRental = class
   private
     FRentalStorage: ITRentalStorage;
@@ -24,7 +17,7 @@ type
   public
     constructor Create(IRentalStorage: ITRentalStorage;
       IVehicleStorage: ITVehicleStorage; IRenterStorage: ITRenterStorage);
-    function Execute(data: TRegisterRentalData): string;
+    function Execute(rentalInfoDTO: TRentalInfoDTO): TRental;
   end;
 
 implementation
@@ -37,27 +30,28 @@ begin
   FRenterStorage := IRenterStorage;
 end;
 
-function TRegisterRental.Execute(data: TRegisterRentalData): string;
+function TRegisterRental.Execute(rentalInfoDTO: TRentalInfoDTO): TRental;
 var
   Renter: TRenter;
   Vehicle: TVehicle;
   RentalId: string;
   Rental : TRental;
 begin
-  Renter := FRenterStorage.Get(data.RenterId);
-  Vehicle := FVehicleStorage.Get(data.VehicleId);
+  Renter := FRenterStorage.Get(rentalInfoDTO.RenterId);
+  Vehicle := FVehicleStorage.Get(rentalInfoDTO.VehicleId);
   RentalId := FRentalStorage.GetNextId();
 
   Rental := TRental.Create(RentalId, Renter.getId, Vehicle,
-    data.StartDate, data.EndDate);
+    rentalInfoDTO.StartDate, rentalInfoDTO.EndDate);
 
-  FRentalStorage.Register(rental);
+  Rental := FRentalStorage.Register(rental);
 
   //Updates vehicle status from AVAILABLE to RENTED
   Vehicle.setStatus(RENTED);
-  FVehicleStorage.Update(Vehicle);
+  Vehicle := FVehicleStorage.Update(Vehicle);
+  Rental.setVehicle(Vehicle);
 
-  Result := 'Rental created successfully!';
+  Result := Rental;
 end;
 
 end.

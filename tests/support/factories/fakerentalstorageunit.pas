@@ -12,7 +12,8 @@ uses
   IRentalStorageUnit,
   RentalUnit,
   VehicleUnit,
-  VehicleStatusUnit;
+  VehicleStatusUnit,
+  RentalExceptionsUnit;
 
 type
 
@@ -58,8 +59,15 @@ begin
 end;
 
 function TFakeRentalStorage.Update(Rental: TRental): TRental;
+var
+  AuxRental: TRental;
+  RentalIdx : Integer;
 begin
-  result := Rental;
+  AuxRental := Get(rental.getId());
+  RentalIdx := FRentals.IndexOf(AuxRental);
+  FRentals.Insert(RentalIdx, rental);
+
+  result := rental;
 end;
 
 function TFakeRentalStorage.Get(id: String): TRental;
@@ -68,16 +76,22 @@ var
 begin
   for Rental in FRentals do
   begin
-    if Rental.getId = id then
+    if Rental.getId() = id then
     begin
       result := Rental;
-      break;
+      Exit;
     end;
   end;
+
+  CreateNotFoundRentalException(id);
 end;
 
 function TFakeRentalStorage.Delete(id: string) : String;
+var
+  Rental : TRental;
 begin
+  Rental := Get(id);
+  FRentals.Remove(Rental);
   result := 'The rental has been successfully deleted from the system.';
 end;
 

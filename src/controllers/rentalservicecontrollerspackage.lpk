@@ -2,7 +2,7 @@
 <CONFIG>
   <Package Version="5">
     <PathDelim Value="\"/>
-    <Name Value="ServiceRentalControllersPackage"/>
+    <Name Value="RentalServiceControllersPackage"/>
     <Type Value="RunAndDesignTime"/>
     <CompilerOptions>
       <Version Value="11"/>
@@ -19,6 +19,10 @@
       <Item>
         <Filename Value="vehiclecontrollerunit.pas"/>
         <UnitName Value="VehicleControllerUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="rentalcontrollerunit.pas"/>
+        <UnitName Value="RentalControllerUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

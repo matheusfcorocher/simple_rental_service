@@ -109,6 +109,10 @@
         <Filename Value="storages\ivehiclestorageunit.pas"/>
         <UnitName Value="IVehicleStorageUnit"/>
       </Item>
+      <Item>
+        <Filename Value="entities\rental\rentaldtounit.pas"/>
+        <UnitName Value="RentalDTOUnit"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

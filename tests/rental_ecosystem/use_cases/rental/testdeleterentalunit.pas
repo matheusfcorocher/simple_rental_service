@@ -5,8 +5,10 @@ unit TestDeleteRentalUnit;
 interface
 
 uses
-  Classes, SysUtils, DateUtils, fpcunit, testregistry, RentalUnit, VehicleUnit, VehicleStatusUnit,
-  IRentalStorageUnit, FakeRentalStorageUnit, DeleteRentalUnit;
+  Classes, SysUtils, DateUtils, fpcunit, testregistry, RentalUnit,
+  VehicleUnit, VehicleStatusUnit,
+  IRentalStorageUnit, FakeRentalStorageUnit, DeleteRentalUnit,
+  RegisterRentalUnit, FakeRenterStorageUnit, FakeVehicleStorageUnit, RenterUnit, IRenterStorageUnit, IVehicleStorageUnit, RentalDTOUnit;
 
 type
 
@@ -20,21 +22,44 @@ implementation
 procedure TTestDeleteRental.TestExecute;
 var
   RentalStorage: ITRentalStorage;
+  VehicleStorage: ITVehicleStorage;
+  RenterStorage: ITRenterStorage;
+
+  RegisterRental: TRegisterRental;
   DeleteRental: TDeleteRental;
-  StartDate, EndDate: TDateTime;
+
+  Renter: TRenter;
   Vehicle: TVehicle;
   Rental: TRental;
-  Expected: String;
+  Data: TRentalInfoDTO;
+
+  Expected: string;
 begin
-  StartDate := EncodeDate(2024, 12, 1);
-  EndDate := EncodeDate(2024, 12, 31);
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
-
-  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle, StartDate, EndDate);
-
+  // preparing test
   RentalStorage := TFakeRentalStorage.Create;
+  VehicleStorage := TFakeVehicleStorage.Create;
+  RenterStorage := TFakeRenterStorage.Create;
+
+  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage);
   DeleteRental := TDeleteRental.Create(RentalStorage);
 
+  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email', '12432532');
+  RenterStorage.Register(Renter);
+
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  VehicleStorage.Register(Vehicle);
+
+  with Data do
+  begin
+    RenterId := Renter.getId;
+    VehicleId := Vehicle.getId;
+    StartDate := EncodeDate(2024, 12, 1);
+    EndDate := EncodeDate(2024, 12, 31);
+  end;
+
+  Rental := RegisterRental.Execute(Data);
+
+  // executing test
   Expected := DeleteRental.Execute(Rental.getId);
 
   AssertEquals(

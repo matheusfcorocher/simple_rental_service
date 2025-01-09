@@ -6,10 +6,10 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, DateUtils, testregistry,
-  VehicleUnit, VehicleStatusUnit,
+  RenterUnit, VehicleUnit, VehicleStatusUnit,
   IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit,
   FakeRentalStorageUnit, FakeVehicleStorageUnit, FakeRenterStorageUnit,
-  RegisterRentalUnit;
+  RegisterRentalUnit, RentalDTOUnit, RentalUnit;
 
 type
 
@@ -26,15 +26,18 @@ var
   VehicleStorage: ITVehicleStorage;
   RentalStorage: ITRentalStorage;
   RegisterRental: TRegisterRental;
+  Renter: TRenter;
   Vehicle: TVehicle;
-  Data: TRegisterRentalData;
-  Message: String;
-const
-  Expected = 'Rental created successfully!';
+  Data: TRentalInfoDTO;
+  Rental: TRental;
+  Expected: TRental;
 begin
   RentalStorage := TFakeRentalStorage.Create;
   VehicleStorage := TFakeVehicleStorage.Create;
   RenterStorage := TFakeRenterStorage.Create;
+
+  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email', '12432532');
+  RenterStorage.Register(Renter);
 
   Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
   VehicleStorage.Register(Vehicle);
@@ -43,24 +46,26 @@ begin
 
   with Data do
   begin
-    RenterId := 'renter_uuid';
-    VehicleId := 'vehicle_uuid';
+    RenterId := Renter.getId;
+    VehicleId := Vehicle.getId;
     StartDate := EncodeDate(2024, 12, 1);
     EndDate := EncodeDate(2024, 12, 31);
   end;
 
-  Message := RegisterRental.Execute(Data);
+  Rental := RegisterRental.Execute(Data);
 
-  AssertEquals(
+  Expected := TRental.CreateWithoutBusinessRules(Rental.getId,
+    Data.RenterId, Vehicle, Data.StartDate, Data.EndDate);
+
+
+  AssertTrue(
     'When registering rental, it retuns correct message',
-    Message,
-    Expected
-  );
+    RentalEquals(Rental, Expected)
+    );
 end;
 
 
 
 initialization
-
   RegisterTest(TTestRegisterRental);
 end.

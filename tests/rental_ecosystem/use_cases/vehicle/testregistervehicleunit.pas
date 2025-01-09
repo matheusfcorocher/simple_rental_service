@@ -41,6 +41,7 @@ begin
     status := Expected.getStatus;
   end;
 
+  // executing test
   Vehicle := RegisterVehicle.Execute(VehicleData);
 
   AssertTrue(

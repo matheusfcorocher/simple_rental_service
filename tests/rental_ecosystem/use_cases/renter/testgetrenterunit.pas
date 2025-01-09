@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testregistry, IRenterStorageUnit,
-  RenterUnit, GetRenterUnit, FakeRenterStorageUnit;
+  RenterUnit, GetRenterUnit, FakeRenterStorageUnit, RegisterRenterUnit;
 
 type
 
@@ -23,17 +23,29 @@ implementation
 procedure TTestGetRenter.TestExecute;
 var
   RenterStorage: ITRenterStorage;
+  RegisterRenter: TRegisterRenter;
   GetRenter: TGetRenter;
+  RenterData: TRenterData;
   Renter: TRenter;
   Expected: TRenter;
 begin
-  Renter := TRenter.Create('uid', 'test', 'test', '12345678', '123456789');
-  Expected := Renter;
-
+  //prepare test
   RenterStorage := TFakeRenterStorage.Create;
+  RegisterRenter := TRegisterRenter.Create(RenterStorage);
   GetRenter := TGetRenter.Create(RenterStorage);
 
-  Renter := GetRenter.Execute(Renter.getId);
+  with RenterData do
+  begin
+    name := 'Los';
+    address := 'address';
+    email :=  '12345678';
+    telephone :=  '123456789';
+  end;
+
+  Renter := RegisterRenter.Execute(RenterData);
+
+  //Execute Test
+  Expected := GetRenter.Execute(Renter.getId);
 
   AssertTrue(
     'When getting a renter, it retuns correct renter',

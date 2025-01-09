@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testregistry, UpdateRenterUnit,
-  FakeRenterStorageUnit, RenterUnit, IRenterStorageUnit;
+  FakeRenterStorageUnit, RenterUnit, IRenterStorageUnit, RegisterRenterUnit;
 
 type
 
@@ -23,16 +23,30 @@ implementation
 procedure TTestUpdateRenter.TestExecute;
 var
   RenterStorage: ITRenterStorage;
+  RegisterRenter: TRegisterRenter;
   UpdateRenter: TUpdateRenter;
+  RenterData: TRenterData;
   Renter: TRenter;
   Expected: TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  Expected := Renter;
-
+  //prepare test
   RenterStorage := TFakeRenterStorage.Create;
+  RegisterRenter := TRegisterRenter.Create(RenterStorage);
   UpdateRenter := TUpdateRenter.Create(RenterStorage);
 
+  with RenterData do
+  begin
+    name := 'Los';
+    address := 'address';
+    email :=  '12345678';
+    telephone :=  '123456789';
+  end;
+
+  Renter := RegisterRenter.Execute(RenterData);
+  Renter.setName('Bob');
+  Expected := Renter;
+
+  //Execute Test
   Renter := UpdateRenter.Execute(Renter);
 
   AssertTrue(

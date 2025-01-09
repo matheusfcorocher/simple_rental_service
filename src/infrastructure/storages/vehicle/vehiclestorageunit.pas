@@ -62,7 +62,7 @@ var
 begin
   AuxVehicle := Get(Vehicle.getId());
   VehicleIdx := FVehicles.IndexOf(AuxVehicle);
-  FVehicles[VehicleIdx] := Vehicle;
+  FVehicles.Insert(VehicleIdx, Vehicle);
 
   result := Vehicle;
 end;

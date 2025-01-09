@@ -62,7 +62,7 @@ var
 begin
   AuxRenter := Get(renter.getId());
   RenterIdx := FRenters.IndexOf(AuxRenter);
-  FRenters[RenterIdx] := renter;
+  FRenters.Insert(RenterIdx, renter);
 
   result := renter;
 end;

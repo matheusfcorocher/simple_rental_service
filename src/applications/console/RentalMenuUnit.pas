@@ -6,7 +6,7 @@ unit RentalMenuUnit;
 
 interface
 
-uses ConsoleUtilsUnit;
+uses ConsoleUtilsUnit, fpjson, jsonparser, GlobalVariablesUnit;
 
 procedure RentalMenu;
 procedure RegisterRental;
@@ -58,33 +58,142 @@ begin
 end;
 
 procedure RegisterRental;
+var
+ RenterJSON: TJSONObject;
+ UserInput : String;
+ Result : String;
 begin
   CleanConsole;
-  Writeln('Clean Rental');
+  RenterJSON := TJSONObject.Create;
+  Writeln('Register Rental');
+
+  Writeln;
+  Writeln('Digit Renters id: ');
+  Readln(UserInput);
+  RenterJSON.Add('renter_id', UserInput);
+
+  Writeln;
+  Writeln('Digit Vehicles id: ');
+  Readln(UserInput);
+  RenterJSON.Add('vehicle_id', UserInput);
+
+  Writeln;
+  Writeln('Digit start date of rental (example: 01/01/2025): ');
+  Readln(UserInput);
+  RenterJSON.Add('start_date', UserInput);
+
+  Writeln;
+  Writeln('Digit end date of rental (example: 31/01/2025): ');
+  Readln(UserInput);
+  RenterJSON.Add('end_date', UserInput);
+
+  Writeln;
+  Writeln('------------------------------');
+  Writeln;
+
+  Result := RentalService.GetRentalController().Register(RenterJSON);
+  Writeln(Result);
   Readln;
+
   Menu;
 end;
 
 procedure EditRental;
+var
+ RenterJSON: TJSONObject;
+ UserInput : String;
+ Result : String;
 begin
   CleanConsole;
-  Writeln('Edit Rental');
+  RenterJSON := TJSONObject.Create;
+  Writeln('Update Rental');
+
+  Writeln;
+  Writeln('Digit id: ');
+  Readln(UserInput);
+  RenterJSON.Add('id', UserInput);
+
+  Writeln;
+  Writeln('Digit Renters id: ');
+  Readln(UserInput);
+  RenterJSON.Add('renter_id', UserInput);
+
+  Writeln;
+  Writeln('Digit Vehicles id: ');
+  Readln(UserInput);
+  RenterJSON.Add('vehicle_id', UserInput);
+
+  Writeln;
+  Writeln('Digit start date of rental (example: 01/01/2025): ');
+  Readln(UserInput);
+  RenterJSON.Add('start_date', UserInput);
+
+  Writeln;
+  Writeln('Digit end date of rental (example: 31/01/2025): ');
+  Readln(UserInput);
+  RenterJSON.Add('end_date', UserInput);
+
+  Writeln;
+  Writeln('------------------------------');
+  Writeln;
+
+  Result := RentalService.GetRentalController().Update(RenterJSON);
+  Writeln(Result);
   Readln;
+
   Menu;
 end;
+
+
 procedure CheckRental;
+var
+ RenterJSON: TJSONObject;
+ UserInput : String;
+ Result : String;
 begin
   CleanConsole;
+  RenterJSON := TJSONObject.Create;
   Writeln('Check Rental');
+
+  Writeln;
+  Writeln('Digit Rental id: ');
+  Readln(UserInput);
+  RenterJSON.Add('id', UserInput);
+
+  Writeln;
+  Writeln('------------------------------');
+  Writeln;
+
+  Result := RentalService.GetRentalController().Get(RenterJSON);
+  Writeln(Result);
   Readln;
+
   Menu;
 end;
 
 procedure DeleteRental;
+var
+ RenterJSON: TJSONObject;
+ UserInput : String;
+ Result : String;
 begin
   CleanConsole;
+  RenterJSON := TJSONObject.Create;
   Writeln('Delete Rental');
+
+  Writeln;
+  Writeln('Digit Rental id: ');
+  Readln(UserInput);
+  RenterJSON.Add('id', UserInput);
+
+  Writeln;
+  Writeln('------------------------------');
+  Writeln;
+
+  Result := RentalService.GetRentalController().Delete(RenterJSON);
+  Writeln(Result);
   Readln;
+
   Menu;
 end;
 

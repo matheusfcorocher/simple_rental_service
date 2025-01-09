@@ -34,9 +34,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="globalvariablesunit.pas"/>
+        <Filename Value="GlobalVariablesUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="GlobalVariablesUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -74,6 +73,9 @@
       </Item>
       <Item>
         <Name Value="EInOutError"/>
+      </Item>
+      <Item>
+        <Name Value="EConvertError"/>
       </Item>
     </Exceptions>
   </Debugging>

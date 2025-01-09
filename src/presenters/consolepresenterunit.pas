@@ -58,8 +58,11 @@ begin
   VehicleMessage := Present(Rental.getVehicle);
 
   message := 'Id: ' + Rental.getId + #13#10 +
-             'Name: ' + Rental.getRenterId + #13#10 +
-             'Vehicle: ' + #13#10 + VehicleMessage + #13#10 +
+             'Renter_Id: ' + Rental.getRenterId + #13#10 +
+             'Vehicle: ' + #13#10 +
+             '-------------------' + #13#10 +
+             VehicleMessage + #13#10 +
+             '-------------------' + #13#10 +
              'Start Date: ' + FormatDateTime('DD MM YYYY', Rental.getStartDate) + #13#10 +
              'End Date: ' + FormatDateTime('DD MM YYYY', Rental.getEndDate);
 

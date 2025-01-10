@@ -30,6 +30,7 @@ lazbuild ./src/presenters/rentalservicepresenterspackage.lpk
 lazbuild ./src/controllers/rentalservicecontrollerspackage.lpk
 lazbuild ./src/assemblers/RentalServicePackage.lpk
 lazbuild ./src/applications/console/RentalServiceConsole.lpi
+lazbuild ./src/applications/rest_api/RentalApiApp.lpi
 
 # Run executable console application
 ./src/applications/console/RentalServiceConsole
@@ -49,6 +50,7 @@ lazbuild .\src\presenters\rentalservicepresenterspackage.lpk
 lazbuild .\src\controllers\rentalservicecontrollerspackage.lpk
 lazbuild .\src\assemblers\RentalServicePackage.lpk
 lazbuild .\src\applications\console\RentalServiceConsole.lpi
+lazbuild .\src\applications\rest_api\RentalApiApp.lpi
 
 REM Run console executable
 .\src\applications\console\RentalServiceConsole.exe

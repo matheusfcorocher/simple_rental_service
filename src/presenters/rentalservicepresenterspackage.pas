@@ -8,7 +8,8 @@ unit RentalServicePresentersPackage;
 interface
 
 uses
-  ConsolePresenterUnit, IPresenterUnit, JSONConvertersUnit, LazarusPackageIntf;
+  ConsolePresenterUnit, IPresenterUnit, JSONConvertersUnit, 
+  WebAPIPresenterUnit, LazarusPackageIntf;
 
 implementation
 

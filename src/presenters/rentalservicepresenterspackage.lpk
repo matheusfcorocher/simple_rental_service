@@ -25,6 +25,10 @@
         <Filename Value="jsonconvertersunit.pas"/>
         <UnitName Value="JSONConvertersUnit"/>
       </Item>
+      <Item>
+        <Filename Value="webapipresenterunit.pas"/>
+        <UnitName Value="WebAPIPresenterUnit"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

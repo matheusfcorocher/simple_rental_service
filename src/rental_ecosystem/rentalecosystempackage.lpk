@@ -30,24 +30,12 @@
         <UnitName Value="RegisterRenterUnit"/>
       </Item>
       <Item>
-        <Filename Value="entities\rental\rentalexceptionsunit.pas"/>
-        <UnitName Value="RentalExceptionsUnit"/>
-      </Item>
-      <Item>
         <Filename Value="entities\rental\rentalunit.pas"/>
         <UnitName Value="RentalUnit"/>
       </Item>
       <Item>
-        <Filename Value="entities\renter\renterexceptionsunit.pas"/>
-        <UnitName Value="RenterExceptionsUnit"/>
-      </Item>
-      <Item>
         <Filename Value="entities\vehicle\vehicledtounit.pas"/>
         <UnitName Value="VehicleDTOUnit"/>
-      </Item>
-      <Item>
-        <Filename Value="entities\vehicle\vehicleexceptionsunit.pas"/>
-        <UnitName Value="VehicleExceptionsUnit"/>
       </Item>
       <Item>
         <Filename Value="entities\vehicle\vehiclestatusunit.pas"/>

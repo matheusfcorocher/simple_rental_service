@@ -9,11 +9,10 @@ interface
 
 uses
   RenterDTOUnit, RenterUnit, IRenterStorageUnit, RegisterRenterUnit, 
-  RentalExceptionsUnit, RentalUnit, RenterExceptionsUnit, VehicleDTOUnit, 
-  VehicleExceptionsUnit, VehicleStatusUnit, VehicleUnit, DeleteRentalUnit, 
-  GetRentalUnit, RegisterRentalUnit, UpdateRentalUnit, DeleteRenterUnit, 
-  GetRenterUnit, UpdateRenterUnit, DeleteVehicleUnit, GetVehicleUnit, 
-  RegisterVehicleUnit, UpdateVehicleUnit, IRentalStorageUnit, 
+  RentalUnit, VehicleDTOUnit, VehicleStatusUnit, VehicleUnit, 
+  DeleteRentalUnit, GetRentalUnit, RegisterRentalUnit, UpdateRentalUnit, 
+  DeleteRenterUnit, GetRenterUnit, UpdateRenterUnit, DeleteVehicleUnit, 
+  GetVehicleUnit, RegisterVehicleUnit, UpdateVehicleUnit, IRentalStorageUnit, 
   IVehicleStorageUnit, RentalDTOUnit, LazarusPackageIntf;
 
 implementation

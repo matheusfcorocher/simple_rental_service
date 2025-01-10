@@ -8,7 +8,9 @@ unit RentalServiceUtilitiesPackage;
 interface
 
 uses
-  SystemResponseUnit, StandardResponsesUnit, LazarusPackageIntf;
+  SystemResponseUnit, StandardResponsesUnit, ExceptionsErrorCodeUnit, 
+  RentalExceptionsUnit, RenterExceptionsUnit, VehicleExceptionsUnit, 
+  LazarusPackageIntf;
 
 implementation
 

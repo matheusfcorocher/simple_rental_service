@@ -8,8 +8,8 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="system_responses"/>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <OtherUnitFiles Value="system_responses;exceptions"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
     <Files>
@@ -20,6 +20,22 @@
       <Item>
         <Filename Value="system_responses\StandardResponsesUnit.pas"/>
         <UnitName Value="StandardResponsesUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="system_responses\exceptionserrorcodeunit.pas"/>
+        <UnitName Value="ExceptionsErrorCodeUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\rentalexceptionsunit.pas"/>
+        <UnitName Value="RentalExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\renterexceptionsunit.pas"/>
+        <UnitName Value="RenterExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\vehicleexceptionsunit.pas"/>
+        <UnitName Value="VehicleExceptionsUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

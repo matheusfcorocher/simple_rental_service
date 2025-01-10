@@ -9,26 +9,20 @@ uses
   httpdefs,
   httproute,
   fpjson,
-  jsonparser;
+  jsonparser, GlobalVariablesUnit;
 
   procedure rentersEndpoint(aRequest: TRequest; aResponse: TResponse);
   var
     // Request
-    JSONData: TJSONData;
+    RequestJSONData: TJSONData;
     JSONObject: TJSONObject;
-
-    //Request Content
-    Id: string;
-    Name: string;
-    Address: string;
-    Email: string;
-    Telephone: string;
+    Id: String;
 
     //Response
-    ResponseJSONObject: TJSONObject;
+    Response: TJSONObject;
 
   begin
-    ResponseJSONObject := TJSONObject.Create;
+    Response := TJSONObject.Create;
     try
       case aRequest.Method of
         'GET':
@@ -36,75 +30,63 @@ uses
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetRenterController().Get(JSONObject);
         end;
         'POST':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          Name := JSONObject.Get('name', '');
-
-          Address := JSONObject.Get('address', '');
-          Email := JSONObject.Get('email', '');
-          Telephone := JSONObject.Get('telephone', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation ' + Name + Address + Email + Telephone;
+          Response := RentalService.GetRenterController().Register(JSONObject);
         end;
         'PUT':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          Id := JSONObject.Get('id', '');
-          Name := JSONObject.Get('name', '');
-          Address := JSONObject.Get('address', '');
-          Email := JSONObject.Get('email', '');
-          Telephone := JSONObject.Get('telephone', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          Response := RentalService.GetRenterController().Update(JSONObject);
         end;
         'DELETE':
         begin;
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetRenterController().Delete(JSONObject);
         end;
       end;
 
-      aResponse.Content := ResponseJSONObject.AsJSON;
+      aResponse.Content := Response.AsJSON;
       aResponse.ContentType := 'application/json';
       aResponse.SendContent;
     finally
-      ResponseJSONObject.Free;
+      Response.Free;
     end;
   end;
 
   procedure vehiclesEndpoint(aRequest: TRequest; aResponse: TResponse);
   var
     // Request
-    JSONData: TJSONData;
+    RequestJSONData: TJSONData;
     JSONObject: TJSONObject;
-
-    //JSON Content
-    Id: string;
-    Name: string;
-    LicensePlate: string;
-    Value: integer;
-    Status: string;
+    Id: String;
 
     //Response
-    ResponseJSONObject: TJSONObject;
+    Response: TJSONObject;
 
   begin
-    ResponseJSONObject := TJSONObject.Create;
+    Response := TJSONObject.Create;
     try
       case aRequest.Method of
         'GET':
@@ -112,73 +94,62 @@ uses
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation ' + Id + '.';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetVehicleController().Get(JSONObject);
         end;
         'POST':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          Name := JSONObject.Get('name', '');
-          LicensePlate := JSONObject.Get('licensePlate', '');
-          Value := JSONObject.Get('value', 0);
-          Status := JSONObject.Get('status', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          Response := RentalService.GetVehicleController().Register(JSONObject);
         end;
         'PUT':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          Id := JSONObject.Get('id', '');
-          Name := JSONObject.Get('name', '');
-          LicensePlate := JSONObject.Get('licensePlate', '');
-          Value := JSONObject.Get('value', 0);
-          Status := JSONObject.Get('status', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          Response := RentalService.GetVehicleController().Update(JSONObject);
         end;
         'DELETE':
         begin;
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation ' + Id + '.';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetVehicleController().Delete(JSONObject);
         end;
       end;
 
-      aResponse.Content := ResponseJSONObject.AsJSON;
+      aResponse.Content := Response.AsJSON;
       aResponse.ContentType := 'application/json';
       aResponse.SendContent;
     finally
-      ResponseJSONObject.Free;
+      Response.Free;
     end;
   end;
 
   procedure rentalsEndpoint(aRequest: TRequest; aResponse: TResponse);
   var
     // Request
-    JSONData: TJSONData;
+    RequestJSONData: TJSONData;
     JSONObject: TJSONObject;
-
-    //Request Content
-    Id: string;
-    RenterId: string;
-    VehicleId: string;
-    StartDate: string;
-    EndDate: string;
+    Id: String;
 
     //Response
-    ResponseJSONObject: TJSONObject;
+    Response: TJSONObject;
   begin
-    ResponseJSONObject := TJSONObject.Create;
+    Response := TJSONObject.Create;
     try
       case aRequest.Method of
         'GET':
@@ -186,53 +157,48 @@ uses
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetRentalController().Get(JSONObject);
         end;
         'POST':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          RenterId := JSONObject.Get('renter_id', '');
-          VehicleId := JSONObject.Get('vehicle_id', '');
-          StartDate := JSONObject.Get('start_date', '');
-          EndDate := JSONObject.Get('end_date', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          Response := RentalService.GetRentalController().Register(JSONObject);
         end;
         'PUT':
         begin;
-          JSONData := GetJSON(ARequest.Content);
+          // getting data from request body
+          RequestJSONData := GetJSON(ARequest.Content);
 
-          JSONObject := TJSONObject(JSONData);
+          JSONObject := TJSONObject(RequestJSONData);
 
-          Id := JSONObject.Get('id', '');
-          RenterId := JSONObject.Get('renter_id', '');
-          VehicleId := JSONObject.Get('vehicle_id', '');
-          StartDate := JSONObject.Get('start_date', '');
-          EndDate := JSONObject.Get('end_date', '');
-
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          Response := RentalService.GetRentalController().Update(JSONObject);
         end;
         'DELETE':
         begin;
           // get from query params
           Id := ARequest.QueryFields.Values['id'];
 
-          ResponseJSONObject.Booleans['success'] := True;
-          ResponseJSONObject.Strings['message'] := 'This need implementation';
+          //creating request data
+          JSONObject := TJSONObject.Create;
+          JSONObject.Add('id', Id);
+
+          Response := RentalService.GetRentalController().Delete(JSONObject);
         end;
       end;
 
-      aResponse.Content := ResponseJSONObject.AsJSON;
+      aResponse.Content := Response.AsJSON;
       aResponse.ContentType := 'application/json';
       aResponse.SendContent;
     finally
-      ResponseJSONObject.Free;
+      Response.Free;
     end;
   end;
 

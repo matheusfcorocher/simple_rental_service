@@ -24,10 +24,20 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
+    <RequiredPackages>
+      <Item>
+        <PackageName Value="RentalServicePackage"/>
+      </Item>
+    </RequiredPackages>
     <Units>
       <Unit>
         <Filename Value="RestApiApp.lpr"/>
         <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="globalvariablesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GlobalVariablesUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -63,6 +73,33 @@
       </Item>
       <Item>
         <Name Value="EConvertError"/>
+      </Item>
+      <Item>
+        <Name Value="RenterTelephoneException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterEmailException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterAddressException"/>
+      </Item>
+      <Item>
+        <Name Value="RenterNameException"/>
+      </Item>
+      <Item>
+        <Name Value="EJSON"/>
+      </Item>
+      <Item>
+        <Name Value="RunError(219)"/>
+      </Item>
+      <Item>
+        <Name Value="EInvalidCast"/>
+      </Item>
+      <Item>
+        <Name Value="NotFoundVehicleException"/>
+      </Item>
+      <Item>
+        <Name Value="NotFoundRentalException"/>
       </Item>
     </Exceptions>
   </Debugging>

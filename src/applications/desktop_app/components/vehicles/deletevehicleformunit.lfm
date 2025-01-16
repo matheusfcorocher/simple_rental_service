@@ -1,0 +1,49 @@
+object DeleteVehicleForm: TDeleteVehicleForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'DeleteVehicleForm'
+  ClientHeight = 480
+  ClientWidth = 640
+  object TitleLabel: TLabel
+    Left = 248
+    Height = 20
+    Top = 32
+    Width = 137
+    Caption = 'Remoção do Veículo'
+  end
+  object IdLabel: TLabel
+    Left = 184
+    Height = 20
+    Top = 80
+    Width = 13
+    Caption = 'Id'
+  end
+  object IdTextField: TEdit
+    Left = 184
+    Height = 28
+    Top = 104
+    Width = 264
+    TabOrder = 0
+  end
+  object DeleteButton: TButton
+    Left = 280
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Remover'
+    TabOrder = 1
+    OnClick = DeleteButtonClick
+  end
+  object TextMessageError: TLabel
+    Left = 64
+    Height = 1
+    Top = 200
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+end

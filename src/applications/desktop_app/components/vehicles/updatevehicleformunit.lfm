@@ -1,0 +1,113 @@
+object UpdateVehicleForm: TUpdateVehicleForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'UpdateVehicleForm'
+  ClientHeight = 480
+  ClientWidth = 640
+  object TitleLabel: TLabel
+    Left = 264
+    Height = 20
+    Top = 24
+    Width = 116
+    Caption = 'Adicionar Veículo'
+  end
+  object NameLabel: TLabel
+    Left = 400
+    Height = 20
+    Top = 80
+    Width = 41
+    Caption = 'Nome'
+  end
+  object NameTextField: TEdit
+    Left = 400
+    Height = 28
+    Top = 104
+    Width = 176
+    TabOrder = 0
+  end
+  object LicensePlateLabel: TLabel
+    Left = 40
+    Height = 20
+    Top = 184
+    Width = 109
+    Caption = 'Placa do Veículo'
+  end
+  object LicensePlateTextField: TEdit
+    Left = 40
+    Height = 28
+    Top = 208
+    Width = 176
+    TabOrder = 1
+  end
+  object ValueLabel: TLabel
+    Left = 400
+    Height = 20
+    Top = 192
+    Width = 34
+    Caption = 'Valor'
+  end
+  object ValueTextField: TEdit
+    Left = 400
+    Height = 28
+    Top = 216
+    Width = 176
+    TabOrder = 2
+  end
+  object UpdateButton: TButton
+    Left = 272
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Atualizar'
+    TabOrder = 3
+    OnClick = UpdateButtonClick
+  end
+  object TextMessageError: TLabel
+    Left = 40
+    Height = 1
+    Top = 392
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object IdTextField: TEdit
+    Left = 40
+    Height = 28
+    Top = 104
+    Width = 176
+    TabOrder = 4
+  end
+  object IdLabel: TLabel
+    Left = 40
+    Height = 20
+    Top = 80
+    Width = 13
+    Caption = 'Id'
+  end
+  object StatusGroup: TRadioGroup
+    Left = 216
+    Height = 105
+    Top = 272
+    Width = 185
+    AutoFill = True
+    Caption = 'Status'
+    ChildSizing.LeftRightSpacing = 6
+    ChildSizing.EnlargeHorizontal = crsHomogenousChildResize
+    ChildSizing.EnlargeVertical = crsHomogenousChildResize
+    ChildSizing.ShrinkHorizontal = crsScaleChilds
+    ChildSizing.ShrinkVertical = crsScaleChilds
+    ChildSizing.Layout = cclLeftToRightThenTopToBottom
+    ChildSizing.ControlsPerLine = 1
+    ClientHeight = 80
+    ClientWidth = 181
+    Items.Strings = (
+      'Disponível'
+      'Alugado'
+    )
+    TabOrder = 5
+  end
+end

@@ -12,7 +12,8 @@ uses
   Interfaces, // this includes the LCL widgetset
   Forms, FrameViewer09, anchordockpkg, runtimetypeinfocontrols, MainFormUnit,
   GlobalVariablesUnit, AddVehicleFormUnit, DeleteRenterFormUnit,
-  RegisterRenterFormUnit, UpdateRenterFormUnit
+  RegisterRenterFormUnit, UpdateRenterFormUnit, UpdateVehicleFormUnit,
+StringGridUtilsUnit, DeleteVehicleFormUnit
   { you can add units after this };
 
 {$R *.res}
@@ -26,6 +27,8 @@ begin
   Application.CreateForm(TDeleteRenterForm, DeleteRenterForm);
   Application.CreateForm(TRegisterRenterForm, RegisterRenterForm);
   Application.CreateForm(TUpdateRenterForm, UpdateRenterForm);
+  Application.CreateForm(TUpdateVehicleForm, UpdateVehicleForm);
+  Application.CreateForm(TDeleteVehicleForm, DeleteVehicleForm);
   Application.Run;
 end.
 

@@ -75,6 +75,7 @@
         <Filename Value="components\renters\deleterenterformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DeleteRenterForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="DeleteRenterFormUnit"/>
       </Unit>
@@ -98,6 +99,7 @@
         <Filename Value="components\renters\updaterenterformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="UpdateRenterForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UpdateRenterFormUnit"/>
       </Unit>
@@ -105,6 +107,25 @@
         <Filename Value="interfaces\globalvariablesunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="GlobalVariablesUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\vehicles\updatevehicleformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="UpdateVehicleForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UpdateVehicleFormUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="utils\stringgridutilsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="StringGridUtilsUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\vehicles\deletevehicleformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DeleteVehicleForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="DeleteVehicleFormUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -116,7 +137,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="components\vehicles;components\renters;interfaces"/>
+      <OtherUnitFiles Value="components\vehicles;components\renters;interfaces;utils"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -155,6 +176,15 @@
       </Item>
       <Item>
         <Name Value="EJSON"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleNameException"/>
+      </Item>
+      <Item>
+        <Name Value="VehicleLicensePlateException"/>
+      </Item>
+      <Item>
+        <Name Value="EConvertError"/>
       </Item>
     </Exceptions>
   </Debugging>

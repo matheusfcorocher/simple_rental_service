@@ -42,7 +42,7 @@ end;
 procedure CreateRenterTelephoneError;
 begin
   raise RenterTelephoneException.Create(
-    'Telephone isnt valid. Checks if telephone isnt empty and have digits between 2 and 50.');
+    'Telephone isnt valid. Checks if telephone isnt empty and have digits between 8 and 15.');
 end;
 
 procedure CreateNotFoundRenterException(id: string);

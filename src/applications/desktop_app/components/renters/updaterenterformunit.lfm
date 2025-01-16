@@ -6,6 +6,7 @@ object UpdateRenterForm: TUpdateRenterForm
   Caption = 'UpdateRenterForm'
   ClientHeight = 480
   ClientWidth = 640
+  LCLVersion = '3.6.0.0'
   object TitleLabel: TLabel
     Left = 264
     Height = 20

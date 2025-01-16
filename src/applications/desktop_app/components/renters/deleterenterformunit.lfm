@@ -12,6 +12,7 @@ object DeleteRenterForm: TDeleteRenterForm
     Top = 32
     Width = 135
     Caption = 'Remoção do Cliente'
+    OnClick = TitleLabelClick
   end
   object IdLabel: TLabel
     Left = 184

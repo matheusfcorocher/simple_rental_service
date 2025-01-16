@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Grids, fpjson, jsonparser, GlobalVariablesUnit;
+  Grids, fpjson, jsonparser, GlobalVariablesUnit, StringGridUtilsUnit;
 
 type
 
@@ -35,9 +35,6 @@ type
 
   end;
 
-function FindRowWithValue(Grid: TStringGrid; const Value: string;
-  Column: integer): integer;
-
 var
   UpdateRenterForm: TUpdateRenterForm;
 
@@ -48,22 +45,6 @@ uses MainFormUnit;
 {$R *.lfm}
 
 { TUpdateRenterForm }
-
-function FindRowWithValue(Grid: TStringGrid; const Value: string;
-  Column: integer): integer;
-var
-  Row: integer;
-begin
-  Result := -1; // Default value if the value is not found
-  for Row := 0 to Grid.RowCount - 1 do
-  begin
-    if Grid.Cells[Column, Row] = Value then
-    begin
-      Result := Row;
-      Exit; // Exit the loop once the value is found
-    end;
-  end;
-end;
 
 procedure TUpdateRenterForm.TitleLabelClick(Sender: TObject);
 begin
@@ -94,7 +75,7 @@ begin
     Data := Response.Objects['data'];
 
     // find row in string grid
-    RowIndex := FindRowWithValue(MainForm.StringGrid1, Data.Get('id', ''), 1);
+    RowIndex := FindRowWithValueInStringGrid(MainForm.StringGrid1, Data.Get('id', ''), 1);
     // Search in column 1
 
     MainForm.StringGrid1.DeleteRow(RowIndex);

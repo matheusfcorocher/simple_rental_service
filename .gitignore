@@ -116,6 +116,9 @@ lib/
 ## Distribution
 
 *dist/
+RentalServiceConsole
+RestApiApp
+RentalServiceDesktopApp.exe
 
 ## Data of database
 /database/data/

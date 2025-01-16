@@ -11,37 +11,52 @@ Welcome to the Rental Service! This project provides a robust and efficient solu
 To get started with this project, you will need the following:
 
 - [Free Pascal Compiler (FPC)](https://www.freepascal.org/): Ensure you have the Free Pascal Compiler installed. You can download it from the official Free Pascal website.
+- [Lazarus-IDE](https://www.lazarus-ide.org/): Comes with lazbuild.
 
 ### Running step by step
 
-Follow the instructions below to compile and run the console application. Depending on your operating system, use the appropriate commands.
+Follow the instructions below to compile and run the console application and rest api application. Depending on your operating system, use the appropriate commands.
 
-For running console application, run the commands for optional platform:
+For running console application and rest api, run the commands for optional platform:
 
 ### Unix-based Systems
 
 ```bash
-# create a distribution folder
-mkdir dist
-# compile pascal file
-fpc -FEdist ./src/applications/console/RentalServiceConsole.pas
-# change directory to distribution folder
-cd dist
-# run executable file
-./RentalServiceConsole
+# Compile all packages before running applications
+lazbuild ./src/utils/rentalserviceutilitiespackage.lpk
+lazbuild ./src/rental_ecosystem/rentalecosystempackage.lpk
+lazbuild ./src/infrastructure/rentalserviceinfrastructurepackage.lpk
+lazbuild ./src/presenters/rentalservicepresenterspackage.lpk
+lazbuild ./src/controllers/rentalservicecontrollerspackage.lpk
+lazbuild ./src/assemblers/RentalServicePackage.lpk
+lazbuild ./src/applications/console/RentalServiceConsole.lpi
+lazbuild ./src/applications/rest_api/RentalApiApp.lpi
+
+# Run executable console application
+./src/applications/console/RentalServiceConsole
+
+# Run executable rest api application
+./src/applications/rest_api/RentalApiApp
 ```
 
 ### Windows
 
 ```cmd
-REM create a distribution folder
-mkdir dist
-REM compile pascal file
-fpc -FEdist ./src/applications/console/RentalServiceConsole.pas
-REM change directory to distribution folder
-cd dist
-REM run executable file
-RentalServiceConsole.exe
+REM Compile all packages before running applications
+lazbuild .\src\utils\rentalserviceutilitiespackage.lpk
+lazbuild .\src\rental_ecosystem\rentalecosystempackage.lpk
+lazbuild .\src\infrastructure\rentalserviceinfrastructurepackage.lpk
+lazbuild .\src\presenters\rentalservicepresenterspackage.lpk
+lazbuild .\src\controllers\rentalservicecontrollerspackage.lpk
+lazbuild .\src\assemblers\RentalServicePackage.lpk
+lazbuild .\src\applications\console\RentalServiceConsole.lpi
+lazbuild .\src\applications\rest_api\RentalApiApp.lpi
+
+REM Run console executable
+.\src\applications\console\RentalServiceConsole.exe
+
+REM Run executable rest api application
+.\src\applications\rest_api\RentalApiApp.exe
 ```
 
 ## Additional Information

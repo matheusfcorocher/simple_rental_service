@@ -118,7 +118,7 @@ lib/
 *dist/
 RentalServiceConsole
 RestApiApp
-RentalServiceDesktopApp.exe
+RentalServiceDesktopApp
 
 ## Data of database
 /database/data/

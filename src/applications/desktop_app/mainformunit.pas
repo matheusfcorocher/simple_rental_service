@@ -8,7 +8,8 @@ uses
   Classes, SysUtils, SQLDB, Forms, Controls, Graphics, Dialogs, Grids, Menus,
   StdCtrls, ExtCtrls, ComCtrls, ValEdit, ColorBox, LazHelpHTML, Buttons,
   HtmlView, AnchorDockPanel, RTTIGrids, Types, RegisterRenterFormUnit,
-  UpdateRenterFormUnit, DeleteRenterFormUnit, GlobalVariablesUnit, AddVehicleFormUnit;
+  UpdateRenterFormUnit, DeleteRenterFormUnit, GlobalVariablesUnit,
+  AddVehicleFormUnit, UpdateVehicleFormUnit, DeleteVehicleFormUnit;
 
 type
 
@@ -34,6 +35,9 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure PageControl1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -66,7 +70,7 @@ end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
 begin
-  AddVehicleForm.Show;
+  RegisterRenterForm.Show;
 end;
 
 procedure TMainForm.Button2Click(Sender: TObject);
@@ -77,6 +81,21 @@ end;
 procedure TMainForm.Button3Click(Sender: TObject);
 begin
   DeleteRenterForm.Show;
+end;
+
+procedure TMainForm.Button4Click(Sender: TObject);
+begin
+  AddVehicleForm.Show;
+end;
+
+procedure TMainForm.Button5Click(Sender: TObject);
+begin
+  UpdateVehicleForm.Show;
+end;
+
+procedure TMainForm.Button6Click(Sender: TObject);
+begin
+  DeleteVehicleForm.Show;
 end;
 
 end.

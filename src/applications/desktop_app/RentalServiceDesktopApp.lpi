@@ -61,7 +61,29 @@
         <UnitName Value="MainFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="registerrenterformunit.pas"/>
+        <Filename Value="components\vehicles\addvehicleformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AddVehicleForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AddVehicleFormUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\renters\deleterenterformunit.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\renters\deleterenterformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DeleteRenterForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="DeleteRenterFormUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\renters\registerrenterformunit.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\renters\registerrenterformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="RegisterRenterForm"/>
         <HasResources Value="True"/>
@@ -69,24 +91,20 @@
         <UnitName Value="RegisterRenterFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="globalvariablesunit.pas"/>
+        <Filename Value="components\renters\updaterenterformunit.lfm"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="GlobalVariablesUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="updaterenterformunit.pas"/>
+        <Filename Value="components\renters\updaterenterformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="UpdateRenterForm"/>
-        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UpdateRenterFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="deleterenterformunit.pas"/>
+        <Filename Value="interfaces\globalvariablesunit.pas"/>
         <IsPartOfProject Value="True"/>
-        <ComponentName Value="DeleteRenterForm"/>
-        <ResourceBaseClass Value="Form"/>
-        <UnitName Value="DeleteRenterFormUnit"/>
+        <UnitName Value="GlobalVariablesUnit"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -98,6 +116,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="components\vehicles;components\renters;interfaces"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -133,6 +152,9 @@
       </Item>
       <Item>
         <Name Value="NotFoundRenterException"/>
+      </Item>
+      <Item>
+        <Name Value="EJSON"/>
       </Item>
     </Exceptions>
   </Debugging>

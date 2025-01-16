@@ -1,0 +1,79 @@
+object AddVehicleForm: TAddVehicleForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'AddVehicleForm'
+  ClientHeight = 480
+  ClientWidth = 640
+  object TitleLabel: TLabel
+    Left = 264
+    Height = 20
+    Top = 24
+    Width = 116
+    Caption = 'Adicionar Veículo'
+    OnClick = TitleLabelClick
+  end
+  object NameLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 64
+    Width = 41
+    Caption = 'Nome'
+  end
+  object NameTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 88
+    Width = 176
+    TabOrder = 0
+  end
+  object LicensePlateLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 136
+    Width = 109
+    Caption = 'Placa do Veículo'
+    OnClick = LicensePlateLabelClick
+  end
+  object LicensePlateTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 160
+    Width = 176
+    TabOrder = 1
+  end
+  object ValueLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 208
+    Width = 34
+    Caption = 'Valor'
+  end
+  object ValueTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 232
+    Width = 176
+    TabOrder = 2
+  end
+  object AddButton: TButton
+    Left = 272
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Adicionar'
+    TabOrder = 3
+    OnClick = AddButtonClick
+  end
+  object TextMessageError: TLabel
+    Left = 48
+    Height = 1
+    Top = 296
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+end

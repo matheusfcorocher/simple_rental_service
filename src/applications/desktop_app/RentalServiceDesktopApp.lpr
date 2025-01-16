@@ -11,8 +11,8 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms, FrameViewer09, anchordockpkg, runtimetypeinfocontrols, MainFormUnit,
-RegisterRenterFormUnit, GlobalVariablesUnit, UpdateRenterFormUnit, 
-DeleteRenterFormUnit
+  GlobalVariablesUnit, AddVehicleFormUnit, DeleteRenterFormUnit,
+  RegisterRenterFormUnit, UpdateRenterFormUnit
   { you can add units after this };
 
 {$R *.res}
@@ -22,9 +22,10 @@ begin
   Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TMainForm, MainForm);
+  Application.CreateForm(TAddVehicleForm, AddVehicleForm);
+  Application.CreateForm(TDeleteRenterForm, DeleteRenterForm);
   Application.CreateForm(TRegisterRenterForm, RegisterRenterForm);
   Application.CreateForm(TUpdateRenterForm, UpdateRenterForm);
-  Application.CreateForm(TDeleteRenterForm, DeleteRenterForm);
   Application.Run;
 end.
 

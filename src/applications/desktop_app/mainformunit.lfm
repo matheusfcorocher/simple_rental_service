@@ -413,15 +413,14 @@ object MainForm: TMainForm
     0000
   }
   OnCreate = FormCreate
-  LCLVersion = '3.6.0.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 730
     Top = 0
     Width = 1280
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     Anchors = [akTop, akLeft, akRight, akBottom]
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     OnChange = PageControl1Change
     object TabSheet1: TTabSheet
@@ -554,6 +553,49 @@ object MainForm: TMainForm
           'Status'
         )
       end
+      object Panel2: TPanel
+        Left = 0
+        Height = 50
+        Top = 647
+        Width = 1272
+        Align = alBottom
+        ClientHeight = 50
+        ClientWidth = 1272
+        Color = clSilver
+        ParentBackground = False
+        ParentColor = False
+        TabOrder = 1
+        object Button4: TButton
+          Left = 1026
+          Height = 40
+          Top = 4
+          Width = 75
+          Anchors = [akTop, akRight, akBottom]
+          Caption = 'Adicionar'
+          TabOrder = 0
+          OnClick = Button1Click
+        end
+        object Button5: TButton
+          Left = 1106
+          Height = 40
+          Top = 4
+          Width = 75
+          Anchors = [akTop, akRight, akBottom]
+          Caption = 'Atualizar'
+          TabOrder = 1
+          OnClick = Button2Click
+        end
+        object Button6: TButton
+          Left = 1186
+          Height = 40
+          Top = 4
+          Width = 75
+          Anchors = [akTop, akRight, akBottom]
+          Caption = 'Remover'
+          TabOrder = 2
+          OnClick = Button3Click
+        end
+      end
     end
     object TabSheet3: TTabSheet
       Caption = 'Aluguéis'
@@ -572,11 +614,11 @@ object MainForm: TMainForm
         TabOrder = 0
         ColWidths = (
           64
-          180
-          179
-          179
-          179
-          179
+          176
+          176
+          176
+          176
+          175
         )
         Cells = (
           5

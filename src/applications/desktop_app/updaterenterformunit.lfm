@@ -1,0 +1,107 @@
+object UpdateRenterForm: TUpdateRenterForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'UpdateRenterForm'
+  ClientHeight = 480
+  ClientWidth = 640
+  object TitleLabel: TLabel
+    Left = 264
+    Height = 20
+    Top = 16
+    Width = 109
+    Caption = 'Atualizar Cliente'
+    OnClick = TitleLabelClick
+  end
+  object NameLabel: TLabel
+    Left = 400
+    Height = 20
+    Top = 120
+    Width = 41
+    Caption = 'Nome'
+  end
+  object NameTextField: TEdit
+    Left = 400
+    Height = 28
+    Top = 144
+    Width = 184
+    TabOrder = 0
+  end
+  object AddressLabel: TLabel
+    Left = 80
+    Height = 20
+    Top = 200
+    Width = 62
+    Caption = 'Endereço'
+  end
+  object AddressTextField: TEdit
+    Left = 80
+    Height = 28
+    Top = 224
+    Width = 181
+    TabOrder = 1
+  end
+  object EmailLabel: TLabel
+    Left = 232
+    Height = 20
+    Top = 272
+    Width = 37
+    Caption = 'Email'
+  end
+  object EmailTextField: TEdit
+    Left = 232
+    Height = 28
+    Top = 296
+    Width = 184
+    TabOrder = 2
+  end
+  object TelephoneTextField: TEdit
+    Left = 400
+    Height = 28
+    Top = 224
+    Width = 184
+    TabOrder = 3
+  end
+  object TelephoneLabel: TLabel
+    Left = 400
+    Height = 20
+    Top = 200
+    Width = 57
+    Caption = 'Telefone'
+  end
+  object UpdateButton: TButton
+    Left = 280
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Atualizar'
+    TabOrder = 4
+    OnClick = UpdateButtonClick
+  end
+  object Idabel: TLabel
+    Left = 80
+    Height = 20
+    Top = 120
+    Width = 13
+    Caption = 'Id'
+    OnClick = IdabelClick
+  end
+  object IdTextField: TEdit
+    Left = 80
+    Height = 28
+    Top = 144
+    Width = 176
+    TabOrder = 5
+  end
+  object TextMessageError: TLabel
+    Left = 32
+    Height = 1
+    Top = 360
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+end

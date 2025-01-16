@@ -1,0 +1,97 @@
+object RegisterRenterForm: TRegisterRenterForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'Registar Clientes'
+  ClientHeight = 480
+  ClientWidth = 640
+  OnCreate = FormCreate
+  LCLVersion = '3.6.0.0'
+  object RegisterButton: TButton
+    Left = 272
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Registrar'
+    TabOrder = 0
+    OnClick = RegisterButtonClick
+  end
+  object NameTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 88
+    Width = 176
+    TabOrder = 1
+  end
+  object AddressTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 160
+    Width = 176
+    TabOrder = 2
+  end
+  object EmailTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 232
+    Width = 176
+    TabOrder = 3
+  end
+  object TitleLabel: TLabel
+    Left = 264
+    Height = 20
+    Top = 24
+    Width = 109
+    Caption = 'Registrar Cliente'
+    OnClick = TitleLabelClick
+  end
+  object NameLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 64
+    Width = 41
+    Caption = 'Nome'
+    OnClick = NameLabelClick
+  end
+  object AddressLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 136
+    Width = 62
+    Caption = 'Endereço'
+  end
+  object EmailLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 208
+    Width = 37
+    Caption = 'Email'
+    OnClick = EmailLabelClick
+  end
+  object TelephoneLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 280
+    Width = 57
+    Caption = 'Telefone'
+    OnClick = EmailLabelClick
+  end
+  object TelephoneTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 304
+    Width = 176
+    TabOrder = 4
+  end
+  object TextMessageError: TLabel
+    Left = 32
+    Height = 1
+    Top = 360
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+end

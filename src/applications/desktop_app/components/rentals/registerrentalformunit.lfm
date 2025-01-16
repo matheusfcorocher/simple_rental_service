@@ -1,0 +1,93 @@
+object RegisterRentalForm: TRegisterRentalForm
+  Left = 376
+  Height = 480
+  Top = 32
+  Width = 640
+  Caption = 'RegisterRentalForm'
+  ClientHeight = 480
+  ClientWidth = 640
+  object TitleLabel: TLabel
+    Left = 256
+    Height = 20
+    Top = 24
+    Width = 114
+    Caption = 'Registrar Aluguel'
+  end
+  object RenterIdLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 64
+    Width = 85
+    Caption = 'Id do Cliente'
+  end
+  object RenterIdTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 88
+    Width = 176
+    TabOrder = 0
+  end
+  object VehicleIdLabel: TLabel
+    Left = 224
+    Height = 20
+    Top = 136
+    Width = 87
+    Caption = 'Id do Veículo'
+  end
+  object VehicleIdTextField: TEdit
+    Left = 224
+    Height = 28
+    Top = 160
+    Width = 176
+    TabOrder = 1
+  end
+  object StartDateLabel: TLabel
+    Left = 48
+    Height = 20
+    Top = 200
+    Width = 93
+    Caption = 'Data de Início'
+  end
+  object AddButton: TButton
+    Left = 272
+    Height = 40
+    Top = 424
+    Width = 75
+    Caption = 'Adicionar'
+    TabOrder = 2
+    OnClick = AddButtonClick
+  end
+  object TextMessageError: TLabel
+    Left = 88
+    Height = 1
+    Top = 400
+    Width = 1
+    Font.Color = clRed
+    ParentFont = False
+    Visible = False
+    WordWrap = True
+  end
+  object EndDateLabel: TLabel
+    Left = 376
+    Height = 20
+    Top = 200
+    Width = 65
+    Caption = 'Data final'
+  end
+  object StartDateCalendar: TCalendar
+    Left = 48
+    Height = 160
+    Top = 224
+    Width = 225
+    DateTime = 45673
+    TabOrder = 3
+  end
+  object EndDateCalendar: TCalendar
+    Left = 376
+    Height = 160
+    Top = 224
+    Width = 225
+    DateTime = 45673
+    TabOrder = 4
+  end
+end

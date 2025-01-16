@@ -64,6 +64,7 @@
         <Filename Value="components\vehicles\addvehicleformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="AddVehicleForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="AddVehicleFormUnit"/>
       </Unit>
@@ -127,6 +128,27 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="DeleteVehicleFormUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="components\rentals\registerrentalformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="RegisterRentalForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="RegisterRentalFormUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\rentals\updaterentalformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="UpdateRentalForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="UpdateRentalFormUnit"/>
+      </Unit>
+      <Unit>
+        <Filename Value="components\rentals\deleterentalformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DeleteRentalForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="DeleteRentalFormUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -137,7 +159,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="components\vehicles;components\renters;interfaces;utils"/>
+      <OtherUnitFiles Value="components\vehicles;components\renters;interfaces;utils;components\rentals"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

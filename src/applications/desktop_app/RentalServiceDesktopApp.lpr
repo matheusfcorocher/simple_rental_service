@@ -13,7 +13,8 @@ uses
   Forms, FrameViewer09, anchordockpkg, runtimetypeinfocontrols, MainFormUnit,
   GlobalVariablesUnit, AddVehicleFormUnit, DeleteRenterFormUnit,
   RegisterRenterFormUnit, UpdateRenterFormUnit, UpdateVehicleFormUnit,
-StringGridUtilsUnit, DeleteVehicleFormUnit
+StringGridUtilsUnit, DeleteVehicleFormUnit, RegisterRentalFormUnit,
+UpdateRentalFormUnit, DeleteRentalFormUnit
   { you can add units after this };
 
 {$R *.res}
@@ -29,6 +30,9 @@ begin
   Application.CreateForm(TUpdateRenterForm, UpdateRenterForm);
   Application.CreateForm(TUpdateVehicleForm, UpdateVehicleForm);
   Application.CreateForm(TDeleteVehicleForm, DeleteVehicleForm);
+  Application.CreateForm(TRegisterRentalForm, RegisterRentalForm);
+  Application.CreateForm(TUpdateRentalForm, UpdateRentalForm);
+  Application.CreateForm(TDeleteRentalForm, DeleteRentalForm);
   Application.Run;
 end.
 

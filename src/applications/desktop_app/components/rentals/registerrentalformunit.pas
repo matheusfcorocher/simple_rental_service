@@ -13,7 +13,7 @@ type
   { TRegisterRentalForm }
 
   TRegisterRentalForm = class(TForm)
-    AddButton: TButton;
+    RegisterButton: TButton;
     StartDateCalendar: TCalendar;
     EndDateCalendar: TCalendar;
     RenterIdLabel: TLabel;
@@ -24,7 +24,7 @@ type
     TitleLabel: TLabel;
     VehicleIdLabel: TLabel;
     VehicleIdTextField: TEdit;
-    procedure AddButtonClick(Sender: TObject);
+    procedure RegisterButtonClick(Sender: TObject);
   private
 
   public
@@ -42,7 +42,7 @@ uses MainFormUnit;
 
 { TRegisterRentalForm }
 
-procedure TRegisterRentalForm.AddButtonClick(Sender: TObject);
+procedure TRegisterRentalForm.RegisterButtonClick(Sender: TObject);
 var
   RentalJSON: TJSONObject;
   Response: TJSONObject;

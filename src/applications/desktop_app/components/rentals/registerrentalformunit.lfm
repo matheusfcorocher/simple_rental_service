@@ -48,14 +48,14 @@ object RegisterRentalForm: TRegisterRentalForm
     Width = 93
     Caption = 'Data de Início'
   end
-  object AddButton: TButton
+  object RegisterButton: TButton
     Left = 272
     Height = 40
     Top = 424
     Width = 75
-    Caption = 'Adicionar'
+    Caption = 'Registrar'
     TabOrder = 2
-    OnClick = AddButtonClick
+    OnClick = RegisterButtonClick
   end
   object TextMessageError: TLabel
     Left = 88

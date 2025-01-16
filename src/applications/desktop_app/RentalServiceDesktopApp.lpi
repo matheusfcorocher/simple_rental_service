@@ -113,6 +113,7 @@
         <Filename Value="components\vehicles\updatevehicleformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="UpdateVehicleForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UpdateVehicleFormUnit"/>
       </Unit>
@@ -132,6 +133,7 @@
         <Filename Value="components\rentals\registerrentalformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="RegisterRentalForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="RegisterRentalFormUnit"/>
       </Unit>
@@ -139,6 +141,7 @@
         <Filename Value="components\rentals\updaterentalformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="UpdateRentalForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UpdateRentalFormUnit"/>
       </Unit>
@@ -207,6 +210,12 @@
       </Item>
       <Item>
         <Name Value="EConvertError"/>
+      </Item>
+      <Item>
+        <Name Value="NotFoundVehicleException"/>
+      </Item>
+      <Item>
+        <Name Value="RangeRentalDateException"/>
       </Item>
     </Exceptions>
   </Debugging>

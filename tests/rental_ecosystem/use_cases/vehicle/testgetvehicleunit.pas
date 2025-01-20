@@ -6,11 +6,12 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, GetVehicleUnit,
-  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit, RegisterVehicleUnit;
+  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit,
+  RegisterVehicleUnit, VehicleDTOUnit, VehicleExceptionsCreatorENUnit, VehicleAuxFunctionsUnit, VehicleBuilderUnit;
 
 type
 
-  TTestGetVehicle= class(TTestCase)
+  TTestGetVehicle = class(TTestCase)
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -19,40 +20,6 @@ type
   end;
 
 implementation
-
-procedure TTestGetVehicle.TestExecute;
-var
-  VehicleStorage: ITVehicleStorage;
-  RegisterVehicle: TRegisterVehicle;
-  GetVehicle: TGetVehicle;
-  Vehicle: TVehicle;
-  VehicleData: TVehicleData;
-  Expected: TVehicle;
-begin
-  // preparing test
-  VehicleStorage := TFakeVehicleStorage.Create;
-  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage);
-  GetVehicle := TGetVehicle.Create(VehicleStorage);
-
-  with VehicleData do
-  begin
-    name := 'corsa';
-    licensePlate := 'MACLOVIN';
-    value := 1000;
-    status := AVAILABLE;
-  end;
-
-  Vehicle := RegisterVehicle.Execute(VehicleData);
-  Expected := Vehicle;
-  // Executing tests
-
-  Vehicle := GetVehicle.Execute(Vehicle.getId);
-
-  AssertTrue(
-    'When getting a Vehicle, it retuns correct Vehicle',
-    VehicleEquals(Vehicle, Expected)
-    );
-end;
 
 procedure TTestGetVehicle.SetUp;
 begin
@@ -64,8 +31,50 @@ begin
 
 end;
 
+procedure TTestGetVehicle.TestExecute;
+var
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  VehicleBuilder : TVehicleBuilder;
+  VehicleStorage: ITVehicleStorage;
+
+  RegisterVehicle: TRegisterVehicle;
+  GetVehicle: TGetVehicle;
+
+  Vehicle: TVehicle;
+  VehicleDetailsDTO: TVehicleDetailsDTO;
+
+  Expected: TVehicle;
+begin
+  // preparing test
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  VehicleStorage := TFakeVehicleStorage.Create(VehicleExceptionsCreator);
+
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+
+  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage, VehicleBuilder);
+  GetVehicle := TGetVehicle.Create(VehicleStorage);
+
+  with VehicleDetailsDTO do
+  begin
+    Name := 'corsa';
+    licensePlate := 'MACLOVIN';
+    Value := 1000;
+    status := AVAILABLE;
+  end;
+
+  Vehicle := RegisterVehicle.Execute(VehicleDetailsDTO);
+  Expected := Vehicle;
+  // Executing tests
+
+  Vehicle := GetVehicle.Execute(Vehicle.getId);
+
+  AssertTrue(
+    'When getting a Vehicle, it retuns correct Vehicle',
+    VehicleEquals(Vehicle, Expected)
+    );
+end;
+
 initialization
 
   RegisterTest(TTestGetVehicle);
 end.
-

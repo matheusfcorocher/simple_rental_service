@@ -6,6 +6,7 @@ object DeleteRentalForm: TDeleteRentalForm
   Caption = 'DeleteRentalForm'
   ClientHeight = 480
   ClientWidth = 640
+  LCLVersion = '3.6.0.0'
   object TitleLabel: TLabel
     Left = 248
     Height = 20

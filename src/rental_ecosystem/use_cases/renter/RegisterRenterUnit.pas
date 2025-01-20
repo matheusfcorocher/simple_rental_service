@@ -5,39 +5,34 @@ unit RegisterRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, RenterUnit, IRenterStorageUnit;
+  Classes, SysUtils, RenterUnit, IRenterStorageUnit, RenterBuilderUnit, RenterDTOUnit;
 
 type
-
-  TRenterData = record
-    name: String;
-    address: String;
-    email: String;
-    telephone: String;
-  end;
-
   TRegisterRenter = class
   private
-    FRenterStorage: ITRenterStorage;
+    _RenterStorage: ITRenterStorage;
+    _RenterBuilder : TRenterBuilder;
   public
-    constructor Create(IRenterStorage: ITRenterStorage);
-    function Execute(RenterData : TRenterData) : TRenter;
+    constructor Create(RenterBuilder : TRenterBuilder; IRenterStorage: ITRenterStorage);
+    function Execute(RenterInfoDTO : TRenterInfoDTO) : TRenter;
   end;
 implementation
 
-constructor TRegisterRenter.Create(IRenterStorage: ITRenterStorage);
+constructor TRegisterRenter.Create(RenterBuilder : TRenterBuilder; IRenterStorage: ITRenterStorage);
 begin
-  FRenterStorage := IRenterStorage;
+  _RenterBuilder := RenterBuilder;
+  _RenterStorage := IRenterStorage;
 end;
 
-function TRegisterRenter.Execute(RenterData : TRenterData) : TRenter;
+function TRegisterRenter.Execute(RenterInfoDTO : TRenterInfoDTO) : TRenter;
 var
   RenterId : String;
   Renter : TRenter;
 begin
-  RenterId := FRenterStorage.GetNextId();
-  Renter := TRenter.Create(RenterId, RenterData.name, RenterData.Address, RenterData.Email, RenterData.Telephone);
-  Result := FRenterStorage.Register(Renter);
+  RenterId := _RenterStorage.GetNextId();
+  Renter := _RenterBuilder.Build(RenterId, RenterInfoDTO.name, RenterInfoDTO.Address, RenterInfoDTO.Email, RenterInfoDTO.Telephone);
+  Renter.IsRenterValid();
+  Result := _RenterStorage.Register(Renter);
 end;
 
 end.

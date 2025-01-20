@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpjson, jsonparser, RegisterRenterUnit, UpdateRenterUnit,
   GetRenterUnit, DeleteRenterUnit, IPresenterUnit,
-  RenterUnit, JSONConvertersUnit;
+  RenterUnit, JSONConvertersUnit, RenterDTOUnit;
 
 type
 
@@ -49,12 +49,12 @@ end;
 
 function TRenterController.Register(JSON: TJSONObject): T;
 var
-  RenterData: TRenterData;
+  RenterInfoDTO: TRenterInfoDTO;
   Renter: TRenter;
 begin
   try
-    RenterData := JSONToRenterData(JSON);
-    Renter := FRegisterRenter.Execute(RenterData);
+    RenterInfoDTO := JSONToRenterInfoDTO(JSON);
+    Renter := FRegisterRenter.Execute(RenterInfoDTO);
     Result := FPresenter.Present(Renter);
   except
     on E: Exception do
@@ -64,11 +64,12 @@ end;
 
 function TRenterController.Update(JSON: TJSONObject): T;
 var
-  Renter: TRenter;
+  RenterDTO: TRenterDTO;
+  Renter : TRenter;
 begin
   try
-    Renter := JSONToRenter(JSON);
-    Renter := FUpdateRenter.Execute(Renter);
+    RenterDTO := JSONToRenterDTO(JSON);
+    Renter := FUpdateRenter.Execute(RenterDTO);
     Result := FPresenter.Present(Renter);
   except
     on E: Exception do

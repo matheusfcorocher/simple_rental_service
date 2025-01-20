@@ -8,6 +8,7 @@ uses
   Classes, SysUtils, Grids;
 
 function FindRowWithValueInStringGrid(Grid: TStringGrid; const Value: string; Column: integer): integer;
+procedure UpdateRowIDs(StringGrid: TStringGrid);
 
 implementation
 
@@ -25,6 +26,14 @@ begin
       Exit; // Exit the loop once the value is found
     end;
   end;
+end;
+
+procedure UpdateRowIDs(StringGrid: TStringGrid);
+var
+  i: Integer;
+begin
+  for i := 1 to StringGrid.RowCount - 1 do
+    StringGrid.Cells[0, i] := IntToStr(i);
 end;
 
 end.

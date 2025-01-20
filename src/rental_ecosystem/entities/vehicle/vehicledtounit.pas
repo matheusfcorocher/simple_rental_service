@@ -15,6 +15,13 @@ type
     status: TVehicleStatus;
   end;
 
+   TVehicleDetailsDTO = record
+    name: string;
+    licensePlate: string;
+    value: currency;
+    status: TVehicleStatus;
+  end;
+
 function CreateVehicleDTO(Aid: string; Aname: string; AlicensePlate: string;
     Avalue: Currency; Astatus: TVehicleStatus): TVehicleDTO;
 

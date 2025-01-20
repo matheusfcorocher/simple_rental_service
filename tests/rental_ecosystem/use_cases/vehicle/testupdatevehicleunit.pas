@@ -6,11 +6,12 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, UpdateVehicleUnit,
-  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit, RegisterVehicleUnit;
+  FakeVehicleStorageUnit, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit,
+  RegisterVehicleUnit, VehicleDTOUnit, VehicleExceptionsCreatorENUnit, VehicleAuxFunctionsUnit, VehicleBuilderUnit;
 
 type
 
-  TTestUpdateVehicle= class(TTestCase)
+  TTestUpdateVehicle = class(TTestCase)
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -19,42 +20,6 @@ type
   end;
 
 implementation
-
-procedure TTestUpdateVehicle.TestVehicle;
-var
-  VehicleStorage: ITVehicleStorage;
-  RegisterVehicle: TRegisterVehicle;
-  UpdateVehicle: TUpdateVehicle;
-  Vehicle: TVehicle;
-  VehicleData: TVehicleData;
-  Expected: TVehicle;
-begin
-  // preparing test
-  VehicleStorage := TFakeVehicleStorage.Create;
-  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage);
-  UpdateVehicle := TUpdateVehicle.Create(VehicleStorage);
-
-  with VehicleData do
-  begin
-    name := 'corsa';
-    licensePlate := 'MACLOVIN';
-    value := 1000;
-    status := AVAILABLE;
-  end;
-
-  Vehicle := RegisterVehicle.Execute(VehicleData);
-
-  Vehicle.setName('Subaru');
-  Expected := Vehicle;
-
-  // executing test
-  Vehicle := UpdateVehicle.Execute(Vehicle);
-
-  AssertTrue(
-    'When updating a Vehicle, it retuns correct Vehicle',
-    VehicleEquals(Vehicle,Expected)
-  );
-end;
 
 procedure TTestUpdateVehicle.SetUp;
 begin
@@ -66,8 +31,61 @@ begin
 
 end;
 
+procedure TTestUpdateVehicle.TestVehicle;
+var
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+
+  VehicleStorage: ITVehicleStorage;
+
+  VehicleBuilder : TVehicleBuilder;
+  RegisterVehicle: TRegisterVehicle;
+  UpdateVehicle: TUpdateVehicle;
+
+  Vehicle: TVehicle;
+  VehicleDTO: TVehicleDTO;
+  VehicleDetailsDTO: TVehicleDetailsDTO;
+  Expected: TVehicle;
+begin
+  // preparing test
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  VehicleStorage := TFakeVehicleStorage.Create(VehicleExceptionsCreator);
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+
+  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage, VehicleBuilder);
+  UpdateVehicle := TUpdateVehicle.Create(VehicleStorage, VehicleBuilder);
+
+  with VehicleDetailsDTO do
+  begin
+    Name := 'corsa';
+    licensePlate := 'MACLOVIN';
+    Value := 1000;
+    status := AVAILABLE;
+  end;
+
+  Vehicle := RegisterVehicle.Execute(VehicleDetailsDTO);
+
+  Vehicle.setName('Subaru');
+  Expected := Vehicle;
+
+  with VehicleDTO do
+  begin
+    id := Vehicle.getId;
+    Name := 'Subaru';
+    licensePlate := 'MACLOVIN';
+    Value := 1000;
+    status := AVAILABLE;
+  end;
+
+  // executing test
+  Vehicle := UpdateVehicle.Execute(VehicleDTO);
+
+  AssertTrue(
+    'When updating a Vehicle, it retuns correct Vehicle',
+    VehicleEquals(Vehicle, Expected)
+    );
+end;
+
 initialization
 
   RegisterTest(TTestUpdateVehicle);
 end.
-

@@ -5,33 +5,36 @@ unit RegisterVehicleUnit;
 interface
 
 uses
-  Classes, SysUtils, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit;
+  Classes, SysUtils, VehicleUnit, IVehicleStorageUnit, VehicleStatusUnit, VehicleDTOUnit, VehicleBuilderUnit;
 
 type
   TRegisterVehicle = class
   private
-    FVehicleStorage: ITVehicleStorage;
+    _VehicleStorage: ITVehicleStorage;
+    _VehicleBuilder: TVehicleBuilder;
   public
-    constructor Create(IVehicleStorage: ITVehicleStorage);
-    function Execute(VehicleData: TVehicleData): TVehicle;
+    constructor Create(IVehicleStorage: ITVehicleStorage; VehicleBuilder: TVehicleBuilder);
+    function Execute(VehicleDetailsDTO: TVehicleDetailsDTO): TVehicle;
   end;
 
 implementation
 
-constructor TRegisterVehicle.Create(IVehicleStorage: ITVehicleStorage);
+constructor TRegisterVehicle.Create(IVehicleStorage: ITVehicleStorage; VehicleBuilder: TVehicleBuilder);
 begin
-  FVehicleStorage := IVehicleStorage;
+  _VehicleStorage := IVehicleStorage;
+  _VehicleBuilder := VehicleBuilder;
 end;
 
-function TRegisterVehicle.Execute(VehicleData: TVehicleData): TVehicle;
+function TRegisterVehicle.Execute(VehicleDetailsDTO: TVehicleDetailsDTO): TVehicle;
 var
   VehicleId: string;
   Vehicle: TVehicle;
 begin
-  VehicleId := FVehicleStorage.GetNextId();
-  Vehicle := TVehicle.Create(VehicleId, VehicleData.Name, VehicleData.licensePlate,
-    VehicleData.value, VehicleData.status);
-  Result := FVehicleStorage.Register(Vehicle);
+  VehicleId := _VehicleStorage.GetNextId();
+  Vehicle := _VehicleBuilder.Build(VehicleId, VehicleDetailsDTO.Name, VehicleDetailsDTO.licensePlate,
+    VehicleDetailsDTO.value, VehicleDetailsDTO.status);
+  Vehicle.IsVehicleValid();
+  Result := _VehicleStorage.Register(Vehicle);
 end;
 
 end.

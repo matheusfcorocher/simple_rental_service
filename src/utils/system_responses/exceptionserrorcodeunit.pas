@@ -5,7 +5,7 @@ unit ExceptionsErrorCodeUnit;
 interface
 
 uses
-  Classes, SysUtils, RentalExceptionsUnit, RenterExceptionsUnit, VehicleExceptionsUnit;
+  Classes, SysUtils, RentalServiceExceptionsUnit;
 
 function getErrorCode(E: Exception) : Integer;
 

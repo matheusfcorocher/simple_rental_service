@@ -126,6 +126,7 @@
         <Filename Value="components\vehicles\deletevehicleformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DeleteVehicleForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="DeleteVehicleFormUnit"/>
       </Unit>
@@ -149,6 +150,7 @@
         <Filename Value="components\rentals\deleterentalformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="DeleteRentalForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="DeleteRentalFormUnit"/>
       </Unit>

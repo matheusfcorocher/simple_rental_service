@@ -10,7 +10,8 @@ uses
   IVehicleStorageUnit,
   VehicleUnit,
   VehicleStatusUnit,
-  VehicleExceptionsUnit;
+  VehiclesUnit,
+  IVehicleExceptionsCreatorUnit;
 
 type
 
@@ -18,30 +19,36 @@ type
 
   TVehicleStorage = class(TInterfacedObject, ITVehicleStorage)
   private
-    FVehicles : TVehicles;
+    _Vehicles: TVehicles;
+    _VehicleExceptionsCreator: ITVehicleExceptionsCreator;
   public
-    constructor Create;
-    constructor Create(vehicles: TVehicles); overload;
-    function GetNextId() : String;
+    constructor Create(VehicleExceptionsCreator: ITVehicleExceptionsCreator);
+    constructor Create(vehicles: TVehicles;
+      VehicleExceptionsCreator: ITVehicleExceptionsCreator); overload;
+    function GetNextId(): string;
     function Register(Vehicle: TVehicle): TVehicle;
     function Update(Vehicle: TVehicle): TVehicle;
-    function Get(id: String): TVehicle;
-    function Delete(id: string): String;
+    function Get(id: string): TVehicle;
+    function Delete(id: string): string;
   end;
 
 implementation
 
-constructor TVehicleStorage.Create;
+constructor TVehicleStorage.Create(VehicleExceptionsCreator:
+  ITVehicleExceptionsCreator);
 begin
-  FVehicles := TVehicles.Create();
+  _Vehicles := TVehicles.Create();
+  _VehicleExceptionsCreator := VehicleExceptionsCreator;
 end;
 
-constructor TVehicleStorage.Create(vehicles: TVehicles);
+constructor TVehicleStorage.Create(vehicles: TVehicles; VehicleExceptionsCreator:
+  ITVehicleExceptionsCreator);
 begin
-  FVehicles := vehicles;
+  _Vehicles := vehicles;
+  _VehicleExceptionsCreator := VehicleExceptionsCreator;
 end;
 
-function TVehicleStorage.GetNextId(): String;
+function TVehicleStorage.GetNextId(): string;
 var
   GUID: TGUID;
 begin
@@ -51,46 +58,45 @@ end;
 
 function TVehicleStorage.Register(Vehicle: TVehicle): TVehicle;
 begin
-  FVehicles.Add(Vehicle);
-  result := Vehicle;
+  _Vehicles.Add(Vehicle);
+  Result := Vehicle;
 end;
 
 function TVehicleStorage.Update(Vehicle: TVehicle): TVehicle;
 var
   AuxVehicle: TVehicle;
-  VehicleIdx : Integer;
+  VehicleIdx: integer;
 begin
   AuxVehicle := Get(Vehicle.getId());
-  VehicleIdx := FVehicles.IndexOf(AuxVehicle);
-  FVehicles.Insert(VehicleIdx, Vehicle);
+  VehicleIdx := _Vehicles.IndexOf(AuxVehicle);
+  _Vehicles.Insert(VehicleIdx, Vehicle);
 
-  result := Vehicle;
+  Result := Vehicle;
 end;
 
-function TVehicleStorage.Get(id: String): TVehicle;
+function TVehicleStorage.Get(id: string): TVehicle;
 var
-  Vehicle : TVehicle;
+  Vehicle: TVehicle;
 begin
-  for Vehicle in FVehicles do
+  for Vehicle in _Vehicles do
   begin
     if Vehicle.getId() = id then
     begin
-      result := Vehicle;
+      Result := Vehicle;
       Exit;
     end;
   end;
 
-  CreateNotFoundVehicleError(id);
+  _VehicleExceptionsCreator.CreateNotFoundVehicleError(id);
 end;
 
-function TVehicleStorage.Delete(id: string) : String;
+function TVehicleStorage.Delete(id: string): string;
 var
-  Vehicle : TVehicle;
+  Vehicle: TVehicle;
 begin
   Vehicle := Get(id);
-  FVehicles.Remove(Vehicle);
-  result := 'The Vehicle has been successfully deleted from the system.';
+  _Vehicles.Remove(Vehicle);
+  Result := 'The Vehicle has been successfully deleted from the system.';
 end;
 
 end.
-

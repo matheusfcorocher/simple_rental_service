@@ -6,13 +6,16 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry, RentalUnit, VehicleUnit,
-  VehicleStatusUnit, RentalExceptionsUnit, DateUtils, VehicleExceptionsUnit;
+  VehicleStatusUnit, RentalExceptionsCreatorENUnit, DateUtils,
+  VehicleExceptionsCreatorENUnit,
+  RentalBuilderUnit, VehicleBuilderUnit, VehicleAuxFunctionsUnit,
+  RentalUtilsFunctionsUnit, RentalServiceExceptionsUnit;
 
 type
 
   { TTestRental }
 
-  TTestRental= class(TTestCase)
+  TTestRental = class(TTestCase)
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -42,77 +45,128 @@ end;
 
 procedure TTestRental._CreatingInvalidDateForRental;
 var
-  StartDate, EndDate : TDateTime;
-  Vehicle : TVehicle;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+  VehicleBuilder: TVehicleBuilder;
+  RentalBuilder: TRentalBuilder;
+
+  StartDate, EndDate: TDateTime;
+  Vehicle: TVehicle;
+  Rental: TRental;
 begin
- StartDate := EncodeDate(2024, 12, 31);
- EndDate := EncodeDate(2024, 12, 1);
- Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
- TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
+
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
+  StartDate := EncodeDate(2024, 12, 31);
+  EndDate := EncodeDate(2024, 12, 1);
+  Vehicle := VehicleBuilder.Build('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Rental := RentalBuilder.Build('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate);
+  Rental.IsRentalValid();
 end;
 
 procedure TTestRental._CreatingInvalidVehicleForRental;
 var
-  StartDate, EndDate : TDateTime;
-  Vehicle : TVehicle;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+  VehicleBuilder: TVehicleBuilder;
+  RentalBuilder: TRentalBuilder;
+
+  StartDate, EndDate: TDateTime;
+  Vehicle: TVehicle;
+  Rental: TRental;
 begin
- StartDate := EncodeDate(2024, 12, 1);
- EndDate := EncodeDate(2024, 12, 31);
- Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, RENTED);
- TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
+
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
+  StartDate := EncodeDate(2024, 12, 1);
+  EndDate := EncodeDate(2024, 12, 31);
+  Vehicle := VehicleBuilder.Build('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, RENTED);
+  Rental := RentalBuilder.Build('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate);
+  Rental.IsRentalValid();
 end;
 
 procedure TTestRental.TestCreateWithValidData;
 var
-  StartDate, EndDate : TDateTime;
-  Vehicle : TVehicle;
-  Rental : TRental;
-  Expected : TRental;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+  VehicleBuilder: TVehicleBuilder;
+  RentalBuilder: TRentalBuilder;
+
+  StartDate, EndDate: TDateTime;
+  Vehicle: TVehicle;
+  Rental: TRental;
+  Expected: TRental;
 begin
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
+
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
   StartDate := EncodeDate(2024, 12, 1);
   EndDate := EncodeDate(2024, 12, 31);
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
-  Rental := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+  Vehicle := VehicleBuilder.Build('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Rental := RentalBuilder.Build('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate);
 
-  Expected := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+  Expected := RentalBuilder.Build('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate);
 
   AssertTrue(
     'When creating a rental with valid data, it retuns rental instance',
     RentalEquals(Expected, Rental)
-  );
+    );
 end;
 
 procedure TTestRental.TestCreateWithInvalidRange;
 begin
   AssertException(
-   'When is created a rental with invalid date, it retuns exception',
-   RangeRentalDateException,
-   @_CreatingInvalidDateForRental
-  );
+    'When is created a rental with invalid date, it retuns exception',
+    RangeRentalDateException, @_CreatingInvalidDateForRental
+    );
 end;
 
 procedure TTestRental.TestCreateWithInvalidVehicle;
 begin
   AssertException(
-   'When is created a rental with invalid vehicle, it retuns exception',
-   VehicleNotAvailableException,
-   @_CreatingInvalidVehicleForRental
-  );
+    'When is created a rental with invalid vehicle, it retuns exception',
+    VehicleNotAvailableException, @_CreatingInvalidVehicleForRental
+    );
 end;
 
 procedure TTestRental.TestTotal;
 var
-  StartDate, EndDate : TDateTime;
-  Vehicle : TVehicle;
-  Rental : TRental;
-  Expected : Currency;
-  Value : Currency;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+  VehicleBuilder: TVehicleBuilder;
+  RentalBuilder: TRentalBuilder;
+
+  StartDate, EndDate: TDateTime;
+  Vehicle: TVehicle;
+  Rental: TRental;
+  Expected: currency;
+  Value: currency;
 begin
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
+
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
   Value := 20000;
   StartDate := EncodeDate(2024, 12, 1);
   EndDate := EncodeDate(2024, 12, 31);
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', Value, AVAILABLE);
-  Rental := TRental.Create('rental_uuid','renter_uuid', Vehicle, StartDate, EndDate);
+  Vehicle := VehicleBuilder.Build('vehicle_uuid', 'corsa', 'MACLOVIN', Value, AVAILABLE);
+  Rental := RentalBuilder.Build('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate);
 
   Expected := Value * DaysBetween(StartDate, EndDate) * 0.01;
 
@@ -120,11 +174,10 @@ begin
     'When get total of rental, it retuns the price of 1% of vehicle value',
     Expected,
     Rental.Total()
-  );
+    );
 end;
 
 initialization
 
   RegisterTest(TTestRental);
 end.
-

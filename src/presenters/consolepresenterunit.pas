@@ -7,7 +7,6 @@ interface
 uses
   Classes, SysUtils, DateUtils, RenterUnit, VehicleUnit, RentalUnit, IPresenterUnit, VehicleStatusUnit;
 
-
 type
 
   { TConsolePresenter }

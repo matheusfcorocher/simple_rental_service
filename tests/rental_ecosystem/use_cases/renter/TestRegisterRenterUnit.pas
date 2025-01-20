@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testregistry, RegisterRenterUnit,
-  FakeRenterStorageUnit, RenterUnit, IRenterStorageUnit;
+  FakeRenterStorageUnit, RenterUnit, IRenterStorageUnit, RenterDTOUnit,
+  RenterExceptionsCreatorENUnit, RenterBuilderUnit, RenterAuxFunctionsUnit;
 
 type
 
@@ -20,36 +21,6 @@ type
 
 implementation
 
-procedure TTestRegisterRenter.TestExecute;
-var
-  RenterStorage: ITRenterStorage;
-  RegisterRenter: TRegisterRenter;
-  Renter : TRenter;
-  RenterData: TRenterData;
-  Expected: TRenter;
-begin
-  //Preparing test
-  with RenterData do
-  begin
-    name := 'Los';
-    address := 'address';
-    email :=  '12345678';
-    telephone :=  '123456789';
-  end;
-
-  RenterStorage := TFakeRenterStorage.Create;
-  RegisterRenter := TRegisterRenter.Create(RenterStorage);
-
-  //Execute Test
-  Renter := RegisterRenter.Execute(RenterData);
-  Expected := TRenter.Create(Renter.getId, 'Los', 'address', '12345678', '123456789');
-
-  AssertTrue(
-    'When executing RegisterRenter, it retuns correct renters',
-    RenterEquals(Renter,Expected)
-  );
-end;
-
 procedure TTestRegisterRenter.SetUp;
 begin
 
@@ -58,6 +29,42 @@ end;
 procedure TTestRegisterRenter.TearDown;
 begin
 
+end;
+
+procedure TTestRegisterRenter.TestExecute;
+var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  RenterBuilder: TRenterBuilder;
+  RenterStorage: ITRenterStorage;
+  RegisterRenter: TRegisterRenter;
+  Renter: TRenter;
+  RenterInfoDTO: TRenterInfoDTO;
+  Expected: TRenter;
+begin
+  //Preparing test
+  with RenterInfoDTO do
+  begin
+    Name := 'Los';
+    address := 'address';
+    email := '12345678';
+    telephone := '123456789';
+  end;
+
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  RenterBuilder := TRenterBuilder.Create(RenterExceptionsCreator);
+
+  RenterStorage := TFakeRenterStorage.Create(RenterExceptionsCreator);
+  RegisterRenter := TRegisterRenter.Create(RenterBuilder, RenterStorage);
+
+  //Execute Test
+  Renter := RegisterRenter.Execute(RenterInfoDTO);
+  Expected := TRenter.Create(Renter.getId, 'Los', 'address', '12345678',
+    '123456789', RenterExceptionsCreator);
+
+  AssertTrue(
+    'When executing RegisterRenter, it retuns correct renters',
+    RenterEquals(Renter, Expected)
+    );
 end;
 
 initialization

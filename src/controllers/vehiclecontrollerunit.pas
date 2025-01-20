@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpjson, jsonparser, RegisterVehicleUnit, UpdateVehicleUnit,
   GetVehicleUnit, DeleteVehicleUnit, IPresenterUnit,
-  VehicleUnit, JSONConvertersUnit;
+  VehicleUnit, JSONConvertersUnit, VehicleDTOUnit;
 
 type
 
@@ -49,12 +49,12 @@ end;
 
 function TVehicleController.Register(JSON: TJSONObject): T;
 var
-  VehicleData: TVehicleData;
+  VehicleDetailsDTO: TVehicleDetailsDTO;
   Vehicle: TVehicle;
 begin
   try
-    VehicleData := JSONToVehicleData(JSON);
-    Vehicle := FRegisterVehicle.Execute(VehicleData);
+    VehicleDetailsDTO := JSONToVehicleDetailsDTO(JSON);
+    Vehicle := FRegisterVehicle.Execute(VehicleDetailsDTO);
     Result := FPresenter.Present(Vehicle);
   except
     on E: Exception do
@@ -64,11 +64,12 @@ end;
 
 function TVehicleController.Update(JSON: TJSONObject): T;
 var
+  VehicleDTO : TVehicleDTO;
   Vehicle: TVehicle;
 begin
   try
-    Vehicle := JSONToVehicle(JSON);
-    Vehicle := FUpdateVehicle.Execute(Vehicle);
+    VehicleDTO := JSONToVehicleDTO(JSON);
+    Vehicle := FUpdateVehicle.Execute(VehicleDTO);
     Result := FPresenter.Present(Vehicle);
   except
     on E: Exception do

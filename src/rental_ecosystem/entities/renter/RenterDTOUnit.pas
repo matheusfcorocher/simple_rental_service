@@ -14,6 +14,13 @@ type
 
   end;
 
+  TRenterInfoDTO = record
+    name: String;
+    address: String;
+    email: String;
+    telephone: String;
+  end;
+
 function CreateRenterDTO(Aid: string; Aname: string; Aaddress: string;
     Aemail: string; Atelephone: string): TRenterDTO;
 

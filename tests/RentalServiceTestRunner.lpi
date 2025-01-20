@@ -55,9 +55,8 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="utils\teststandardresponseunit.pas"/>
+        <Filename Value="utils\TestStandardResponseUnit.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestStandardResponseUnit"/>
       </Unit>
       <Unit>
         <Filename Value="utils\testsystemresponseunit.pas"/>
@@ -263,6 +262,12 @@
       </Item>
       <Item>
         <Name Value="NotFoundVehicleException"/>
+      </Item>
+      <Item>
+        <Name Value="RunError(204)"/>
+      </Item>
+      <Item>
+        <Name Value="EInvalidPointer"/>
       </Item>
     </Exceptions>
   </Debugging>

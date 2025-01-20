@@ -13,7 +13,8 @@ uses
   RentalUnit,
   VehicleUnit,
   VehicleStatusUnit,
-  RentalExceptionsUnit;
+  IRentalExceptionsCreatorUnit,
+  RentalsUnit;
 
 type
 
@@ -21,9 +22,10 @@ type
 
   TFakeRentalStorage = class(TInterfacedObject, ITRentalStorage)
   private
-    FRentals: TRentals;
+    _Rentals: TRentals;
+    _RentalExceptionsCreator : ITRentalExceptionsCreator;
   public
-    constructor Create();
+    constructor Create(RentalExceptionsCreator : ITRentalExceptionsCreator);
     constructor Create(rentals : TRentals); overload;
     function GetNextId() : String;
     function Register(Rental: TRental): TRental;
@@ -34,14 +36,15 @@ type
 
 implementation
 
-constructor TFakeRentalStorage.Create();
+constructor TFakeRentalStorage.Create(RentalExceptionsCreator : ITRentalExceptionsCreator);
 begin
-  FRentals := TRentals.Create
+  _Rentals := TRentals.Create;
+  _RentalExceptionsCreator := RentalExceptionsCreator;
 end;
 
 constructor TFakeRentalStorage.Create(rentals : TRentals);
 begin
-  FRentals := rentals;
+  _Rentals := rentals;
 end;
 
 function TFakeRentalStorage.GetNextId(): String;
@@ -54,7 +57,7 @@ end;
 
 function TFakeRentalStorage.Register(Rental: TRental): TRental;
 begin
-  FRentals.Add(Rental);
+  _Rentals.Add(Rental);
   result := Rental;
 end;
 
@@ -64,8 +67,8 @@ var
   RentalIdx : Integer;
 begin
   AuxRental := Get(rental.getId());
-  RentalIdx := FRentals.IndexOf(AuxRental);
-  FRentals.Insert(RentalIdx, rental);
+  RentalIdx := _Rentals.IndexOf(AuxRental);
+  _Rentals.Insert(RentalIdx, rental);
 
   result := rental;
 end;
@@ -74,7 +77,7 @@ function TFakeRentalStorage.Get(id: String): TRental;
 var
   Rental : TRental;
 begin
-  for Rental in FRentals do
+  for Rental in _Rentals do
   begin
     if Rental.getId() = id then
     begin
@@ -83,7 +86,7 @@ begin
     end;
   end;
 
-  CreateNotFoundRentalException(id);
+  _RentalExceptionsCreator.CreateNotFoundRentalException(id);
 end;
 
 function TFakeRentalStorage.Delete(id: string) : String;
@@ -91,7 +94,7 @@ var
   Rental : TRental;
 begin
   Rental := Get(id);
-  FRentals.Remove(Rental);
+  _Rentals.Remove(Rental);
   result := 'The rental has been successfully deleted from the system.';
 end;
 

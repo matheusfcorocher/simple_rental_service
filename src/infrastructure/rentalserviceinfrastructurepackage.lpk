@@ -26,6 +26,10 @@
         <Filename Value="storages\vehicle\vehiclestorageunit.pas"/>
         <UnitName Value="VehicleStorageUnit"/>
       </Item>
+      <Item>
+        <Filename Value="storages\renter\renterstoragebuilderunit.pas"/>
+        <UnitName Value="RenterStorageBuilderUnit"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

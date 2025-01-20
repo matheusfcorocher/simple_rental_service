@@ -11,7 +11,9 @@ uses
   IVehicleStorageUnit, IRenterStorageUnit,
   FakeRentalStorageUnit, FakeVehicleStorageUnit,
   FakeRenterStorageUnit, UpdateRentalUnit, RegisterRentalUnit,
-  RegisterRenterUnit, RegisterVehicleUnit;
+  RegisterRenterUnit, RegisterVehicleUnit, VehicleDTOUnit, RenterDTOUnit,
+  RenterExceptionsCreatorENUnit, RentalExceptionsCreatorENUnit, VehicleExceptionsCreatorENUnit,
+  RenterBuilderUnit, VehicleBuilderUnit, RentalBuilderUnit, RentalUtilsFunctionsUnit;
 
 type
 
@@ -24,6 +26,14 @@ implementation
 
 procedure TTestUpdateRental.TestExecute;
 var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+
+  RenterBuilder: TRenterBuilder;
+  VehicleBuilder : TVehicleBuilder;
+  RentalBuilder : TRentalBuilder;
+
   RentalStorage: ITRentalStorage;
   VehicleStorage: ITVehicleStorage;
   RenterStorage: ITRenterStorage;
@@ -34,10 +44,10 @@ var
   UpdateRental: TUpdateRental;
 
   Renter: TRenter;
-  RenterProfile: TRenterData;
+  RenterProfile: TRenterInfoDTO;
 
   Vehicle: TVehicle;
-  VehicleDetails: TVehicleData;
+  VehicleDetails: TVehicleDetailsDTO;
 
   Rental: TRental;
   RentalInfoDTO: TRentalInfoDTO;
@@ -46,19 +56,27 @@ var
   Expected: TRental;
 begin
   // preparing test
-  RentalStorage := TFakeRentalStorage.Create;
-  VehicleStorage := TFakeVehicleStorage.Create;
-  RenterStorage := TFakeRenterStorage.Create;
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
 
-  RegisterRenter := TRegisterRenter.Create(RenterStorage);
-  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage);
+  RenterBuilder := TRenterBuilder.Create(RenterExceptionsCreator);
+  VehicleBuilder := TVehicleBuilder.Create(VehicleExceptionsCreator);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
 
-  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage);
-  UpdateRental := TUpdateRental.Create(RentalStorage, VehicleStorage, RenterStorage);
+  RentalStorage := TFakeRentalStorage.Create(RentalExceptionsCreator);
+  VehicleStorage := TFakeVehicleStorage.Create(VehicleExceptionsCreator);
+  RenterStorage := TFakeRenterStorage.Create(RenterExceptionsCreator);
+
+  RegisterRenter := TRegisterRenter.Create(RenterBuilder, RenterStorage);
+  RegisterVehicle := TRegisterVehicle.Create(VehicleStorage, VehicleBuilder);
+
+  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage, RentalBuilder);
+  UpdateRental := TUpdateRental.Create(RentalStorage, VehicleStorage, RenterStorage, RentalBuilder);
 
   with RenterProfile do
   begin
-    name := 'bob';
+    Name := 'bob';
     address := 'address';
     email := 'email';
     telephone := '12432532';
@@ -68,9 +86,9 @@ begin
 
   with VehicleDetails do
   begin
-    name := 'corsa';
+    Name := 'corsa';
     licensePlate := 'MACLOVIN';
-    value := 20000;
+    Value := 20000;
     status := AVAILABLE;
   end;
 
@@ -98,8 +116,8 @@ begin
   // executing test
   Rental := UpdateRental.Execute(RentalDTO);
 
-  Expected := TRental.CreateWithoutBusinessRules(Rental.getId, RentalDTO.RenterId, Vehicle,
-    RentalDTO.StartDate, RentalDTO.EndDate);
+  Expected := TRental.Create(Rental.getId,
+    RentalDTO.RenterId, Vehicle, RentalDTO.StartDate, RentalDTO.EndDate, RentalExceptionsCreator);
 
   AssertTrue(
     'When updating a Rental, it retuns correct Rental',

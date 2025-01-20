@@ -7,13 +7,13 @@ interface
 uses
   Classes, SysUtils, fpjson, jsonparser, RegisterRenterUnit,
   RegisterVehicleUnit, RenterUnit, VehicleUnit, VehicleStatusUnit, RentalUnit,
-  RentalDTOUnit;
+  RentalDTOUnit, RenterDTOUnit, VehicleDTOUnit;
 
-function JSONToRenter(JSON: TJSONObject): TRenter;
-function JSONToRenterData(JSON: TJSONObject): TRenterData;
+function JSONToRenterDTO(JSON: TJSONObject): TRenterDTO;
+function JSONToRenterInfoDTO(JSON: TJSONObject): TRenterInfoDTO;
 
-function JSONToVehicle(JSON: TJSONObject): TVehicle;
-function JSONToVehicleData(JSON: TJSONObject): TVehicleData;
+function JSONToVehicleDTO(JSON: TJSONObject): TVehicleDTO;
+function JSONToVehicleDetailsDTO(JSON: TJSONObject): TVehicleDetailsDTO;
 
 function JSONToRentalDTO(JSON: TJSONObject): TRentalDTO;
 function JSONToRentalInfoDTO(JSON: TJSONObject): TRentalInfoDTO;
@@ -22,19 +22,27 @@ function JSONToId(JSON: TJSONObject): string;
 
 implementation
 
-function JSONToRenter(JSON: TJSONObject): TRenter;
+function JSONToRenterDTO(JSON: TJSONObject): TRenterDTO;
 var
-  Renter: TRenter;
+  RenterDTO : TRenterDTO;
 begin
-  Result := TRenter.Create(JSON.Strings['id'], JSON.Strings['name'],
-    JSON.Strings['address'], JSON.Strings['email'], JSON.Strings['telephone']);
+  with RenterDTO do
+  begin
+    id := JSON.Strings['id'];
+    name := JSON.Strings['name'];
+    address := JSON.Strings['address'];
+    email := JSON.Strings['email'];
+    telephone := JSON.Strings['telephone'];
+  end;
+
+  Result := RenterDTO;
 end;
 
-function JSONToRenterData(JSON: TJSONObject): TRenterData;
+function JSONToRenterInfoDTO(JSON: TJSONObject): TRenterInfoDTO;
 var
-  RenterData: TRenterData;
+  RenterInfoDTO: TRenterInfoDTO;
 begin
-  with RenterData do
+  with RenterInfoDTO do
   begin
     name := JSON.Strings['name'];
     address := JSON.Strings['address'];
@@ -42,23 +50,30 @@ begin
     telephone := JSON.Strings['telephone'];
   end;
 
-  Result := RenterData;
+  Result := RenterInfoDTO;
 end;
 
-function JSONToVehicle(JSON: TJSONObject): TVehicle;
+function JSONToVehicleDTO(JSON: TJSONObject): TVehicleDTO;
 var
-  Vehicle: TVehicle;
+  VehicleDTO: TVehicleDTO;
 begin
-  Result := TVehicle.Create(JSON.Strings['id'], JSON.Strings['name'],
-    JSON.Strings['licensePlate'], JSON.Integers['value'],
-    StrToVehicleStatus(JSON.Strings['status']));
+  with VehicleDTO do
+  begin
+    id := JSON.Strings['id'];
+    Name := JSON.Strings['name'];
+    licensePlate := JSON.Strings['licensePlate'];
+    Value := JSON.Integers['value'];
+    status := StrToVehicleStatus(JSON.Strings['status']);
+  end;
+
+  Result := VehicleDTO;
 end;
 
-function JSONToVehicleData(JSON: TJSONObject): TVehicleData;
+function JSONToVehicleDetailsDTO(JSON: TJSONObject): TVehicleDetailsDTO;
 var
-  VehicleData: TVehicleData;
+  VehicleDetailsDTO: TVehicleDetailsDTO;
 begin
-  with VehicleData do
+  with VehicleDetailsDTO do
   begin
     name := JSON.Strings['name'];
     licensePlate := JSON.Strings['licensePlate'];
@@ -66,7 +81,7 @@ begin
     status := StrToVehicleStatus(JSON.Strings['status']);
   end;
 
-  Result := VehicleData;
+  Result := VehicleDetailsDTO;
 end;
 
 function JSONToRentalDTO(JSON: TJSONObject): TRentalDTO;
@@ -75,11 +90,11 @@ var
 begin
   with RentalDTO do
   begin
-   Id := JSON.Strings['id'];
-   RenterId := JSON.Strings['renter_id'];
-   VehicleId := JSON.Strings['vehicle_id'];
-   StartDate := StrToDateTime(Copy(JSON.Strings['start_date'], 1, 10));
-   EndDate := StrToDateTime(Copy(JSON.Strings['end_date'], 1, 10));
+    Id := JSON.Strings['id'];
+    RenterId := JSON.Strings['renter_id'];
+    VehicleId := JSON.Strings['vehicle_id'];
+    StartDate := StrToDateTime(Copy(JSON.Strings['start_date'], 1, 10));
+    EndDate := StrToDateTime(Copy(JSON.Strings['end_date'], 1, 10));
   end;
 
 

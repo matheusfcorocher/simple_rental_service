@@ -10,7 +10,8 @@ uses
   IRenterStorageUnit,
   RenterUnit,
   RenterDTOUnit,
-  RenterExceptionsUnit;
+  IRenterExceptionsCreatorUnit,
+  RentersUnit;
 
 type
 
@@ -18,10 +19,11 @@ type
 
   TRenterStorage = class(TInterfacedObject, ITRenterStorage)
   private
-    FRenters : TRenters;
+    _Renters : TRenters;
+    _RenterExceptionCreator : ITRenterExceptionsCreator;
   public
-    constructor Create;
-    constructor Create(renters : TRenters); overload;
+    constructor Create(RenterExceptionsCreator: ITRenterExceptionsCreator);
+    constructor Create(renters : TRenters; RenterExceptionsCreator: ITRenterExceptionsCreator); overload;
     function GetNextId() : String;
     function Register(renter: TRenter): TRenter;
     function Update(renter: TRenter): TRenter;
@@ -31,14 +33,16 @@ type
 
 implementation
 
-constructor TRenterStorage.Create();
+constructor TRenterStorage.Create(RenterExceptionsCreator: ITRenterExceptionsCreator);
 begin
-  FRenters := TRenters.Create;
+  _Renters := TRenters.Create;
+  _RenterExceptionCreator := RenterExceptionsCreator;
 end;
 
-constructor TRenterStorage.Create(renters: TRenters);
+constructor TRenterStorage.Create(renters: TRenters; RenterExceptionsCreator: ITRenterExceptionsCreator);
 begin
-  FRenters := renters;
+  _Renters := renters;
+  _RenterExceptionCreator := RenterExceptionsCreator;
 end;
 
 function TRenterStorage.GetNextId(): String;
@@ -51,7 +55,7 @@ end;
 
 function TRenterStorage.Register(renter: TRenter): TRenter;
 begin
-  FRenters.Add(renter);
+  _Renters.Add(renter);
   result := renter;
 end;
 
@@ -61,8 +65,8 @@ var
   RenterIdx : Integer;
 begin
   AuxRenter := Get(renter.getId());
-  RenterIdx := FRenters.IndexOf(AuxRenter);
-  FRenters.Insert(RenterIdx, renter);
+  RenterIdx := _Renters.IndexOf(AuxRenter);
+  _Renters.Insert(RenterIdx, renter);
 
   result := renter;
 end;
@@ -71,7 +75,7 @@ function TRenterStorage.Get(id: String): TRenter;
 var
   Renter : TRenter;
 begin
-  for Renter in FRenters do
+  for Renter in _Renters do
   begin
     if Renter.getId() = id then
     begin
@@ -80,7 +84,7 @@ begin
     end;
   end;
 
-  CreateNotFoundRenterException(id);
+  _RenterExceptionCreator.CreateNotFoundRenterException(id);
 end;
 
 function TRenterStorage.Delete(id: string) : String;
@@ -88,7 +92,7 @@ var
   Renter : TRenter;
 begin
   Renter := Get(id);
-  FRenters.Remove(Renter);
+  _Renters.Remove(Renter);
   result := 'The renter has been successfully deleted from the system.';
 end;
 

@@ -6,28 +6,30 @@ interface
 
 uses
   Classes, SysUtils, RentalUnit, RenterUnit, VehicleUnit, RentalDTOUnit,
-  IRentalStorageUnit, IVehicleStorageUnit, VehicleStatusUnit, IRenterStorageUnit;
+  IRentalStorageUnit, IVehicleStorageUnit, VehicleStatusUnit, IRenterStorageUnit, RentalBuilderUnit;
 
 type
   TUpdateRental = class
   private
-    FRentalStorage: ITRentalStorage;
-    FVehicleStorage: ITVehicleStorage;
-    FRenterStorage: ITRenterStorage;
+    _RentalStorage: ITRentalStorage;
+    _VehicleStorage: ITVehicleStorage;
+    _RenterStorage: ITRenterStorage;
+    _RentalBuilder: TRentalBuilder;
   public
     constructor Create(IRentalStorage: ITRentalStorage;
-  IVehicleStorage: ITVehicleStorage; IRenterStorage: ITRenterStorage);
+  IVehicleStorage: ITVehicleStorage; IRenterStorage: ITRenterStorage; RentalBuilder: TRentalBuilder);
     function Execute(rentalDTO: TRentalDTO): TRental;
   end;
 
 implementation
 
 constructor TUpdateRental.Create(IRentalStorage: ITRentalStorage;
-  IVehicleStorage: ITVehicleStorage; IRenterStorage: ITRenterStorage);
+  IVehicleStorage: ITVehicleStorage; IRenterStorage: ITRenterStorage; RentalBuilder: TRentalBuilder);
 begin
-  FRentalStorage := IRentalStorage;
-  FVehicleStorage := IVehicleStorage;
-  FRenterStorage := IRenterStorage;
+  _RentalStorage := IRentalStorage;
+  _VehicleStorage := IVehicleStorage;
+  _RenterStorage := IRenterStorage;
+  _RentalBuilder := RentalBuilder;
 end;
 
 function TUpdateRental.Execute(rentalDTO: TRentalDTO): TRental;
@@ -36,28 +38,30 @@ var
   Vehicle: TVehicle;
   Rental: TRental;
 begin
-  Rental := FRentalStorage.Get(rentalDTO.id);
+  Rental := _RentalStorage.Get(rentalDTO.id);
 
   //Updates vehicle status from RENTED to AVAILABLE
   Vehicle := Rental.getVehicle();
   Vehicle.setStatus(AVAILABLE);
-  FVehicleStorage.Update(Vehicle);
+  _VehicleStorage.Update(Vehicle);
 
-  Renter := FRenterStorage.Get(rentalDTO.RenterId);
-  Vehicle := FVehicleStorage.Get(rentalDTO.VehicleId);
+  Renter := _RenterStorage.Get(rentalDTO.RenterId);
+  Vehicle := _VehicleStorage.Get(rentalDTO.VehicleId);
 
   // Checks if vehicle is available
   Vehicle.IsVehicleAvailable();
 
   // Create new Rental
-  Rental := TRental.Create(Rental.getId, Renter.getId, Vehicle,
+  Rental := _RentalBuilder.Build(Rental.getId, Renter.getId, Vehicle,
     rentalDTO.StartDate, rentalDTO.EndDate);
+
+  Rental.IsRentalValid();
 
   //Updates vehicle status from AVAILABLE to RENTED
   Vehicle.setStatus(RENTED);
-  FVehicleStorage.Update(Vehicle);
+  _VehicleStorage.Update(Vehicle);
 
-  Result := FRentalStorage.Update(rental);
+  Result := _RentalStorage.Update(rental);
 end;
 
 end.

@@ -5,18 +5,13 @@ program RentalServiceTestRunner;
 uses
   Interfaces, Forms, TestRenterStorageUnit, TestRenterDTOUnit, TestRenterUnit,
   GuiTestRunner, TestStandardResponseUnit, TestSystemResponseUnit,
-  TestRegisterRenterUnit, TestUpdateRenterUnit,
-  TestGetRenterUnit, TestDeleteRenterUnit,
-  FakeRenterStorageUnit, TestVehicleUnit,
-  TestVehicleDTOUnit,
-  TestRegisterVehicleUnit,
-  FakeVehicleStorageUnit, TestUpdateVehicleUnit,
-  TestGetVehicleUnit, TestDeleteVehicleUnit,
-  TestVehicleStorageUnit, TestRentalUnit, 
-  TestVehicleStatusUnit,
+  TestRegisterRenterUnit, TestUpdateRenterUnit, TestGetRenterUnit,
+  TestDeleteRenterUnit, FakeRenterStorageUnit, TestVehicleUnit,
+  TestVehicleDTOUnit, TestRegisterVehicleUnit, FakeVehicleStorageUnit,
+  TestUpdateVehicleUnit, TestGetVehicleUnit, TestDeleteVehicleUnit,
+  TestVehicleStorageUnit, TestRentalUnit, TestVehicleStatusUnit,
   TestRegisterRentalUnit, TestUpdateRentalUnit, TestGetRentalUnit,
-  TestDeleteRentalUnit, FakeRentalStorageUnit,
-  TestRentalStorageUnit,
+  TestDeleteRentalUnit, FakeRentalStorageUnit, TestRentalStorageUnit,
   TestRenterControllerForConsoleApplicationUnit;
 
   {$R *.res}

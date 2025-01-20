@@ -13,7 +13,10 @@ uses
   DeleteRentalUnit, GetRentalUnit, RegisterRentalUnit, UpdateRentalUnit, 
   DeleteRenterUnit, GetRenterUnit, UpdateRenterUnit, DeleteVehicleUnit, 
   GetVehicleUnit, RegisterVehicleUnit, UpdateVehicleUnit, IRentalStorageUnit, 
-  IVehicleStorageUnit, RentalDTOUnit, LazarusPackageIntf;
+  IVehicleStorageUnit, RentalDTOUnit, RenterBuilderUnit, VehicleBuilderUnit, 
+  RentalBuilderUnit, RenterAuxFunctionsUnit, RentersUnit, 
+  VehicleAuxFunctionsUnit, VehiclesUnit, RentalsUnit, 
+  RentalUtilsFunctionsUnit, LazarusPackageIntf;
 
 implementation
 

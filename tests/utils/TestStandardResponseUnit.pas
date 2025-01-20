@@ -13,11 +13,16 @@ uses
   testregistry,
   StandardResponsesUnit,
   SystemResponseUnit,
-  RenterUnit;
+  RenterUnit,
+  RentersUnit,
+  RenterExceptionsCreatorENUnit,
+  RentalServiceExceptionsUnit;
 
 type
 
   TTestStandardResponseUnit = class(TTestCase)
+  private
+    _RenterExceptionsCreator: TRenterExceptionsCreatorEN;
   protected
     procedure SetUp; override;
     procedure TearDown; override;
@@ -30,6 +35,16 @@ type
 
 implementation
 
+procedure TTestStandardResponseUnit.SetUp;
+begin
+ _RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+end;
+
+procedure TTestStandardResponseUnit.TearDown;
+begin
+
+end;
+
 //tests
 
 procedure TTestStandardResponseUnit.TestCreatingSuccessfulResponse;
@@ -41,11 +56,11 @@ var
 begin
   Renters := TRenters.Create;
   Renters.Add(TRenter.Create('uuid1', 'John Doe', 'street1',
-    'johndoe@gmail.com', '12345677'));
+    'johndoe@gmail.com', '12345677', _RenterExceptionsCreator));
   Renters.Add(TRenter.Create('uuid2', 'Marcus Doe', 'street2',
-    'marcusdoe@gmail.com', '12345678'));
+    'marcusdoe@gmail.com', '12345678', _RenterExceptionsCreator));
   Renters.Add(TRenter.Create('uuid3', 'Matthew Doe', 'street3',
-    'matthewdoe@gmail.com', '12345679'));
+    'matthewdoe@gmail.com', '12345679', _RenterExceptionsCreator));
 
   ObjectList := Renters.ToObjectList();
 
@@ -114,16 +129,6 @@ begin
     'When is created bad request response, it retuns right response',
     AreSystemResponsesEquals(Expected, Response)
     );
-end;
-
-procedure TTestStandardResponseUnit.SetUp;
-begin
-
-end;
-
-procedure TTestStandardResponseUnit.TearDown;
-begin
-
 end;
 
 initialization

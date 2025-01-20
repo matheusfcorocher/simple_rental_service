@@ -101,6 +101,42 @@
         <Filename Value="entities\rental\rentaldtounit.pas"/>
         <UnitName Value="RentalDTOUnit"/>
       </Item>
+      <Item>
+        <Filename Value="entities\renter\renterbuilderunit.pas"/>
+        <UnitName Value="RenterBuilderUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehiclebuilderunit.pas"/>
+        <UnitName Value="VehicleBuilderUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\rental\rentalbuilderunit.pas"/>
+        <UnitName Value="RentalBuilderUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\renter\renterauxfunctionsunit.pas"/>
+        <UnitName Value="RenterAuxFunctionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\renter\rentersunit.pas"/>
+        <UnitName Value="RentersUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehicleauxfunctionsunit.pas"/>
+        <UnitName Value="VehicleAuxFunctionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\vehicle\vehiclesunit.pas"/>
+        <UnitName Value="VehiclesUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\rental\rentalsunit.pas"/>
+        <UnitName Value="RentalsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="entities\rental\rentalutilsfunctionsunit.pas"/>
+        <UnitName Value="RentalUtilsFunctionsUnit"/>
+      </Item>
     </Files>
     <RequiredPkgs>
       <Item>

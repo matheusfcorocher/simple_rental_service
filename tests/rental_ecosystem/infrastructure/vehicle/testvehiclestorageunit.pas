@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, fpcunit, testutils, testregistry,
   VehicleUnit,
-  VehicleStorageUnit, VehicleStatusUnit, VehicleExceptionsUnit;
+  VehicleStorageUnit, VehicleStatusUnit, VehicleExceptionsCreatorENUnit, VehicleAuxFunctionsUnit, RentalServiceExceptionsUnit;
 
 type
 
@@ -15,7 +15,8 @@ type
 
   TTestVehicleStorage= class(TTestCase)
   private
-    FVehicleStorage : TVehicleStorage;
+    _VehicleStorage : TVehicleStorage;
+    _VehicleExceptionsCreator : TVehicleExceptionsCreatorEN;
 
     procedure _CreatingInvalidUpdateVehicle;
     procedure _CreatingInvalidGetVehicle;
@@ -38,38 +39,39 @@ type
 
 implementation
 
+procedure TTestVehicleStorage.SetUp;
+begin
+  _VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  _VehicleStorage := TVehicleStorage.Create(_VehicleExceptionsCreator);
+end;
+
+procedure TTestVehicleStorage.TearDown;
+begin
+
+end;
+
 procedure TTestVehicleStorage._CreatingInvalidUpdateVehicle;
 var
   Vehicle : TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Update(Vehicle);
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Update(Vehicle);
 end;
 
 procedure TTestVehicleStorage._CreatingInvalidGetVehicle;
 var
   Vehicle : TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Get(Vehicle.getId);
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Get(Vehicle.getId);
 end;
 
 procedure TTestVehicleStorage._CreatingInvalidDeleteVehicle;
 var
   Vehicle : TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Delete(Vehicle.getId);
-end;
-
-procedure TTestVehicleStorage.SetUp;
-begin
-  FVehicleStorage := TVehicleStorage.Create;
-end;
-
-procedure TTestVehicleStorage.TearDown;
-begin
-  FVehicleStorage.Free;
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Delete(Vehicle.getId);
 end;
 
 procedure TTestVehicleStorage.TestRegister;
@@ -77,8 +79,8 @@ var
   Vehicle : TVehicle;
   Expected: TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  Expected := FVehicleStorage.Register(Vehicle);
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  Expected := _VehicleStorage.Register(Vehicle);
 
   AssertTrue(
     'When testing Register of StorageTest, it retuns correct Vehicle',
@@ -91,9 +93,9 @@ var
   Vehicle : TVehicle;
   Expected : TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Register(Vehicle);
-  Expected := FVehicleStorage.Update(Vehicle);
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Register(Vehicle);
+  Expected := _VehicleStorage.Update(Vehicle);
 
   AssertTrue(
     'When updating a Vehicle, it retuns correct Vehicle',
@@ -115,9 +117,9 @@ var
   Vehicle: TVehicle;
   Expected: TVehicle;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Register(Vehicle);
-  Expected := FVehicleStorage.Get(Vehicle.getId);
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Register(Vehicle);
+  Expected := _VehicleStorage.Get(Vehicle.getId);
 
   AssertTrue(
     'When getting a Vehicle, it retuns correct Vehicle',
@@ -139,9 +141,9 @@ var
   Vehicle: TVehicle;
   Expected: String;
 begin
-  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE);
-  FVehicleStorage.Register(Vehicle);
-  Expected := FVehicleStorage.Delete('uuid');
+  Vehicle := TVehicle.Create('uuid', 'corsa', 'MACLOVIN', 1000, AVAILABLE, _VehicleExceptionsCreator);
+  _VehicleStorage.Register(Vehicle);
+  Expected := _VehicleStorage.Delete('uuid');
 
   AssertEquals(
     'When deleting a Vehicle, it retuns right message',

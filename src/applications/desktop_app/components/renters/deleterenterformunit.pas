@@ -58,6 +58,7 @@ begin
     // Search in column 1
 
     MainForm.StringGrid1.DeleteRow(RowIndex);
+    UpdateRowIDs(MainForm.StringGrid1);
   end
   else
   begin

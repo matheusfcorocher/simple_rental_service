@@ -7,7 +7,8 @@ interface
 uses
   Classes, SysUtils, DateUtils, fpcunit, testutils, testregistry,
   VehicleUnit, VehicleStatusUnit, IRentalStorageUnit, FakeRentalStorageUnit,
-  GetRentalUnit, RentalUnit;
+  GetRentalUnit, RentalUnit, RentalsUnit, VehicleExceptionsCreatorENUnit,
+  RentalExceptionsCreatorENUnit, RentalUtilsFunctionsUnit;
 
 type
 
@@ -20,19 +21,30 @@ implementation
 
 procedure TTestGetRental.TestExecute;
 var
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+
   RentalStorage: ITRentalStorage;
+
   GetRental: TGetRental;
+
   StartDate, EndDate: TDateTime;
   Vehicle: TVehicle;
   Rentals: TRentals;
   Rental: TRental;
+
   Expected: TRental;
 begin
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create();
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create();
+
   StartDate := EncodeDate(2024, 12, 1);
   EndDate := EncodeDate(2024, 12, 31);
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN',
+    20000, AVAILABLE, VehicleExceptionsCreator);
 
-  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle, StartDate, EndDate);
+  Rental := TRental.Create('rental_uuid', 'renter_uuid', Vehicle,
+    StartDate, EndDate, RentalExceptionsCreator);
 
   Rentals := TRentals.Create;
   Rentals.Add(Rental);
@@ -47,7 +59,7 @@ begin
   AssertTrue(
     'When getting a rental, it retuns correct rental',
     RentalEquals(Rental, Expected)
-  );
+    );
 end;
 
 initialization

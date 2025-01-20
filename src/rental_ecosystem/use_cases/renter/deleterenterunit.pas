@@ -10,7 +10,7 @@ uses
 type
   TDeleteRenter = class
   private
-    FRenterStorage: ITRenterStorage;
+    _RenterStorage: ITRenterStorage;
   public
     constructor Create(IRenterStorage: ITRenterStorage);
     function Execute(id : String): String;
@@ -20,12 +20,12 @@ implementation
 
 constructor TDeleteRenter.Create(IRenterStorage: ITRenterStorage);
 begin
-  FRenterStorage := IRenterStorage;
+  _RenterStorage := IRenterStorage;
 end;
 
 function TDeleteRenter.Execute(id : String): String;
 begin
-  Result := FRenterStorage.Delete(id);
+  Result := _RenterStorage.Delete(id);
 end;
 
 end.

@@ -14,8 +14,7 @@ uses
   GlobalVariablesUnit, AddVehicleFormUnit, DeleteRenterFormUnit,
   RegisterRenterFormUnit, UpdateRenterFormUnit, UpdateVehicleFormUnit,
 StringGridUtilsUnit, DeleteVehicleFormUnit, RegisterRentalFormUnit,
-UpdateRentalFormUnit, DeleteRentalFormUnit
-  { you can add units after this };
+UpdateRentalFormUnit, DeleteRentalFormUnit;
 
 {$R *.res}
 

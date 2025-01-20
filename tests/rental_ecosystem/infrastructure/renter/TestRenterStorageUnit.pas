@@ -9,7 +9,10 @@ uses
   testregistry,
   RenterUnit,
   RenterStorageUnit,
-  RenterExceptionsUnit;
+  RenterExceptionsCreatorENUnit,
+  RenterBuilderUnit,
+  RenterAuxFunctionsUnit,
+  RentalServiceExceptionsUnit;
 
 type
 
@@ -17,7 +20,8 @@ type
 
   TRenterStorageTest = class(TTestCase)
   private
-    FRenterStorage: TRenterStorage;
+    _RenterStorage : TRenterStorage;
+    _RenterBuilder : TRenterBuilder;
 
     procedure _CreatingNotFoundRenterGet;
     procedure _CreatingNotFoundRenterUpdate;
@@ -40,35 +44,40 @@ type
 
 implementation
 
+procedure TRenterStorageTest.SetUp;
+var
+  RenterExceptionsCreator : TRenterExceptionsCreatorEN;
+begin
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+
+  _RenterBuilder := TRenterBuilder.Create(RenterExceptionsCreator);
+  _RenterStorage := TRenterStorage.Create(RenterExceptionsCreator);
+end;
+
+procedure TRenterStorageTest.TearDown;
+begin
+
+end;
+
 procedure TRenterStorageTest._CreatingNotFoundRenterGet;
 begin
-  FRenterStorage.Get('uid');
+  _RenterStorage.Get('uid');
 end;
 
 procedure TRenterStorageTest._CreatingNotFoundRenterUpdate;
 var
   Renter : TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  FRenterStorage.Update(Renter);
+  Renter := _RenterBuilder.Build('uid', 'Los', 'a', '12345678', '123456789');
+  _RenterStorage.Update(Renter);
 end;
 
 procedure TRenterStorageTest._CreatingNotFoundRenterDelete;
 var
   Renter : TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  FRenterStorage.Delete(Renter.getId);
-end;
-
-procedure TRenterStorageTest.SetUp;
-begin
-  FRenterStorage := TRenterStorage.Create;
-end;
-
-procedure TRenterStorageTest.TearDown;
-begin
-  FRenterStorage.Free;
+  Renter := _RenterBuilder.Build('uid', 'Los', 'a', '12345678', '123456789');
+  _RenterStorage.Delete(Renter.getId);
 end;
 
 procedure TRenterStorageTest.TestRegister;
@@ -76,8 +85,8 @@ var
   Renter : TRenter;
   Expected: TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  Expected := FRenterStorage.Register(Renter);
+  Renter := _RenterBuilder.Build('uid', 'Los', 'a', '12345678', '123456789');
+  Expected := _RenterStorage.Register(Renter);
 
   AssertTrue(
     'When testing Register of StorageTest, it retuns correct renter',
@@ -90,9 +99,9 @@ var
   Renter : TRenter;
   Expected : TRenter;
 begin
-  Renter := TRenter.Create('uid', 'Los', 'a', '12345678', '123456789');
-  FRenterStorage.Register(Renter);
-  Expected := FRenterStorage.Update(Renter);
+  Renter := _RenterBuilder.Build('uid', 'Los', 'a', '12345678', '123456789');
+  _RenterStorage.Register(Renter);
+  Expected := _RenterStorage.Update(Renter);
 
   AssertTrue(
     'When updating a renter, it retuns correct renter',
@@ -114,9 +123,9 @@ var
   Renter: TRenter;
   Expected: TRenter;
 begin
-  Renter := TRenter.Create('uid', 'test', 'test', '12345678', '123456789');
-  FRenterStorage.Register(Renter);
-  Expected := FRenterStorage.Get(Renter.getId);
+  Renter := _RenterBuilder.Build('uid', 'test', 'test', '12345678', '123456789');
+  _RenterStorage.Register(Renter);
+  Expected := _RenterStorage.Get(Renter.getId);
 
   AssertTrue(
     'When getting a renter, it retuns correct renter',
@@ -138,9 +147,9 @@ var
   Renter: TRenter;
   Expected: String;
 begin
-  Renter := TRenter.Create('uid', 'test', 'test', '12345678', '123456789');
-  FRenterStorage.Register(Renter);
-  Expected := FRenterStorage.Delete('uid');
+  Renter := _RenterBuilder.Build('uid', 'test', 'test', '12345678', '123456789');
+  _RenterStorage.Register(Renter);
+  Expected := _RenterStorage.Delete('uid');
 
   AssertEquals(
     'When deleting a renter, it retuns right message',

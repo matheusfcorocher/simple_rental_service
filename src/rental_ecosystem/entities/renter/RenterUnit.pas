@@ -5,40 +5,45 @@ unit RenterUnit;
 interface
 
 uses
-    SysUtils, Generics.Collections, SystemResponseUnit, RenterDTOUnit, RenterExceptionsUnit;
+  SysUtils, RenterDTOUnit, IRenterExceptionsCreatorUnit;
 
 type
   TRenter = class
 
   private
-    Fid: string;
-    Fname: string;
-    Faddress: string;
-    Femail: string;
-    Ftelephone: string;
+    _id: string;
+    _name: string;
+    _address: string;
+    _email: string;
+    _telephone: string;
 
+    _RenterExceptionsCreator: ITRenterExceptionsCreator;
 
-    function IsNameValid(name: string) : Boolean;
-    function IsAddressValid(address: string) : Boolean;
-    function IsEmailValid(email: string) : Boolean;
-    function IsTelephoneValid(telephone: string) : Boolean;
+    // renter validation methods
 
-    function IsFieldEmpty(field: string) : Boolean;
-    function HasNameValidDigits(name: string) : Boolean;
-    function HasTelephoneValidDigits(telephone: string) : Boolean;
+    function _IsNameValid(): boolean;
+    function _IsAddressValid(): boolean;
+    function _IsEmailValid(): boolean;
+    function _IsTelephoneValid(): boolean;
 
+    function _IsFieldEmpty(field: string): boolean;
+    function _HasNameValidDigits(): boolean;
+    function _HasTelephoneValidDigits(): boolean;
 
   public
     constructor Create(id: string; name: string; address: string;
-      email: string; telephone: string);
+      email: string; telephone: string; RenterExceptionsCreator: ITRenterExceptionsCreator);
 
-    constructor Create(RenterDTO: TRenterDTO); overload;
+    constructor Create(RenterDTO: TRenterDTO; RenterExceptionsCreator: ITRenterExceptionsCreator); overload;
+
+    function IsRenterValid() : Boolean;
 
     //getter and setter methods
+
     function getId: string;
 
     function getName: string;
-    procedure setName(name: string);
+    procedure setName(Name: string);
 
     function getAddress: string;
     procedure setAddress(address: string);
@@ -50,195 +55,165 @@ type
     procedure setTelephone(telephone: string);
   end;
 
-  TRenters = specialize TObjectList<TRenter>;
-
-  TRentersHelper = class helper for TRenters
-    function ToObjectList(): specialize TObjectList<TObject>;
-  end;
-
-  function RenterEquals(a, b : TRenter): boolean;
-
 implementation
 
-constructor TRenter.Create(id: string; name: string; address: string;
-  email: string; telephone: string);
-begin
-  IsNameValid(name);
-  IsAddressValid(address);
-  IsEmailValid(email);
-  IsTelephoneValid(telephone);
+// private methods
 
-  Fid := id;
-  Fname := name;
-  Faddress := address;
-  Femail := email;
-  Ftelephone := telephone;
-end;
-
-constructor TRenter.Create(RenterDTO: TRenterDTO);
-begin
-  IsNameValid(RenterDTO.name);
-  IsAddressValid(RenterDTO.address);
-  IsEmailValid(RenterDTO.email);
-  IsTelephoneValid(RenterDTO.telephone);
-
-  Fid := RenterDTO.id;
-  Fname := RenterDTO.name;
-  Faddress := RenterDTO.address;
-  Femail := RenterDTO.email;
-  Ftelephone := RenterDTO.telephone;
-end;
-
-
-// getter and setter methods
-function TRenter.getId(): string;
-begin
-  Result := Fid;
-end;
-
-function TRenter.getName(): string;
-begin
-  Result := Fname;
-end;
-
-procedure TRenter.setName(name: string);
-begin
-  IsNameValid(name);
-  Fname := Name;
-end;
-
-function TRenter.getAddress(): string;
-begin
-  Result := Faddress;
-end;
-
-procedure TRenter.setAddress(address: string);
-begin
-  IsAddressValid(address);
-  Faddress := address;
-end;
-
-function TRenter.getEmail(): string;
-begin
-  Result := Femail;
-end;
-
-procedure TRenter.setEmail(email: string);
-begin
-  IsEmailValid(email);
-  Femail := email;
-end;
-
-function TRenter.getTelephone() : string;
-begin
-  Result := Ftelephone;
-end;
-
-procedure TRenter.setTelephone(telephone: string);
-begin
-  IsTelephoneValid(telephone);
-  Ftelephone := telephone;
-end;
-
-// main methods for validating Renter fields
-
-function TRenter.IsNameValid(name: string) : Boolean;
+function TRenter._IsNameValid(): boolean;
 var
-  isValid : Boolean;
+  isValid: boolean;
 begin
-  isValid := HasNameValidDigits(name);
+  isValid := _HasNameValidDigits();
 
   if not isValid then
   begin
-    CreateRenterNameError;
+    _RenterExceptionsCreator.CreateRenterNameError;
   end;
 
-  result := isValid;
+  Result := isValid;
 end;
 
-function TRenter.IsAddressValid(address: string) : Boolean;
+function TRenter._IsAddressValid(): boolean;
 var
-  IsValid : Boolean;
+  IsValid: boolean;
 begin
-  IsValid := not IsFieldEmpty(address);
+  IsValid := not _IsFieldEmpty(_address);
 
   if not IsValid then
   begin
-    CreateRenterAddressError;
+    _RenterExceptionsCreator.CreateRenterAddressError;
   end;
 
-  result := IsValid;
+  Result := IsValid;
 end;
 
-function TRenter.IsEmailValid(email: string) : Boolean;
+function TRenter._IsEmailValid(): boolean;
 var
-  IsValid : Boolean;
+  IsValid: boolean;
 begin
-  IsValid := not IsFieldEmpty(email);
+  IsValid := not _IsFieldEmpty(_email);
 
   if not IsValid then
   begin
-    CreateRenterEmailError;
+    _RenterExceptionsCreator.CreateRenterEmailError;
   end;
 
-  result := IsValid;
+  Result := IsValid;
 end;
 
-function TRenter.IsTelephoneValid(telephone: string) : Boolean;
+function TRenter._IsTelephoneValid(): boolean;
 var
-  IsValid : Boolean;
+  IsValid: boolean;
 begin
-  IsValid := HasTelephoneValidDigits(telephone);
+  IsValid := _HasTelephoneValidDigits();
 
   if not IsValid then
   begin
-    CreateRenterTelephoneError;
+    _RenterExceptionsCreator.CreateRenterTelephoneError;
   end;
 
-  result := IsValid;
+  Result := IsValid;
 end;
 
 // auxiliary private methods for validating Renter fields
 
-function TRenter.IsFieldEmpty(field: string) : Boolean;
+function TRenter._IsFieldEmpty(field: string): boolean;
 begin
-   result := (Length(Trim(field))) = 0
+  Result := (Length(Trim(field))) = 0;
 end;
 
-function TRenter.HasNameValidDigits(name: string) : Boolean;
+function TRenter._HasNameValidDigits(): boolean;
 const
   minimumDigits = 2;
   maximumDigits = 50;
 begin
-  result := (Length(name) >= minimumDigits) and (Length(name) <= maximumDigits);
+  Result := (Length(_name) >= minimumDigits) and (Length(_name) <= maximumDigits);
 end;
 
-function TRenter.HasTelephoneValidDigits(telephone: string) : Boolean;
+function TRenter._HasTelephoneValidDigits(): boolean;
 const
   minimumDigits = 8;
   maximumDigits = 15;
 begin
-  result := (Length(telephone) >= minimumDigits) and (Length(telephone) <= maximumDigits);
+  Result := (Length(_telephone) >= minimumDigits) and
+    (Length(_telephone) <= maximumDigits);
 end;
 
-function TRentersHelper.ToObjectList(): specialize TObjectList<TObject>;
-var
-  Renter: TRenter;
-  ObjectList: specialize TObjectList<TObject>;
+// public methods
+
+constructor TRenter.Create(id: string; name: string; address: string;
+  email: string; telephone: string; RenterExceptionsCreator: ITRenterExceptionsCreator);
 begin
-  ObjectList := specialize TObjectList<TObject>.Create();
-  for Renter in Self do
-    ObjectList.Add(Renter);
+  _id := id;
+  _name := name;
+  _address := address;
+  _email := email;
+  _telephone := telephone;
 
-  Result := ObjectList;
+  _RenterExceptionsCreator := RenterExceptionsCreator;
 end;
 
-function RenterEquals(a, b : TRenter): boolean;
-  begin
-       Result := (a.getName = b.getName) and
-       (a.getAddress = b.getAddress) and
-       (a.getEmail = b.getEmail) and (a.getTelephone =
-       b.getTelephone);
+constructor TRenter.Create(RenterDTO: TRenterDTO; RenterExceptionsCreator: ITRenterExceptionsCreator);
+begin
+  _id := RenterDTO.id;
+  _name := RenterDTO.Name;
+  _address := RenterDTO.address;
+  _email := RenterDTO.email;
+  _telephone := RenterDTO.telephone;
+
+  _RenterExceptionsCreator := RenterExceptionsCreator;
+end;
+
+function TRenter.IsRenterValid() : Boolean;
+begin
+  result := _IsNameValid() and _IsAddressValid() and _IsEmailValid() and _IsTelephoneValid();
+end;
+
+// getter and setters
+
+function TRenter.getId(): string;
+begin
+  Result := _id;
+end;
+
+function TRenter.getName(): string;
+begin
+  Result := _name;
+end;
+
+procedure TRenter.setName(name: string);
+begin
+  _name := name;
+end;
+
+function TRenter.getAddress(): string;
+begin
+  Result := _address;
+end;
+
+procedure TRenter.setAddress(address: string);
+begin
+  _address := address;
+end;
+
+function TRenter.getEmail(): string;
+begin
+  Result := _email;
+end;
+
+procedure TRenter.setEmail(email: string);
+begin
+  _email := email;
+end;
+
+function TRenter.getTelephone(): string;
+begin
+  Result := _telephone;
+end;
+
+procedure TRenter.setTelephone(telephone: string);
+begin
+  _telephone := telephone;
 end;
 
 end.

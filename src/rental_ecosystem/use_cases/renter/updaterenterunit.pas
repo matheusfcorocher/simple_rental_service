@@ -5,28 +5,34 @@ unit UpdateRenterUnit;
 interface
 
 uses
-  Classes, SysUtils, RenterUnit, IRenterStorageUnit;
+  Classes, SysUtils, RenterUnit, IRenterStorageUnit, RenterDTOUnit, RenterBuilderUnit;
 
 type
   TUpdateRenter = class
   private
-    FRenterStorage: ITRenterStorage;
+    _RenterStorage: ITRenterStorage;
+    _RenterBuilder : TRenterBuilder;
   public
-    constructor Create(IRenterStorage: ITRenterStorage);
-    function Execute(renter : TRenter): TRenter;
+    constructor Create(IRenterStorage: ITRenterStorage; RenterBuilder : TRenterBuilder);
+    function Execute(RenterDTO: TRenterDTO): TRenter;
   end;
 
 implementation
 
-constructor TUpdateRenter.Create(IRenterStorage: ITRenterStorage);
+constructor TUpdateRenter.Create(IRenterStorage: ITRenterStorage; RenterBuilder : TRenterBuilder);
 begin
-  FRenterStorage := IRenterStorage;
+  _RenterStorage := IRenterStorage;
+  _RenterBuilder := RenterBuilder;
 end;
 
-function TUpdateRenter.Execute(renter : TRenter) : TRenter;
+function TUpdateRenter.Execute(RenterDTO: TRenterDTO): TRenter;
+var
+  Renter: TRenter;
 begin
-  Result := FRenterStorage.Update(renter);
+  Renter := _RenterBuilder.Build(RenterDTO.id, RenterDTO.Name, RenterDTO.Address,
+    RenterDTO.email, RenterDTO.telephone);
+  Renter.IsRenterValid();
+  Result := _RenterStorage.Update(Renter);
 end;
 
 end.
-

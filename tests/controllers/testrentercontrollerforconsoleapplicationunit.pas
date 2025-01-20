@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, fpcunit, testutils, testregistry, fpjson,
   jsonparser, RenterControllerUnit,
   RegisterRenterUnit, UpdateRenterUnit, GetRenterUnit, DeleteRenterUnit,
-  RenterStorageUnit, ConsolePresenterUnit;
+  RenterStorageUnit, ConsolePresenterUnit, RenterBuilderUnit, RenterExceptionsCreatorENUnit;
 
 type
 
@@ -45,6 +45,9 @@ end;
 
 procedure TTestRenterControllerOnConsoleApplication.SetUp;
 var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  RenterBuilder: TRenterBuilder;
+
   RenterStorage: TRenterStorage;
 
   RegisterRenter: TRegisterRenter;
@@ -54,10 +57,14 @@ var
 
   ConsolePresenter: TConsolePresenter;
 begin
-  RenterStorage := TRenterStorage.Create();
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  RenterBuilder := TRenterBuilder.Create(RenterExceptionsCreator);
 
-  RegisterRenter := TRegisterRenter.Create(RenterStorage);
-  UpdateRenter := TUpdateRenter.Create(RenterStorage);
+  RenterStorage := TRenterStorage.Create(RenterExceptionsCreator);
+
+  RegisterRenter := TRegisterRenter.Create(RenterBuilder, RenterStorage);
+
+  UpdateRenter := TUpdateRenter.Create(RenterStorage, RenterBuilder);
   GetRenter := TGetRenter.Create(RenterStorage);
   DeleteRenter := TDeleteRenter.Create(RenterStorage);
 

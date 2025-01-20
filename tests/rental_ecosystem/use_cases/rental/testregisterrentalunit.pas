@@ -9,7 +9,8 @@ uses
   RenterUnit, VehicleUnit, VehicleStatusUnit,
   IRentalStorageUnit, IVehicleStorageUnit, IRenterStorageUnit,
   FakeRentalStorageUnit, FakeVehicleStorageUnit, FakeRenterStorageUnit,
-  RegisterRentalUnit, RentalDTOUnit, RentalUnit;
+  RegisterRentalUnit, RentalDTOUnit, RentalUnit, RentalExceptionsCreatorENUnit,
+  VehicleExceptionsCreatorENUnit, RenterExceptionsCreatorENUnit, RentalBuilderUnit, RentalUtilsFunctionsUnit;
 
 type
 
@@ -22,27 +23,43 @@ implementation
 
 procedure TTestRegisterRental.TestExecute;
 var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+
   RenterStorage: ITRenterStorage;
   VehicleStorage: ITVehicleStorage;
   RentalStorage: ITRentalStorage;
+
+  RentalBuilder : TRentalBuilder;
+
   RegisterRental: TRegisterRental;
+
   Renter: TRenter;
   Vehicle: TVehicle;
-  Data: TRentalInfoDTO;
   Rental: TRental;
+
+  Data: TRentalInfoDTO;
   Expected: TRental;
 begin
-  RentalStorage := TFakeRentalStorage.Create;
-  VehicleStorage := TFakeVehicleStorage.Create;
-  RenterStorage := TFakeRenterStorage.Create;
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
 
-  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email', '12432532');
+
+  RentalStorage := TFakeRentalStorage.Create(RentalExceptionsCreator);
+  VehicleStorage := TFakeVehicleStorage.Create(VehicleExceptionsCreator);
+  RenterStorage := TFakeRenterStorage.Create(RenterExceptionsCreator);
+
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
+  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email', '12432532', RenterExceptionsCreator);
   RenterStorage.Register(Renter);
 
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE, VehicleExceptionsCreator);
   VehicleStorage.Register(Vehicle);
 
-  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage);
+  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage, RentalBuilder);
 
   with Data do
   begin
@@ -54,8 +71,7 @@ begin
 
   Rental := RegisterRental.Execute(Data);
 
-  Expected := TRental.CreateWithoutBusinessRules(Rental.getId,
-    Data.RenterId, Vehicle, Data.StartDate, Data.EndDate);
+  Expected := TRental.Create(Rental.getId, Data.RenterId, Vehicle, Data.StartDate, Data.EndDate, RentalExceptionsCreator);
 
 
   AssertTrue(

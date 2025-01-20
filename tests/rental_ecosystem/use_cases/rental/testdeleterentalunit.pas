@@ -8,7 +8,9 @@ uses
   Classes, SysUtils, DateUtils, fpcunit, testregistry, RentalUnit,
   VehicleUnit, VehicleStatusUnit,
   IRentalStorageUnit, FakeRentalStorageUnit, DeleteRentalUnit,
-  RegisterRentalUnit, FakeRenterStorageUnit, FakeVehicleStorageUnit, RenterUnit, IRenterStorageUnit, IVehicleStorageUnit, RentalDTOUnit;
+  RegisterRentalUnit, FakeRenterStorageUnit, FakeVehicleStorageUnit,
+  RenterUnit, IRenterStorageUnit, IVehicleStorageUnit, RentalDTOUnit,
+  RenterExceptionsCreatorENUnit, VehicleExceptionsCreatorENUnit, RentalExceptionsCreatorENUnit, RentalBuilderUnit;
 
 type
 
@@ -21,6 +23,12 @@ implementation
 
 procedure TTestDeleteRental.TestExecute;
 var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  VehicleExceptionsCreator: TVehicleExceptionsCreatorEN;
+  RentalExceptionsCreator: TRentalExceptionsCreatorEN;
+
+  RentalBuilder: TRentalBuilder;
+
   RentalStorage: ITRentalStorage;
   VehicleStorage: ITVehicleStorage;
   RenterStorage: ITRenterStorage;
@@ -36,17 +44,26 @@ var
   Expected: string;
 begin
   // preparing test
-  RentalStorage := TFakeRentalStorage.Create;
-  VehicleStorage := TFakeVehicleStorage.Create;
-  RenterStorage := TFakeRenterStorage.Create;
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  VehicleExceptionsCreator := TVehicleExceptionsCreatorEN.Create;
+  RentalExceptionsCreator := TRentalExceptionsCreatorEN.Create;
 
-  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage, RenterStorage);
+  RentalBuilder := TRentalBuilder.Create(RentalExceptionsCreator);
+
+  RentalStorage := TFakeRentalStorage.Create(RentalExceptionsCreator);
+  VehicleStorage := TFakeVehicleStorage.Create(VehicleExceptionsCreator);
+  RenterStorage := TFakeRenterStorage.Create(RenterExceptionsCreator);
+
+  RegisterRental := TRegisterRental.Create(RentalStorage, VehicleStorage,
+    RenterStorage, RentalBuilder);
   DeleteRental := TDeleteRental.Create(RentalStorage);
 
-  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email', '12432532');
+  Renter := TRenter.Create('renter_uuid', 'bob', 'address', 'email',
+    '12432532', RenterExceptionsCreator);
   RenterStorage.Register(Renter);
 
-  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN', 20000, AVAILABLE);
+  Vehicle := TVehicle.Create('vehicle_uuid', 'corsa', 'MACLOVIN',
+    20000, AVAILABLE, VehicleExceptionsCreator);
   VehicleStorage.Register(Vehicle);
 
   with Data do

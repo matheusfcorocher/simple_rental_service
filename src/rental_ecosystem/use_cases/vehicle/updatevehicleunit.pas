@@ -5,28 +5,34 @@ unit UpdateVehicleUnit;
 interface
 
 uses
-  Classes, SysUtils, VehicleUnit, IVehicleStorageUnit;
+  Classes, SysUtils, VehicleUnit, IVehicleStorageUnit, VehicleDTOUnit, VehicleBuilderUnit;
 
 type
   TUpdateVehicle = class
   private
-    FVehicleStorage: ITVehicleStorage;
+    _VehicleStorage: ITVehicleStorage;
+    _VehicleBuilder: TVehicleBuilder;
   public
-    constructor Create(IVehicleStorage: ITVehicleStorage);
-    function Execute(Vehicle : TVehicle): TVehicle;
+    constructor Create(IVehicleStorage: ITVehicleStorage; VehicleBuilder: TVehicleBuilder);
+    function Execute(VehicleDTO: TVehicleDTO): TVehicle;
   end;
 
 implementation
 
-constructor TUpdateVehicle.Create(IVehicleStorage: ITVehicleStorage);
+constructor TUpdateVehicle.Create(IVehicleStorage: ITVehicleStorage; VehicleBuilder: TVehicleBuilder);
 begin
-  FVehicleStorage := IVehicleStorage;
+  _VehicleStorage := IVehicleStorage;
+  _VehicleBuilder := VehicleBuilder;
 end;
 
-function TUpdateVehicle.Execute(Vehicle : TVehicle) : TVehicle;
+function TUpdateVehicle.Execute(VehicleDTO: TVehicleDTO): TVehicle;
+var
+  Vehicle: TVehicle;
 begin
-  Result := FVehicleStorage.Update(Vehicle);
+  Vehicle := _VehicleBuilder.Build(VehicleDTO.id, VehicleDTO.Name,
+    VehicleDTO.licensePlate, VehicleDTO.Value, VehicleDTO.status);
+  Vehicle.IsVehicleValid();
+  Result := _VehicleStorage.Update(Vehicle);
 end;
 
 end.
-

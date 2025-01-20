@@ -13,5 +13,5 @@ var
 implementation
 
 initialization
-  RentalService := AssembleRentalServiceOnWebApi();
+  RentalService := AssembleRentalServiceOnPTDesktopApp();
 end.

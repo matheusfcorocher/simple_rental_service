@@ -6,7 +6,8 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, testregistry, IRenterStorageUnit,
-  DeleteRenterUnit, RenterUnit, FakeRenterStorageUnit, RegisterRenterUnit;
+  DeleteRenterUnit, RenterUnit, FakeRenterStorageUnit, RegisterRenterUnit,
+  RenterExceptionsCreatorENUnit, RenterBuilderUnit, RenterDTOUnit;
 
 type
 
@@ -22,27 +23,33 @@ implementation
 
 procedure TTestDeleteRenter.TestExecute;
 var
+  RenterExceptionsCreator: TRenterExceptionsCreatorEN;
+  RenterBuilder: TRenterBuilder;
   RenterStorage: ITRenterStorage;
   RegisterRenter: TRegisterRenter;
   DeleteRenter: TDeleteRenter;
-  RenterData: TRenterData;
+  RenterInfoDTO: TRenterInfoDTO;
+  RenterDTO: TRenterDTO;
   Renter: TRenter;
   Expected: string;
 begin
   //prepare test
-  RenterStorage := TFakeRenterStorage.Create;
-  RegisterRenter := TRegisterRenter.Create(RenterStorage);
+  RenterExceptionsCreator := TRenterExceptionsCreatorEN.Create;
+  RenterBuilder := TRenterBuilder.Create(RenterExceptionsCreator);
+
+  RenterStorage := TFakeRenterStorage.Create(RenterExceptionsCreator);
+  RegisterRenter := TRegisterRenter.Create(RenterBuilder, RenterStorage);
   DeleteRenter := TDeleteRenter.Create(RenterStorage);
 
-  with RenterData do
+  with RenterInfoDTO do
   begin
-    name := 'Los';
+    Name := 'Los';
     address := 'address';
-    email :=  '12345678';
-    telephone :=  '123456789';
+    email := '12345678';
+    telephone := '123456789';
   end;
 
-  Renter := RegisterRenter.Execute(RenterData);
+  Renter := RegisterRenter.Execute(RenterInfoDTO);
 
   //Execute Test
   Expected := DeleteRenter.Execute(Renter.getId);
@@ -51,7 +58,7 @@ begin
     'When deleting a renter, it retuns right message',
     'The renter has been successfully deleted from the system.',
     Expected
-  );
+    );
 end;
 
 procedure TTestDeleteRenter.SetUp;

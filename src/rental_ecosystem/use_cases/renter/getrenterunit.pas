@@ -10,7 +10,7 @@ uses
 type
   TGetRenter = class
   private
-    FRenterStorage: ITRenterStorage;
+    _RenterStorage: ITRenterStorage;
   public
     constructor Create(IRenterStorage: ITRenterStorage);
     function Execute(id : String): TRenter;
@@ -20,12 +20,12 @@ implementation
 
 constructor TGetRenter.Create(IRenterStorage: ITRenterStorage);
 begin
-  FRenterStorage := IRenterStorage;
+  _RenterStorage := IRenterStorage;
 end;
 
 function TGetRenter.Execute(id : String): TRenter;
 begin
-  Result := FRenterStorage.Get(id);
+  Result := _RenterStorage.Get(id);
 end;
 
 end.

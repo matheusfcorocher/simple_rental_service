@@ -5,21 +5,26 @@ unit RentalUnit;
 interface
 
 uses
-  Classes, SysUtils, Generics.Collections, DateUtils, VehicleUnit, RentalExceptionsUnit;
+  Classes, SysUtils, DateUtils, VehicleUnit, IRentalExceptionsCreatorUnit;
 
 type
   { TRental }
 
   TRental = class
   private
-    FId: string;
-    FRenterId: string;
-    FVehicle: TVehicle;
-    FStartDate: TDateTime;
-    FEndDate: TDateTime;
+    _Id: string;
+    _RenterId: string;
+    _Vehicle: TVehicle;
+    _StartDate: TDateTime;
+    _EndDate: TDateTime;
 
-    function IsRentalDateValid(startDate: TDateTime; endDate: TDateTime): boolean;
+    _ExceptionsCreator : ITRentalExceptionsCreator;
+
+    function _IsRentalDateValid(): boolean;
   public
+    constructor Create(Id: string; RenterId: string; vehicle: TVehicle;
+      startDate: TDateTime; endDate: TDateTime; RentalExceptionsCreator : ITRentalExceptionsCreator);
+
     function getId: string;
     function getRenterId: string;
     function getVehicle: TVehicle;
@@ -27,90 +32,47 @@ type
     function getEndDate: TDateTime;
     procedure setVehicle(vehicle: TVehicle);
 
-    constructor Create(Id: string; RenterId: string; vehicle: TVehicle;
-      startDate: TDateTime; endDate: TDateTime);
-    constructor CreateWithoutBusinessRules(Id: string; RenterId: string; vehicle: TVehicle;
-      startDate: TDateTime; endDate: TDateTime);
+    function IsRentalValid(): boolean;
     function Total(): currency;
   end;
 
-  TRentals = specialize TObjectList<TRental>;
-
-  TRentalsHelper = class helper for TRentals
-    function ToObjectList(): specialize TObjectList<TObject>;
-  end;
-
-function RentalEquals(a, b: TRental): boolean;
-
 implementation
 
-constructor TRental.Create(Id: string; RenterId: string; vehicle: TVehicle;
-  startDate: TDateTime; endDate: TDateTime);
-begin
+// private methods
 
-  IsRentalDateValid(startDate, endDate);
-  Vehicle.IsVehicleAvailable();
-
-  FId := id;
-  FRenterId := RenterId;
-  FVehicle := vehicle;
-  FStartDate := startDate;
-  FEndDate := endDate;
-end;
-
-constructor TRental.CreateWithoutBusinessRules(Id: string; RenterId: string; vehicle: TVehicle;
-  startDate: TDateTime; endDate: TDateTime);
-begin
-  FId := id;
-  FRenterId := RenterId;
-  FVehicle := vehicle;
-  FStartDate := startDate;
-  FEndDate := endDate;
-end;
-
-function TRental.IsRentalDateValid(startDate: TDateTime; endDate: TDateTime): boolean;
+function TRental._IsRentalDateValid(): boolean;
 var
   ComparisonResult: integer;
 begin
-  ComparisonResult := CompareDateTime(startDate, endDate);
+  ComparisonResult := CompareDateTime(_StartDate, _EndDate);
 
   //Rejects if is a day before or on the same day
   if ComparisonResult >= 0 then
   begin
-    CreateRangeRentalDateException();
+    _ExceptionsCreator.CreateRangeRentalDateException();
   end;
 
   Result := True;
 end;
 
-function TRental.getId: string;
+
+// public methods
+
+constructor TRental.Create(Id: string; RenterId: string; vehicle: TVehicle;
+  startDate: TDateTime; endDate: TDateTime; RentalExceptionsCreator : ITRentalExceptionsCreator);
 begin
-  Result := FId;
+  _Id := id;
+  _RenterId := RenterId;
+  _Vehicle := vehicle;
+  _StartDate := startDate;
+  _EndDate := endDate;
+
+  _ExceptionsCreator := RentalExceptionsCreator;
 end;
 
-function TRental.getRenterId: string;
+function TRental.IsRentalValid(): Boolean;
 begin
-  Result := FRenterId;
-end;
-
-function TRental.getVehicle: TVehicle;
-begin
-  Result := FVehicle;
-end;
-
-function TRental.getStartDate: TDateTime;
-begin
-  Result := FStartDate;
-end;
-
-function TRental.getEndDate: TDateTime;
-begin
-  Result := FEndDate;
-end;
-
-procedure TRental.setVehicle(vehicle: TVehicle);
-begin
-  FVehicle := vehicle;
+   result := _IsRentalDateValid() and _Vehicle.IsVehicleAvailable();
 end;
 
 function TRental.Total(): currency;
@@ -119,31 +81,42 @@ var
   RentalTax: currency;
 begin
   // Calculate the difference in hours
-  RentedDays := DaysBetween(FStartDate, FEndDate);
+  RentedDays := DaysBetween(_StartDate, _EndDate);
 
   //Tax is 1% of vehicle value
-  RentalTax := FVehicle.getValue * 0.01;
+  RentalTax := _Vehicle.getValue * 0.01;
 
   Result := RentalTax * RentedDays;
 end;
 
-function RentalEquals(a, b: TRental): boolean;
+function TRental.getId: string;
 begin
-  Result := (a.getId = b.getId) and (a.getRenterId = b.getRenterId) and
-  (a.getVehicle = b.getVehicle) and (a.getStartDate = b.getStartDate)
-  and (a.getEndDate = b.getEndDate);
+  Result := _Id;
 end;
 
-function TRentalsHelper.ToObjectList(): specialize TObjectList<TObject>;
-var
-  Rental: TRental;
-  ObjectList: specialize TObjectList<TObject>;
+function TRental.getRenterId: string;
 begin
-  ObjectList := specialize TObjectList<TObject>.Create();
-  for Rental in Self do
-    ObjectList.Add(Rental);
+  Result := _RenterId;
+end;
 
-  Result := ObjectList;
+function TRental.getVehicle: TVehicle;
+begin
+  Result := _Vehicle;
+end;
+
+function TRental.getStartDate: TDateTime;
+begin
+  Result := _StartDate;
+end;
+
+function TRental.getEndDate: TDateTime;
+begin
+  Result := _EndDate;
+end;
+
+procedure TRental.setVehicle(vehicle: TVehicle);
+begin
+  _Vehicle := vehicle;
 end;
 
 end.

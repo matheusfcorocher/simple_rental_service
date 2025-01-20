@@ -10,7 +10,8 @@ uses
   IVehicleStorageUnit,
   VehicleUnit,
   VehicleStatusUnit,
-  VehicleExceptionsUnit;
+  IVehicleExceptionsCreatorUnit,
+  VehiclesUnit;
 
 type
 
@@ -18,9 +19,10 @@ type
 
   TFakeVehicleStorage = class(TInterfacedObject, ITVehicleStorage)
   private
-    FVehicles: TVehicles;
+    _Vehicles: TVehicles;
+    _VehicleExceptionsCreator : ITVehicleExceptionsCreator;
   public
-    constructor Create();
+    constructor Create(VehicleExceptionsCreator : ITVehicleExceptionsCreator);
     function GetNextId() : String;
     function Register(Vehicle: TVehicle): TVehicle;
     function Update(Vehicle: TVehicle): TVehicle;
@@ -30,9 +32,10 @@ type
 
 implementation
 
-constructor TFakeVehicleStorage.Create();
+constructor TFakeVehicleStorage.Create(VehicleExceptionsCreator : ITVehicleExceptionsCreator);
 begin
-  FVehicles := TVehicles.Create
+  _Vehicles := TVehicles.Create;
+  _VehicleExceptionsCreator := VehicleExceptionsCreator;
 end;
 
 function TFakeVehicleStorage.GetNextId(): String;
@@ -45,7 +48,7 @@ end;
 
 function TFakeVehicleStorage.Register(Vehicle: TVehicle): TVehicle;
 begin
-  FVehicles.Add(Vehicle);
+  _Vehicles.Add(Vehicle);
   result := Vehicle;
 end;
 
@@ -55,8 +58,8 @@ var
   VehicleIdx : Integer;
 begin
   AuxVehicle := Get(Vehicle.getId());
-  VehicleIdx := FVehicles.IndexOf(AuxVehicle);
-  FVehicles.Insert(VehicleIdx, Vehicle);;
+  VehicleIdx := _Vehicles.IndexOf(AuxVehicle);
+  _Vehicles.Insert(VehicleIdx, Vehicle);;
 
   result := Vehicle;
 end;
@@ -65,7 +68,7 @@ function TFakeVehicleStorage.Get(id: String): TVehicle;
 var
   Vehicle : TVehicle;
 begin
-  for Vehicle in FVehicles do
+  for Vehicle in _Vehicles do
   begin
     if Vehicle.getId() = id then
     begin
@@ -74,7 +77,7 @@ begin
     end;
   end;
 
-  CreateNotFoundVehicleError(id);
+  _VehicleExceptionsCreator.CreateNotFoundVehicleError(id);
 end;
 
 function TFakeVehicleStorage.Delete(id: string) : String;
@@ -82,7 +85,7 @@ var
   Vehicle : TVehicle;
 begin
   Vehicle := Get(id);
-  FVehicles.Remove(Vehicle);
+  _Vehicles.Remove(Vehicle);
   result := 'The Vehicle has been successfully deleted from the system.';
 end;
 

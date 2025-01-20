@@ -9,7 +9,12 @@ interface
 
 uses
   SystemResponseUnit, StandardResponsesUnit, ExceptionsErrorCodeUnit, 
-  RentalExceptionsUnit, RenterExceptionsUnit, VehicleExceptionsUnit, 
+  IExceptionsCreatorUnit, IRentalExceptionsCreatorUnit, 
+  IRenterExceptionsCreatorUnit, IVehicleExceptionsCreatorUnit, 
+  ExceptionCreatorUnit, RentalExceptionsCreatorENUnit, 
+  RenterExceptionsCreatorENUnit, VehicleExceptionsCreatorENUnit, 
+  RentalServiceExceptionsUnit, RentalExceptionsCreatorPTUnit, 
+  RenterExceptionsCreatorPTUnit, VehicleExceptionsCreatorPTUnit, 
   LazarusPackageIntf;
 
 implementation

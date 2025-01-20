@@ -8,7 +8,7 @@
       <Version Value="11"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <OtherUnitFiles Value="system_responses;exceptions"/>
+        <OtherUnitFiles Value="system_responses;exceptions;exceptions\en-US;exceptions\interfaces;exceptions\pt-BR"/>
         <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
     </CompilerOptions>
@@ -26,16 +26,52 @@
         <UnitName Value="ExceptionsErrorCodeUnit"/>
       </Item>
       <Item>
-        <Filename Value="exceptions\rentalexceptionsunit.pas"/>
-        <UnitName Value="RentalExceptionsUnit"/>
+        <Filename Value="exceptions\interfaces\iexceptionscreatorunit.pas"/>
+        <UnitName Value="IExceptionsCreatorUnit"/>
       </Item>
       <Item>
-        <Filename Value="exceptions\renterexceptionsunit.pas"/>
-        <UnitName Value="RenterExceptionsUnit"/>
+        <Filename Value="exceptions\interfaces\irentalexceptionscreatorunit.pas"/>
+        <UnitName Value="IRentalExceptionsCreatorUnit"/>
       </Item>
       <Item>
-        <Filename Value="exceptions\vehicleexceptionsunit.pas"/>
-        <UnitName Value="VehicleExceptionsUnit"/>
+        <Filename Value="exceptions\interfaces\irenterexceptionscreatorunit.pas"/>
+        <UnitName Value="IRenterExceptionsCreatorUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\interfaces\ivehicleexceptionscreatorunit.pas"/>
+        <UnitName Value="IVehicleExceptionsCreatorUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\exceptioncreatorunit.pas"/>
+        <UnitName Value="ExceptionCreatorUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\en-US\rentalexceptionscreatorenunit.pas"/>
+        <UnitName Value="RentalExceptionsCreatorENUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\en-US\renterexceptionscreatorenunit.pas"/>
+        <UnitName Value="RenterExceptionsCreatorENUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\en-US\vehicleexceptionscreatorenunit.pas"/>
+        <UnitName Value="VehicleExceptionsCreatorENUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\rentalserviceexceptionsunit.pas"/>
+        <UnitName Value="RentalServiceExceptionsUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\pt-BR\rentalexceptionscreatorptunit.pas"/>
+        <UnitName Value="RentalExceptionsCreatorPTUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\pt-BR\renterexceptionscreatorptunit.pas"/>
+        <UnitName Value="RenterExceptionsCreatorPTUnit"/>
+      </Item>
+      <Item>
+        <Filename Value="exceptions\pt-BR\vehicleexceptionscreatorptunit.pas"/>
+        <UnitName Value="VehicleExceptionsCreatorPTUnit"/>
       </Item>
     </Files>
     <RequiredPkgs>

@@ -9,7 +9,8 @@ uses
   Classes,
   IRenterStorageUnit,
   RenterUnit,
-  RenterExceptionsUnit;
+  IRenterExceptionsCreatorUnit,
+  RentersUnit;
 
 type
 
@@ -17,9 +18,10 @@ type
 
   TFakeRenterStorage = class(TInterfacedObject, ITRenterStorage)
   private
-    FRenters: TRenters;
+    _Renters: TRenters;
+    _RenterExceptionsCreator : ITRenterExceptionsCreator;
   public
-    constructor Create();
+    constructor Create(RenterExceptionsCreator : ITRenterExceptionsCreator);
     function GetNextId() : String;
     function Register(renter: TRenter): TRenter;
     function Update(renter: TRenter): TRenter;
@@ -29,9 +31,10 @@ type
 
 implementation
 
-constructor TFakeRenterStorage.Create();
+constructor TFakeRenterStorage.Create(RenterExceptionsCreator : ITRenterExceptionsCreator);
 begin
-  FRenters := TRenters.Create
+  _Renters := TRenters.Create;
+  _RenterExceptionsCreator := RenterExceptionsCreator;
 end;
 
 function TFakeRenterStorage.GetNextId(): String;
@@ -44,7 +47,7 @@ end;
 
 function TFakeRenterStorage.Register(renter: TRenter): TRenter;
 begin
-  FRenters.Add(renter);
+  _Renters.Add(renter);
   result := renter;
 end;
 
@@ -54,8 +57,8 @@ var
   RenterIdx : Integer;
 begin
   AuxRenter := Get(renter.getId());
-  RenterIdx := FRenters.IndexOf(AuxRenter);
-  FRenters[RenterIdx] := renter;
+  RenterIdx := _Renters.IndexOf(AuxRenter);
+  _Renters[RenterIdx] := renter;
 
   result := renter;
 end;
@@ -64,7 +67,7 @@ function TFakeRenterStorage.Get(id: String): TRenter;
 var
   Renter : TRenter;
 begin
-  for Renter in FRenters do
+  for Renter in _Renters do
   begin
     if Renter.getId() = id then
     begin
@@ -73,7 +76,7 @@ begin
     end;
   end;
 
-  CreateNotFoundRenterException(id);
+  _RenterExceptionsCreator.CreateNotFoundRenterException(id);
 end;
 
 function TFakeRenterStorage.Delete(id: string) : String;
@@ -81,7 +84,7 @@ var
   Renter : TRenter;
 begin
   Renter := Get(id);
-  FRenters.Remove(Renter);
+  _Renters.Remove(Renter);
   result := 'The renter has been successfully deleted from the system.';
 end;
 

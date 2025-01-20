@@ -58,6 +58,8 @@ begin
 
       // Delete row
       MainForm.StringGrid3.DeleteRow(RowIndex);
+
+      UpdateRowIDs(MainForm.StringGrid3);
     end
     else
     begin

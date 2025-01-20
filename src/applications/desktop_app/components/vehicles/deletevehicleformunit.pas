@@ -60,6 +60,8 @@ begin
 
     // Delete row
     MainForm.StringGrid2.DeleteRow(RowIndex);
+
+    UpdateRowIDs(MainForm.StringGrid2);
   end
   else
   begin
